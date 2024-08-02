@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+// import TodoList from '../components/TodoList.tsx'
+import ItemList from '../components/ItemList.tsx'
+import OrderInfo from '../components/OrderInfo.tsx';
+---
+
+<Layout title="Print-A-Majig">
+    <script src="../scripts/script.js"></script>
+    <script src="../scripts/delete-row.js"></script>
+	<main>
+        <h1>New Order!!!</h1>
+        <button id="create-order">Create Order</button>
+        <OrderInfo/>
+        <ItemList client:load/>
+	</main>
+</Layout>

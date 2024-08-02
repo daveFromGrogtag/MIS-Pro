@@ -1,0 +1,138 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    max-width: 1000px;
+    box-sizing:border-box;
+    display: flex;
+}
+
+main {
+    margin-left: calc(250px + 2rem);
+    padding: 1rem;
+}
+
+header {
+    /* box-sizing:border-box; */
+    min-width: 250px;
+    max-width: 500px;
+    position: fixed;
+    background-color: darkslategrey;
+    height: 100vh;
+    padding: 1rem;
+}
+
+header h1 {
+    color: white;
+}
+
+nav ul {
+    list-style: none;
+    padding: unset;
+}
+
+nav ul li {
+    padding: .5rem;
+}
+
+nav i {
+    margin-right: .75rem;
+    width: 1rem; 
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: lightblue;
+}
+
+section {
+    padding: 1rem;
+}
+
+label {
+    display: block;
+}
+input, select {
+    padding: .25rem;
+    margin-bottom: .5rem;
+    width: 100%;
+    max-width: 250px;
+}
+
+.add-item-section {
+    background: #222225ee;
+    backdrop-filter: blur(.125rem);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-item-section .add-item-modal {
+    background-color: #eee;
+    width: 500px;
+    padding: 2rem;
+    border-radius: .5rem;
+}
+
+/* General table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+/* Table header styling */
+th {
+    background-color: darkslategrey;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+/* Table cell styling */
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* Table row styling for alternating colors */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Table row styling for hover effect */
+tr:hover {
+    background-color: #ddd;
+}
+
+/* Optional: Add a border to the table */
+table {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden; /* Ensures that the border-radius works */
+}
+
+/* Optional: Add a shadow to the table for a bit of depth */
+table {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+tfoot tr td {
+    text-align: center;
+}
+tfoot tr td button {
+    margin: .25rem;
+}
