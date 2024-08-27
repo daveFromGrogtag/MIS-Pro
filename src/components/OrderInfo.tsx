@@ -20,11 +20,7 @@ function OrderInfo({data, setData}) {
                     <input list="client-list" type="text" name="client" value={data.client} onChange={handleChange}/>
                         <button>Add New Client</button>
                         <datalist id="client-list">
-                            <option value="Chocolate"></option>
-                            <option value="Coconut"></option>
-                            <option value="Mint"></option>
-                            <option value="Strawberry"></option>
-                            <option value="Vanilla"></option>
+                            <option value="techstyles">TechStyles</option>
                         </datalist>
                 </div>
                 <div>

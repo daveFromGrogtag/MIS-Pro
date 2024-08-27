@@ -4,6 +4,9 @@ const substrateList = {
     },
     "holo-vinyl": {
         "costPerSquareInch": 0.0066450
+    },
+    "foam-core": {
+        "costPerSquareInch": 0.0029
     }
 }
 
@@ -12,7 +15,7 @@ const laminateList = {
         "costPerSquareInch": 0
     },
     "soft-touch": {
-        "costPerSquareInch": .0002
+        "costPerSquareInch": .002
     }
 }
 

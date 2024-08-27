@@ -77,6 +77,7 @@ const EditOrder = () => {
         return (<>
             <h1 className="branded-title">Order not found</h1>
             <h3 className="branded-title">Are you sure this is the right order number?</h3>
+            <a href="/orders">Back to orders</a>
         </>
         )
     }

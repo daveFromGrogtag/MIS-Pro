@@ -170,6 +170,7 @@ function ItemList({items, setItems}) {
                                 <option>-</option>
                                 <option value="vinyl">Standard Self Adhesive Vinyl</option>
                                 <option value="holo-vinyl">Holographic Self Adhesive Vinyl</option>
+                                <option value="foam-core">Foam Core</option>
                             </select>
                         </div>
                         <div>
