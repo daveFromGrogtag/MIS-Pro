@@ -1,33 +1,33 @@
 const substrateList = {
     "vinyl": {
-        "costPerSqareInch": 0.0024034
+        "costPerSquareInch": 0.0024034
     },
     "holo-vinyl": {
-        "costPerSqareInch": 0.0066450
+        "costPerSquareInch": 0.0066450
     }
 }
 
 const laminateList = {
     "none": {
-        "costPerSqareInch": 0
+        "costPerSquareInch": 0
     },
     "soft-touch": {
-        "costPerSqareInch": .0002
+        "costPerSquareInch": .0002
     }
 }
 
 const pressList = {
     "canon-colorado": {
-        "inkCostPerSqareInch": 0.0004,
+        "inkCostPerSquareInch": 0.0004,
         "printMode": {
             "cmyk-1-side": {
-                "inkCostPerSqareInch":  0.0004
+                "inkCostPerSquareInch":  0.0004
             },
             "cmyk-2-side": {
-                "inkCostPerSqareInch":  0.0009
+                "inkCostPerSquareInch":  0.0009
             },
             "cmyk-white": {
-                "inkCostPerSqareInch":  0.0009
+                "inkCostPerSquareInch":  0.0009
             }
         },
         "printQuality": {
@@ -40,16 +40,16 @@ const pressList = {
         }
     },
     "canon-arizona": {
-        "inkCostPerSqareInch": 0.0016,
+        "inkCostPerSquareInch": 0.0016,
         "printMode": {
             "cmyk-1-side": {
-                "inkCostPerSqareInch":  0.0008
+                "inkCostPerSquareInch":  0.0008
             },
             "cmyk-2-side": {
-                "inkCostPerSqareInch":  0.0016
+                "inkCostPerSquareInch":  0.0016
             },
             "cmyk-white": {
-                "inkCostPerSqareInch":  0.0017
+                "inkCostPerSquareInch":  0.0017
             }
         },
         "printQuality": {
@@ -83,9 +83,9 @@ function estimator(width, height, bleed, quantity, substrate, laminate, press, m
 }
 
 function getMaterialCost(substrate, laminate, press, mode, quality) {
-    let substrateCost = substrateList[substrate]["costPerSqareInch"]
-    let laminateCost = laminateList[laminate]["costPerSqareInch"]
-    let inkCost = pressList[press].printMode[mode].inkCostPerSqareInch
+    let substrateCost = substrateList[substrate]["costPerSquareInch"]
+    let laminateCost = laminateList[laminate]["costPerSquareInch"]
+    let inkCost = pressList[press].printMode[mode].inkCostPerSquareInch
     return substrateCost + laminateCost + inkCost
 }
 
