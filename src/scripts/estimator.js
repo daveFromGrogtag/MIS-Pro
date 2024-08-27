@@ -75,7 +75,7 @@ function estimator(width, height, bleed, quantity, substrate, laminate, press, m
     let widthBleed = parseFloat(width) + (parseFloat(bleed) * 2)
     let heightBleed = parseFloat(height) + (parseFloat(bleed) * 2)
     let squareInches = (widthBleed * heightBleed * parseInt(quantity))
-    let materialCost = getMaterialCost(substrate, laminate, press) * squareInches
+    let materialCost = getMaterialCost(substrate, laminate, press, mode, quality) * squareInches
     let laborCost = getTime(press, width, height, quantity, mode, quality).timeTotal * burden.totalPerHour
     
     let totalCost = (materialCost + laborCost)

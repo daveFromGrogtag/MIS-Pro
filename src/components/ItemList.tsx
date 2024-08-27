@@ -58,8 +58,7 @@ function ItemList({items, setItems}) {
                 itemHeight: data.itemHeight,
                 itemBleed: data.itemBleed,
                 itemQuantity: data.itemQuantity,
-                itemCost: data.itemCost,
-                itemThumbnail: data.itemThumbnail
+                itemCost: data.itemCost
             }
         ]
         setItems(payload)
@@ -78,29 +77,29 @@ function ItemList({items, setItems}) {
         setItems([...items])
     }
 
-    const handleThumbnailUpload = (e) => {
-        const thumbnailFile = e.target.files[0]
-        const reader = new FileReader()
-        if (thumbnailFile && thumbnailFile.type.startsWith('image/')) {
-            console.log("Image");
-            reader.onload = (e) => {
+    // const handleThumbnailUpload = (e) => {
+    //     const thumbnailFile = e.target.files[0]
+    //     const reader = new FileReader()
+    //     if (thumbnailFile && thumbnailFile.type.startsWith('image/')) {
+    //         console.log("Image");
+    //         reader.onload = (e) => {
 
-            }
-        } else if (thumbnailFile && thumbnailFile.type === 'application/pdf') {
-            console.log("PDF");
-             reader.onload = async (e) => {
-                const pdfData = new Uint8Array(e.target.result);
-                console.log(e);
-                try {
-                    const thumbnailUrl = await uploadFile(pdfData)
-                    setData({...data, itemThumbnail: thumbnailUrl})
-                } catch (error) {
-                    console.error(error)
-                }
-             }
-        }
+    //         }
+    //     } else if (thumbnailFile && thumbnailFile.type === 'application/pdf') {
+    //         console.log("PDF");
+    //          reader.onload = async (e) => {
+    //             const pdfData = new Uint8Array(e.target.result);
+    //             console.log(e);
+    //             try {
+    //                 const thumbnailUrl = await uploadFile(pdfData)
+    //                 setData({...data, itemThumbnail: thumbnailUrl})
+    //             } catch (error) {
+    //                 console.error(error)
+    //             }
+    //          }
+    //     }
         
-    }
+    // }
 
     return (
         <>
@@ -230,11 +229,11 @@ function ItemList({items, setItems}) {
                                 onChange={handleChange}
                             />
                         </div>
-                        <div>
+                        {/* <div>
                             <label htmlFor="itemThumbnail">Item Thumbnail</label>
                             <input type="file" name="itemThumbnail" onChange={handleThumbnailUpload} />
                             <img src={data.itemThumbnail} alt="" />
-                        </div>
+                        </div> */}
                         <div>
                             <label htmlFor="itemCost">Est. Cost</label>
                             <p>{data.itemCost}</p>

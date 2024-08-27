@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { db, setDoc, doc } from '../scripts/firebase/init.ts'
-import { query, collection, getDocs, where, orderBy, limit } from "firebase/firestore"
+import { db, doc } from '../scripts/firebase/init.ts'
+import { query, collection, getDocs, where, orderBy, limit, setDoc } from "firebase/firestore"
 import OrderInfo from './OrderInfo'
 import ItemList from './ItemList'
 import { generateOrderId } from '../scripts/firebase/generateOrderId.ts'
@@ -19,7 +19,6 @@ const ExportOrder = () => {
     },[items, data])
 
     const exportToFirebase = (orderId, orderIdString) => {
-
         try {
             setDoc(doc(db, "orders", orderIdString), {
                 orderId,
@@ -70,7 +69,7 @@ const ExportOrder = () => {
             <OrderInfo data={data} setData={setData}/>
             <h2>Total: ${total.toFixed(2)}</h2>
             <ItemList items={items} setItems={setItems}/>
-            <button onClick={createNewOrder}>Creat Order</button>
+            <button onClick={createNewOrder}>Create Order</button>
         </div>
     )
 }
