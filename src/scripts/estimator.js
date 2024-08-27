@@ -1,9 +1,9 @@
 const substrateList = {
     "vinyl": {
-        "costPerSqareInch": 0.00565843621399177
+        "costPerSqareInch": 0.0024034
     },
     "holo-vinyl": {
-        "costPerSqareInch": 0.00665843621399177
+        "costPerSqareInch": 0.0066450
     }
 }
 
@@ -12,49 +12,90 @@ const laminateList = {
         "costPerSqareInch": 0
     },
     "soft-touch": {
-        "costPerSqareInch": .5
+        "costPerSqareInch": .0002
     }
 }
 
 const pressList = {
-    "canon-colorado-production": {
-        "inkCostPerSqareInch": 0
+    "canon-colorado": {
+        "inkCostPerSqareInch": 0.0004,
+        "printMode": {
+            "cmyk-1-side": {
+                "inkCostPerSqareInch":  0.0004
+            },
+            "cmyk-2-side": {
+                "inkCostPerSqareInch":  0.0009
+            },
+            "cmyk-white": {
+                "inkCostPerSqareInch":  0.0009
+            }
+        },
+        "printQuality": {
+            "production-gloss": {
+                "squareInchesPerHour": 87840
+            },
+            "high-quality-gloss": {
+                "squareInchesPerHour": 61488
+            }
+        }
     },
-    "canon-colorado-quality": {
-        "inkCostPerSqareInch": 0.1
-    },
-    "canon-arizona-production": {
-        "inkCostPerSqareInch": 0
-    },
-    "canon-arizona-quality": {
-        "inkCostPerSqareInch": 0
+    "canon-arizona": {
+        "inkCostPerSqareInch": 0.0016,
+        "printMode": {
+            "cmyk-1-side": {
+                "inkCostPerSqareInch":  0.0008
+            },
+            "cmyk-2-side": {
+                "inkCostPerSqareInch":  0.0016
+            },
+            "cmyk-white": {
+                "inkCostPerSqareInch":  0.0017
+            }
+        },
+        "printQuality": {
+            "production-gloss": {
+                "squareInchesPerHour": 32241
+            },
+            "high-quality-gloss": {
+                "squareInchesPerHour": 22636
+            }
+        }
     }
 }
 
 
-function estimator(width, height, bleed, quantity, substrate, laminate, press, discount, markup) {
-    const pulledMarkUp = parseFloat(document.getElementById('order-markup').value) / 100
-    const pulledDiscount = parseFloat(document.getElementById('order-discount').value) / 100
+const burden = {
+    "totalPerHour": 160
+}
+
+
+function estimator(width, height, bleed, quantity, substrate, laminate, press, mode, quality) {
+    // const pulledMarkUp = parseFloat(document.getElementById('orderMarkup').value) / 100
+    // const pulledDiscount = parseFloat(document.getElementById('orderDiscount').value) / 100
     let widthBleed = parseFloat(width) + (parseFloat(bleed) * 2)
-    console.log(widthBleed);
     let heightBleed = parseFloat(height) + (parseFloat(bleed) * 2)
-    console.log(heightBleed);
     let squareInches = (widthBleed * heightBleed * parseInt(quantity))
     let materialCost = getMaterialCost(substrate, laminate, press) * squareInches
-    let laborCost = 0
-    let totalCost = ((materialCost + laborCost) + ((materialCost + laborCost) * pulledMarkUp)) - (((materialCost + laborCost) + ((materialCost + laborCost) * pulledMarkUp)) * pulledDiscount)
+    let laborCost = getTime(press, width, height, quantity, mode, quality).timeTotal * burden.totalPerHour
+    
+    let totalCost = (materialCost + laborCost)
     return {'materialCost': materialCost, 'squareInches': squareInches, 'laborCost': laborCost, 'totalCost': totalCost}
 }
 
-function getMaterialCost(substrate, laminate, press) {
+function getMaterialCost(substrate, laminate, press, mode, quality) {
     let substrateCost = substrateList[substrate]["costPerSqareInch"]
     let laminateCost = laminateList[laminate]["costPerSqareInch"]
-    let inkCost = pressList[press]["inkCostPerSqareInch"]
+    let inkCost = pressList[press].printMode[mode].inkCostPerSqareInch
     return substrateCost + laminateCost + inkCost
 }
 
-function getTimeCosts(press) {
-
+function getTime(press, width, height, quantity, mode, quality) {
+    let printTimeTotal = (width * height * quantity) / pressList[press].printQuality[quality].squareInchesPerHour
+    
+    
+    let finishingTimeTotal = 0
+    let timeTotal = printTimeTotal + finishingTimeTotal
+    return {'printTimeTotal': printTimeTotal, 'finishingTimeTotal': finishingTimeTotal, 'timeTotal': timeTotal}
 }
 
 export default estimator

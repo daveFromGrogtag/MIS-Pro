@@ -1,0 +1,13 @@
+---
+import MaterialCost from '../components/MaterialCost'
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Substrates | HMB">
+	<main>
+        <h1 class="branded-title">Substrates, Presses and Inks oh my...</h1>
+        <MaterialCost materialType="substrates" client:load/>
+        <MaterialCost materialType="presses" client:load/>
+        <MaterialCost materialType="laminates" client:load/>
+	</main>
+</Layout>

@@ -1,0 +1,18 @@
+---
+import LinkButton from '../components/LinkButton.astro';
+import OrderList from '../components/OrderList';
+import Layout from '../layouts/Layout.astro';
+import OrderSearch from '../components/OrderSearch'
+---
+
+<Layout title="Orders | HMB">
+	<main>
+        <h1 class="branded-title">Orders</h1>
+        <LinkButton link="new-order" title="Create New Order +"/>
+        <OrderSearch client:load/>
+		<section>
+            <h2>Current Orders List</h2>
+            <OrderList client:load/>
+        </section>
+	</main>
+</Layout>

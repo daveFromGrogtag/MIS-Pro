@@ -1,19 +1,22 @@
 ---
-
+import LoginButton from './LoginButton.tsx'
 ---
 <header>
-    <h1>Print-a-majig</h1>
+    <h1>Hold My Beer</h1>
+    <h3>Print Order Manager</h3>
+    <hr>
     <nav>
         <ul>
             <li><a href="/"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</a></li>
-            <li><a href=""><i class="fa fa-file-text" aria-hidden="true"></i>Orders</a></li>
-            <li><a href=""><i class="fa fa-shapes" aria-hidden="true"></i>Products</a></li>
-            <li><a href=""><i class="fa fa-users" aria-hidden="true"></i>Customers</a></li>
-            <li><a href=""><i class="fa fa-line-chart" aria-hidden="true"></i>Reports</a></li>
-            <li><a href=""><i class="fa fa-scroll" aria-hidden="true"></i>Substrates</a></li>
-            <li><a href=""><i class="fa fa-cog" aria-hidden="true"></i>Settings</a></li>
+            <li><a href="/orders"><i class="fa fa-file-text" aria-hidden="true"></i>Orders</a></li>
+            <li><a href="/products"><i class="fa fa-shapes" aria-hidden="true"></i>Products</a></li>
+            <li><a href="/customers"><i class="fa fa-users" aria-hidden="true"></i>Customers</a></li>
+            <li><a href="/reports"><i class="fa fa-line-chart" aria-hidden="true"></i>Reports</a></li>
+            <li><a href="/substrates"><i class="fa fa-scroll" aria-hidden="true"></i>Substrates</a></li>
+            <li><a href="/settings"><i class="fa fa-cog" aria-hidden="true"></i>Settings</a></li>
         </ul>
         <hr>
-        <a href=""><i class="fa fa-user" aria-hidden="true"></i>Sign In</a>
+        <LoginButton client:load/>
+        <!-- <a href=""><i class="fa fa-user" aria-hidden="true"></i>Sign In</a> -->
     </nav>
 </header>

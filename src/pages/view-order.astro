@@ -1,0 +1,9 @@
+---
+import PrintLayout from '../layouts/PrintLayout.astro';
+import ViewOrder from '../components/ViewOrder'
+---
+<PrintLayout>
+	<main>
+        <ViewOrder client:only/>
+	</main>
+</PrintLayout>
