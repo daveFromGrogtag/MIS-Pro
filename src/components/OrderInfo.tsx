@@ -12,12 +12,39 @@ function OrderInfo({data, setData}) {
         setData(payload)
     }
 
+    const handleClientChange = (e) => {
+        let clientName = e.target.value
+        let payload;
+        if (clientName = 'techstyles') {
+            payload = {
+                ...data,
+                'client': clientName,
+                'billingAddress1': '30803 San Clemente St',
+                'billingAddress2': '',
+                'billingAddress3': '',
+                'billingAttn': 'Mr. Techstyles',
+                'billingCity': 'Hayward',
+                'billingCompany': 'TechStyles',
+                'billingCountry': 'USA',
+                'billingState': 'CA',
+                'billingZip': '94544'
+            }
+        }
+        else {
+            payload = {
+                ...data,
+                'client': clientName
+            }
+        }
+        setData(payload)
+    }
+
     return (
         <>
             <section id="order-info-section">
                 <div>
                     <label htmlFor="client">Client</label>
-                    <input list="client-list" type="text" name="client" value={data.client} onChange={handleChange}/>
+                    <input list="client-list" type="text" name="client" value={data.client} onChange={handleClientChange}/>
                         <button>Add New Client</button>
                         <datalist id="client-list">
                             <option value="techstyles">TechStyles</option>

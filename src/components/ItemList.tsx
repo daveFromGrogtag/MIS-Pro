@@ -13,8 +13,10 @@ function ItemList({items, setItems}) {
 
     useEffect(() => {
         let currentItemCost;
-        if (data.itemWidth && data.itemHeight && data.itemBleed && data.itemQuantity && data.itemSubstrate && data.itemLaminate && data.itemPress && data.itemPrintMode && data.itemPrintQuality) {
-            currentItemCost = estimator(data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality).totalCost.toFixed(2)
+        if (data.itemWidth && data.itemHeight && data.itemBleed && data.itemQuantity && data.itemSubstrate && data.itemLaminate && data.itemPress && data.itemPrintMode && data.itemPrintQuality && data.itemCutter) {
+            currentItemCost = estimator(data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter).totalCost.toFixed(2)
+            console.log(estimator(data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter));
+            
         } else {
             currentItemCost = 0
         }
@@ -23,7 +25,7 @@ function ItemList({items, setItems}) {
             itemCost: currentItemCost
         } 
         setData(payload)
-    }, [data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality])
+    }, [data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter])
     
     
     const handleChange = (e) => {
@@ -52,12 +54,14 @@ function ItemList({items, setItems}) {
                 itemPress: data.itemPress,
                 itemPrintMode: data.itemPrintMode,
                 itemPrintQuality: data.itemPrintQuality,
+                itemCutter: data.itemCutter,
                 itemSubstrate: data.itemSubstrate,
                 itemLaminate: data.itemLaminate,
                 itemWidth: data.itemWidth,
                 itemHeight: data.itemHeight,
                 itemBleed: data.itemBleed,
                 itemQuantity: data.itemQuantity,
+                itemThumbnail: data.itemThumbnail,
                 itemCost: data.itemCost
             }
         ]
@@ -77,29 +81,34 @@ function ItemList({items, setItems}) {
         setItems([...items])
     }
 
-    // const handleThumbnailUpload = (e) => {
-    //     const thumbnailFile = e.target.files[0]
-    //     const reader = new FileReader()
-    //     if (thumbnailFile && thumbnailFile.type.startsWith('image/')) {
-    //         console.log("Image");
-    //         reader.onload = (e) => {
+    const handleThumbnailUpload = (e) => {
+        // const thumbnailFile = e.target.files[0]
+        // const reader = new FileReader()
+        // if (thumbnailFile && thumbnailFile.type.startsWith('image/')) {
+        //     console.log("Image");
+        //     reader.onload = (e) => {
 
-    //         }
-    //     } else if (thumbnailFile && thumbnailFile.type === 'application/pdf') {
-    //         console.log("PDF");
-    //          reader.onload = async (e) => {
-    //             const pdfData = new Uint8Array(e.target.result);
-    //             console.log(e);
-    //             try {
-    //                 const thumbnailUrl = await uploadFile(pdfData)
-    //                 setData({...data, itemThumbnail: thumbnailUrl})
-    //             } catch (error) {
-    //                 console.error(error)
-    //             }
-    //          }
-    //     }
-        
-    // }
+        //     }
+        // } else if (thumbnailFile && thumbnailFile.type === 'application/pdf') {
+        //     console.log("PDF");
+        //      reader.onload = async (e) => {
+        //         const pdfData = new Uint8Array(e.target.result);
+        //         console.log(e);
+        //         try {
+        //             const thumbnailUrl = await uploadFile(pdfData)
+        //             setData({...data, itemThumbnail: thumbnailUrl})
+        //         } catch (error) {
+        //             console.error(error)
+        //         }
+        //      }
+        // }
+        setData({
+            ...data,
+            itemThumbnail: '/images/no-image.jpg'
+        })
+    }
+
+
 
     return (
         <>
@@ -159,6 +168,20 @@ function ItemList({items, setItems}) {
                                 <option value="production-gloss">Production Gloss</option>
                             </select>
                         </div>
+                        <div>
+                            <label htmlFor="itemCutter">Cutter</label>
+                            <select 
+                                name="itemCutter" 
+                                id="itemCutter"
+                                value={data.itemCutter}
+                                onChange={handleChange}
+                            >
+                                <option>-</option>
+                                <option value="none">None</option>
+                                <option value="graphtec">Graphtec</option>
+                            </select>
+                        </div>
+                        <hr/>
                         <div>
                             <label htmlFor="itemSubstrate">Substrate</label>
                             <select 
@@ -230,11 +253,11 @@ function ItemList({items, setItems}) {
                                 onChange={handleChange}
                             />
                         </div>
-                        {/* <div>
+                        <div>
                             <label htmlFor="itemThumbnail">Item Thumbnail</label>
-                            <input type="file" name="itemThumbnail" onChange={handleThumbnailUpload} />
-                            <img src={data.itemThumbnail} alt="" />
-                        </div> */}
+                            <button onClick={handleThumbnailUpload}>Thumbnail</button>
+                            <img src={data.itemThumbnail} alt="Thumbnail Image" />
+                        </div>
                         <div>
                             <label htmlFor="itemCost">Est. Cost</label>
                             <p>{data.itemCost}</p>
@@ -253,15 +276,17 @@ function ItemList({items, setItems}) {
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Product</th>
-                    <th>Substrate</th>
-                    <th>Laminate</th>
-                    <th>Dimensions</th>
+                    <th>Prod</th>
+                    <th>Sub</th>
+                    <th>Lam</th>
+                    <th>Dims</th>
                     <th>Press</th>
                     <th>Mode</th>
                     <th>Quality</th>
+                    <th>Cutter</th>
                     <th>Quantity</th>
                     <th>Est. Cost</th>
+                    <th>Thumb</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -276,15 +301,18 @@ function ItemList({items, setItems}) {
                         <td>{item.itemPress}</td>
                         <td>{item.itemPrintMode}</td>
                         <td>{item.itemPrintQuality}</td>
+                        <td>{item.itemCutter}</td>
                         <td>{item.itemQuantity}</td>
-                        <td>{estimator(item.itemWidth, item.itemHeight, item.itemBleed, item.itemQuantity, item.itemSubstrate, item.itemLaminate, item.itemPress, item.itemPrintMode, item.itemPrintQuality).totalCost.toFixed(2)}</td>
+                        {/* <td>{estimator(item.itemWidth, item.itemHeight, item.itemBleed, item.itemQuantity, item.itemSubstrate, item.itemLaminate, item.itemPress, item.itemPrintMode, item.itemPrintQuality).totalCost.toFixed(2)}</td> */}
+                        <td>$ {item.itemCost}</td>
+                        <td><img src={item.itemThumbnail} alt="no-image" /></td>
                         <td><button onClick={() => removeItem(item.id)}>Remove</button></td>
                     </tr>
                 ))}
             </tbody>
             <tfoot>
                 <tr>
-                    <td colSpan={11}>
+                    <td colSpan={13}>
                         <button onClick={refreshList}>Refresh</button>
                         <button onClick={toggleVisibility}>Add Item +</button>
                     </td>
