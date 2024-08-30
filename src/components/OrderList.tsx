@@ -50,7 +50,7 @@ const OrderList = () => {
                     <td>{order.data.client}</td>
                     <td>{order.data.desc}</td>
                     <td>{order.data.dueDate}</td>
-                    <td>${order.total?order.total:0}</td>
+                    <td>${order.total?order.total.toFixed(2):0}</td>
                     <td>
                         <a href={`/edit-order?order=${order.id}`}>Edit</a> | 
                         <a href={`/view-order?order=${order.id}`}>Pack List</a> | 

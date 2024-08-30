@@ -67,7 +67,7 @@ const ExportOrder = () => {
     return (
         <div>
             <OrderInfo data={data} setData={setData}/>
-            <h2>Total: ${total.toFixed(2)}</h2>
+            <h2>Total: ${total.toFixed(2)} | Total (with markup): ${(parseFloat(total.toFixed(2)) * ((parseFloat(data.orderMarkup?data.orderMarkup:0)/100) + 1 )).toFixed(2) } | Total (with Markup and discount): ${((parseFloat(total.toFixed(2)) * ((parseFloat(data.orderMarkup?data.orderMarkup:0)/100) + 1 )) * (1 - (parseFloat(data.orderDiscount?data.orderDiscount:0)/100))).toFixed(2)}</h2>
             <ItemList items={items} setItems={setItems}/>
             <button onClick={createNewOrder}>Create Order</button>
         </div>

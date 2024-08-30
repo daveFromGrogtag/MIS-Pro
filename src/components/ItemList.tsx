@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import PreviewCanvas from './PreviewCanvas.tsx'
 import estimator from '../scripts/estimator.js'
 import generateUUID from '../scripts/generateUUID.js'
-import { uploadFile } from '../scripts/firebase/uploadFiles.ts'
+// import { uploadFile } from '../scripts/firebase/uploadFiles.ts'
 // import { uploadFile } from "./firebase/upload-file.js";
 
-function ItemList({items, setItems}) {
+function ItemList({ items, setItems }) {
 
     // const [items, setItems] = useState([])
     const [data, setData] = useState({})
@@ -16,18 +16,18 @@ function ItemList({items, setItems}) {
         if (data.itemWidth && data.itemHeight && data.itemBleed && data.itemQuantity && data.itemSubstrate && data.itemLaminate && data.itemPress && data.itemPrintMode && data.itemPrintQuality && data.itemCutter) {
             currentItemCost = estimator(data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter).totalCost.toFixed(2)
             console.log(estimator(data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter));
-            
+
         } else {
             currentItemCost = 0
         }
         let payload = {
             ...data,
             itemCost: currentItemCost
-        } 
+        }
         setData(payload)
     }, [data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter])
-    
-    
+
+
     const handleChange = (e) => {
         // let currentItemCost;
         // if (data.itemWidth && data.itemHeight && data.itemBleed && data.itemQuantity && data.itemSubstrate && data.itemLaminate && data.itemPress) {
@@ -90,17 +90,10 @@ function ItemList({items, setItems}) {
 
         //     }
         // } else if (thumbnailFile && thumbnailFile.type === 'application/pdf') {
+        //     const thumbnailUrl = uploadFile(e.target.files[0])
+        //     setData({ ...data, itemThumbnail: thumbnailUrl })
         //     console.log("PDF");
-        //      reader.onload = async (e) => {
-        //         const pdfData = new Uint8Array(e.target.result);
-        //         console.log(e);
-        //         try {
-        //             const thumbnailUrl = await uploadFile(pdfData)
-        //             setData({...data, itemThumbnail: thumbnailUrl})
-        //         } catch (error) {
-        //             console.error(error)
-        //         }
-        //      }
+            
         // }
         setData({
             ...data,
@@ -114,211 +107,212 @@ function ItemList({items, setItems}) {
         <>
             <h2>Item List</h2>
             {isVisible && (
-            <section className="add-item-section">
-            <section className="add-item-modal">
-                <h2>Add New Item</h2>
-                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <div>
-                        <div>
-                            <label htmlFor="item-product">Product</label>
-                            <input 
-                                type="text" 
-                                name="itemProduct" 
-                                id="itemProduct"
-                                value={data.itemProduct}
-                                onChange={handleChange}
-                            />
+                <section className="add-item-section">
+                    <section className="add-item-modal">
+                        <h2>Add New Item</h2>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <div>
+                                <div>
+                                    <label htmlFor="item-product">Product</label>
+                                    <input
+                                        type="text"
+                                        name="itemProduct"
+                                        id="itemProduct"
+                                        value={data.itemProduct}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="itemPress">Press</label>
+                                    <select
+                                        name="itemPress"
+                                        id="itemPress"
+                                        value={data.itemPress}
+                                        onChange={handleChange}
+                                    >
+                                        <option>-</option>
+                                        <option value="canon-colorado">CANON Colorado</option>
+                                        <option value="canon-arizona">CANON Arizona</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label htmlFor="itemPrintMode">Print Mode</label>
+                                    <select
+                                        name="itemPrintMode"
+                                        id="itemPrintMode"
+                                        value={data.itemPrintMode}
+                                        onChange={handleChange}
+                                    >
+                                        <option>-</option>
+                                        <option value="cmyk-1-side">CMYK - 1 Side</option>
+                                        <option value="cmyk-2-side">CMYK - 2 Side</option>
+                                        <option value="cmyk-white">CMYK + White Spot</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label htmlFor="itemPrintQuality">Print Quality</label>
+                                    <select
+                                        name="itemPrintQuality"
+                                        id="itemPrintQuality"
+                                        value={data.itemPrintQuality}
+                                        onChange={handleChange}
+                                    >
+                                        <option>-</option>
+                                        <option value="production-gloss">Production Gloss</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label htmlFor="itemCutter">Cutter</label>
+                                    <select
+                                        name="itemCutter"
+                                        id="itemCutter"
+                                        value={data.itemCutter}
+                                        onChange={handleChange}
+                                    >
+                                        <option>-</option>
+                                        <option value="none">None</option>
+                                        <option value="graphtec">Graphtec</option>
+                                    </select>
+                                </div>
+                                <hr />
+                                <div>
+                                    <label htmlFor="itemSubstrate">Substrate</label>
+                                    <select
+                                        name="itemSubstrate"
+                                        id="itemSubstrate"
+                                        value={data.itemSubstrate}
+                                        onChange={handleChange}
+                                    >
+                                        <option>-</option>
+                                        <option value="vinyl">Standard Self Adhesive Vinyl</option>
+                                        <option value="holo-vinyl">Holographic Self Adhesive Vinyl</option>
+                                        <option value="foam-core">Foam Core</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label htmlFor="itemLaminate">Laminate</label>
+                                    <select
+                                        name="itemLaminate"
+                                        id="itemLaminate"
+                                        value={data.itemLaminate}
+                                        onChange={handleChange}
+                                    >
+                                        <option>-</option>
+                                        <option value="none">None</option>
+                                        <option value="soft-touch">Soft Touch</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label htmlFor="itemWidth">Width</label>
+                                    <input
+                                        type="number"
+                                        name="itemWidth"
+                                        id="itemWidth"
+                                        min="0"
+                                        value={data.itemWidth}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="itemHeight">Height</label>
+                                    <input
+                                        type="number"
+                                        name="itemHeight"
+                                        id="itemHeight"
+                                        min="0"
+                                        value={data.itemHeight}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="itemBleed">Bleed</label>
+                                    <input
+                                        type="number"
+                                        name="itemBleed"
+                                        id="itemBleed"
+                                        min="0"
+                                        value={data.itemBleed}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="itemQuantity">Quantity</label>
+                                    <input
+                                        type="number"
+                                        name="itemQuantity"
+                                        id="itemQuantity"
+                                        min="1"
+                                        value={data.itemQuantity}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="itemThumbnail">Item Thumbnail</label>
+                                    {/* <input type="file" name="itemThumbnail" id="itemThumbnail" onChange={handleThumbnailUpload} /> */}
+                                    <button onClick={handleThumbnailUpload}>Thumbnail</button>
+                                    <img src={data.itemThumbnail} alt="Thumbnail Image" />
+                                </div>
+                                <div>
+                                    <label htmlFor="itemCost">Est. Cost</label>
+                                    <p>{data.itemCost}</p>
+                                </div>
+                            </div>
+                            <div style={{ background: 'lightgrey', padding: '.25rem', maxHeight: '415px' }}>
+                                <PreviewCanvas width={data.itemWidth} height={data.itemHeight} bleed={data.itemBleed} />
+                            </div>
                         </div>
-                        <div>
-                            <label htmlFor="itemPress">Press</label>
-                            <select 
-                                name="itemPress" 
-                                id="itemPress"
-                                value={data.itemPress}
-                                onChange={handleChange}
-                            >
-                                <option>-</option>
-                                <option value="canon-colorado">CANON Colorado</option>
-                                <option value="canon-arizona">CANON Arizona</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label htmlFor="itemPrintMode">Print Mode</label>
-                            <select 
-                                name="itemPrintMode" 
-                                id="itemPrintMode"
-                                value={data.itemPrintMode}
-                                onChange={handleChange}
-                            >
-                                <option>-</option>
-                                <option value="cmyk-1-side">CMYK - 1 Side</option>
-                                <option value="cmyk-2-side">CMYK - 2 Side</option>
-                                <option value="cmyk-white">CMYK + White Spot</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label htmlFor="itemPrintQuality">Print Quality</label>
-                            <select 
-                                name="itemPrintQuality" 
-                                id="itemPrintQuality"
-                                value={data.itemPrintQuality}
-                                onChange={handleChange}
-                            >
-                                <option>-</option>
-                                <option value="production-gloss">Production Gloss</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label htmlFor="itemCutter">Cutter</label>
-                            <select 
-                                name="itemCutter" 
-                                id="itemCutter"
-                                value={data.itemCutter}
-                                onChange={handleChange}
-                            >
-                                <option>-</option>
-                                <option value="none">None</option>
-                                <option value="graphtec">Graphtec</option>
-                            </select>
-                        </div>
-                        <hr/>
-                        <div>
-                            <label htmlFor="itemSubstrate">Substrate</label>
-                            <select 
-                                name="itemSubstrate" 
-                                id="itemSubstrate"
-                                value={data.itemSubstrate}
-                                onChange={handleChange}
-                            >
-                                <option>-</option>
-                                <option value="vinyl">Standard Self Adhesive Vinyl</option>
-                                <option value="holo-vinyl">Holographic Self Adhesive Vinyl</option>
-                                <option value="foam-core">Foam Core</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label htmlFor="itemLaminate">Laminate</label>
-                            <select 
-                                name="itemLaminate" 
-                                id="itemLaminate"
-                                value={data.itemLaminate}
-                                onChange={handleChange}
-                            >
-                                <option>-</option>
-                                <option value="none">None</option>
-                                <option value="soft-touch">Soft Touch</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label htmlFor="itemWidth">Width</label>
-                            <input 
-                                type="number" 
-                                name="itemWidth" 
-                                id="itemWidth" 
-                                min="0"
-                                value={data.itemWidth}
-                                onChange={handleChange}
-                                />
-                        </div>
-                        <div>
-                            <label htmlFor="itemHeight">Height</label>
-                            <input 
-                                type="number" 
-                                name="itemHeight" 
-                                id="itemHeight"
-                                min="0"
-                                value={data.itemHeight}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="itemBleed">Bleed</label>
-                            <input 
-                                type="number" 
-                                name="itemBleed" 
-                                id="itemBleed"
-                                min="0"
-                                value={data.itemBleed}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="itemQuantity">Quantity</label>
-                            <input 
-                                type="number" 
-                                name="itemQuantity" 
-                                id="itemQuantity"
-                                min="1"
-                                value={data.itemQuantity}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="itemThumbnail">Item Thumbnail</label>
-                            <button onClick={handleThumbnailUpload}>Thumbnail</button>
-                            <img src={data.itemThumbnail} alt="Thumbnail Image" />
-                        </div>
-                        <div>
-                            <label htmlFor="itemCost">Est. Cost</label>
-                            <p>{data.itemCost}</p>
-                        </div>
-                    </div>
-                    <div style={{background: 'lightgrey', padding: '.25rem', maxHeight: '415px'}}>
-                        <PreviewCanvas width={data.itemWidth} height={data.itemHeight} bleed={data.itemBleed}/>
-                    </div>
-                </div>
-                <button onClick={toggleVisibility}>Cancel</button>
-            <button onClick={addItem}>Add</button>
-            </section>
-        </section>
+                        <button onClick={toggleVisibility}>Cancel</button>
+                        <button onClick={addItem}>Add</button>
+                    </section>
+                </section>
             )}
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Prod</th>
-                    <th>Sub</th>
-                    <th>Lam</th>
-                    <th>Dims</th>
-                    <th>Press</th>
-                    <th>Mode</th>
-                    <th>Quality</th>
-                    <th>Cutter</th>
-                    <th>Quantity</th>
-                    <th>Est. Cost</th>
-                    <th>Thumb</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="item-section">
-                {items.map((item, index) => (
+            <table>
+                <thead>
                     <tr>
-                        <td>{index + 1}</td>
-                        <td>{item.itemProduct}</td>
-                        <td>{item.itemSubstrate}</td>
-                        <td>{item.itemLaminate}</td>
-                        <td>{item.itemWidth} x {item.itemHeight}</td>
-                        <td>{item.itemPress}</td>
-                        <td>{item.itemPrintMode}</td>
-                        <td>{item.itemPrintQuality}</td>
-                        <td>{item.itemCutter}</td>
-                        <td>{item.itemQuantity}</td>
-                        {/* <td>{estimator(item.itemWidth, item.itemHeight, item.itemBleed, item.itemQuantity, item.itemSubstrate, item.itemLaminate, item.itemPress, item.itemPrintMode, item.itemPrintQuality).totalCost.toFixed(2)}</td> */}
-                        <td>$ {item.itemCost}</td>
-                        <td><img src={item.itemThumbnail} alt="no-image" /></td>
-                        <td><button onClick={() => removeItem(item.id)}>Remove</button></td>
+                        <th>#</th>
+                        <th>Prod</th>
+                        <th>Sub</th>
+                        <th>Lam</th>
+                        <th>Dims</th>
+                        <th>Press</th>
+                        <th>Mode</th>
+                        <th>Quality</th>
+                        <th>Cutter</th>
+                        <th>Quantity</th>
+                        <th>Est. Cost</th>
+                        <th>Thumb</th>
+                        <th>Actions</th>
                     </tr>
-                ))}
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colSpan={13}>
-                        <button onClick={refreshList}>Refresh</button>
-                        <button onClick={toggleVisibility}>Add Item +</button>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+                </thead>
+                <tbody id="item-section">
+                    {items.map((item, index) => (
+                        <tr>
+                            <td>{index + 1}</td>
+                            <td>{item.itemProduct}</td>
+                            <td>{item.itemSubstrate}</td>
+                            <td>{item.itemLaminate}</td>
+                            <td>{item.itemWidth} x {item.itemHeight}</td>
+                            <td>{item.itemPress}</td>
+                            <td>{item.itemPrintMode}</td>
+                            <td>{item.itemPrintQuality}</td>
+                            <td>{item.itemCutter}</td>
+                            <td>{item.itemQuantity}</td>
+                            {/* <td>{estimator(item.itemWidth, item.itemHeight, item.itemBleed, item.itemQuantity, item.itemSubstrate, item.itemLaminate, item.itemPress, item.itemPrintMode, item.itemPrintQuality).totalCost.toFixed(2)}</td> */}
+                            <td>$ {item.itemCost}</td>
+                            <td><img src={item.itemThumbnail} alt="no-image" /></td>
+                            <td><button onClick={() => removeItem(item.id)}>Remove</button></td>
+                        </tr>
+                    ))}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colSpan={13}>
+                            <button onClick={refreshList}>Refresh</button>
+                            <button onClick={toggleVisibility}>Add Item +</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
         </>
     )
 }

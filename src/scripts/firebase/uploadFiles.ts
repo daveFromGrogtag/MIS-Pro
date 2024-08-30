@@ -1,9 +1,10 @@
 import { storage } from "./init.js"
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { getDocument } from 'pdfjs';
 
 async function uploadFile(pdfData) {
   // Load PDF using PDF.js
-  const loadingTask = pdfjsLib.getDocument({ data: pdfData });
+  const loadingTask = getDocument({ data: pdfData });
   const pdf = await loadingTask.promise;
   
   // Fetch the first page
