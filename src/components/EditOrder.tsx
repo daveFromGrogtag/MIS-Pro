@@ -85,7 +85,9 @@ const EditOrder = () => {
     return (
         <div>
             <h1>Order: {order}</h1>
-            <h2>Total: ${total}</h2>
+            <h2>Total: ${total.toFixed(2)}</h2>
+            <h2>Total (with markup): ${(parseFloat(total.toFixed(2)) * ((parseFloat(data.orderMarkup?data.orderMarkup:0)/100) + 1 )).toFixed(2) }</h2>
+            <h2>Total (with Markup and discount): ${((parseFloat(total.toFixed(2)) * ((parseFloat(data.orderMarkup?data.orderMarkup:0)/100) + 1 )) * (1 - (parseFloat(data.orderDiscount?data.orderDiscount:0)/100))).toFixed(2)}</h2>
             <label htmlFor="status">Status:</label>
             <select name="status" id="status" onChange={handleStatusChange} defaultValue={status}>
                 <option value="closed">closed</option>
