@@ -15,7 +15,7 @@ function OrderInfo({data, setData}) {
     const handleClientChange = (e) => {
         let clientName = e.target.value
         let payload;
-        if (clientName = 'techstyles') {
+        if (clientName == 'techstyles') {
             payload = {
                 ...data,
                 'client': clientName,
