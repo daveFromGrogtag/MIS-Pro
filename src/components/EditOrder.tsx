@@ -4,6 +4,8 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import OrderInfo from './OrderInfo'
 import ItemList from './ItemList'
 import Loading from './Loading.tsx'
+import totalCalculator from '../scripts/totalCalculator.js'
+
 
 const EditOrder = () => {
     const urlParams = new URLSearchParams(window.location.search)
@@ -43,34 +45,6 @@ const EditOrder = () => {
         });
         setTotal(sumTotal)
     }
-
-    const totalCosts = (total, taxRate, shippingCost, markup, discount) => {
-        total = parseFloat(total)
-        taxRate = parseFloat(taxRate)/100
-        shippingCost = parseFloat(shippingCost)
-        markup = parseFloat(markup)/100
-        discount = parseFloat(discount)/100
-
-        let clientTotal = total * (1 + markup)
-        let clientShipping =  shippingCost * (1 + markup)
-        let clientTax = clientTotal * taxRate
-        let clientSubtotalWithTax = clientTotal * (1 + taxRate)
-        let clientTotalWithTaxAndShipping = clientSubtotalWithTax + clientShipping
-        let clientTotalWithDiscount = clientTotalWithTaxAndShipping * (1 - discount)
-
-        let clientTotals = {
-            cost: total,
-            shippingCost: shippingCost,
-            clientTotal: clientTotal,
-            clientShipping: clientShipping,
-            clientTax: clientTax,
-            clientSubtotalWithTax: clientSubtotalWithTax,
-            clientTotalWithTaxAndShipping: clientTotalWithTaxAndShipping,
-            clientTotalWithDiscount: clientTotalWithDiscount
-        }
-        console.log(clientTotals)
-        return clientTotals
-    } 
 
     useEffect(() => {
         getOrderTotal()
@@ -114,12 +88,12 @@ const EditOrder = () => {
         <div>
             <h1>Order: {order}</h1>
             <table id='order-pricing-table'>
-                <tr><td>Cost</td><td>${totalCosts(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).cost.toFixed(2)}</td></tr>
-                <tr><td>Tax</td><td>${totalCosts(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).clientTax.toFixed(2)}</td></tr>
-                <tr><td>Shipping</td><td>${totalCosts(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).shippingCost.toFixed(2)}</td></tr>
-                <tr><td>Shipping MU</td><td>${totalCosts(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).clientShipping.toFixed(2)}</td></tr>
-                <tr><td>Total MU</td><td>${totalCosts(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).clientTotalWithTaxAndShipping.toFixed(2)}</td></tr>
-                <tr><td>Total + MU - D</td><td>${totalCosts(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).clientTotalWithDiscount.toFixed(2)}</td></tr>
+                <tr><td>Cost</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).cost.toFixed(2)}</td></tr>
+                <tr><td>Tax</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).clientTax.toFixed(2)}</td></tr>
+                <tr><td>Shipping</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).shippingCost.toFixed(2)}</td></tr>
+                <tr><td>Shipping MU</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).clientShipping.toFixed(2)}</td></tr>
+                <tr><td>Total MU</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).clientTotalWithTaxAndShipping.toFixed(2)}</td></tr>
+                <tr><td>Total + MU - D</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).clientTotalWithDiscount.toFixed(2)}</td></tr>
             </table>
             <label htmlFor="status">Status:</label>
             <select name="status" id="status" onChange={handleStatusChange} defaultValue={status}>

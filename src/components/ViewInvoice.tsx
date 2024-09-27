@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { db } from '../scripts/firebase/init.ts'
 import { query, collection, getDocs, doc, getDoc } from 'firebase/firestore'
+import totalCalculator from '../scripts/totalCalculator.js'
 
 const ViewInvoice = () => {
     const urlParams = new URLSearchParams(window.location.search)
@@ -22,34 +23,6 @@ const ViewInvoice = () => {
         }
         fetchData()
     }, [])
-
-    const totalCosts = (total, taxRate, shippingCost, markup, discount) => {
-        total = parseFloat(total)
-        taxRate = parseFloat(taxRate)/100
-        shippingCost = parseFloat(shippingCost)
-        markup = parseFloat(markup)/100
-        discount = parseFloat(discount)/100
-
-        let clientTotal = total * (1 + markup)
-        let clientShipping =  shippingCost * (1 + markup)
-        let clientTax = clientTotal * taxRate
-        let clientSubtotalWithTax = clientTotal * (1 + taxRate)
-        let clientTotalWithTaxAndShipping = clientSubtotalWithTax + clientShipping
-        let clientTotalWithDiscount = clientTotalWithTaxAndShipping * (1 - discount)
-
-        let clientTotals = {
-            cost: total,
-            shippingCost: shippingCost,
-            clientTotal: clientTotal,
-            clientShipping: clientShipping,
-            clientTax: clientTax,
-            clientSubtotalWithTax: clientSubtotalWithTax,
-            clientTotalWithTaxAndShipping: clientTotalWithTaxAndShipping,
-            clientTotalWithDiscount: clientTotalWithDiscount
-        }
-        console.log(clientTotals)
-        return clientTotals
-    } 
     
     if (loading) {
         return <p>loading...</p>
@@ -59,11 +32,11 @@ const ViewInvoice = () => {
         <div>
             <h1>Invoice {urlParams.get('order')}</h1>
             <table id='order-pricing-table'>
-                <tr><td>Shipping</td><td>${totalCosts(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientShipping.toFixed(2)}</td></tr>
-                <tr><td>Subtotal</td><td>${totalCosts(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTotal.toFixed(2)}</td></tr>
-                <tr><td>Tax</td><td>${totalCosts(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTax.toFixed(2)}</td></tr>
-                <tr><td>Total before Discount</td><td>${totalCosts(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTotalWithTaxAndShipping.toFixed(2)}</td></tr>
-                <tr><td>Total</td><td>${totalCosts(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTotalWithDiscount.toFixed(2)}</td></tr>
+                <tr><td>Shipping</td><td>${totalCalculator(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientShipping.toFixed(2)}</td></tr>
+                <tr><td>Subtotal</td><td>${totalCalculator(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTotal.toFixed(2)}</td></tr>
+                <tr><td>Tax</td><td>${totalCalculator(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTax.toFixed(2)}</td></tr>
+                <tr><td>Total before Discount</td><td>${totalCalculator(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTotalWithTaxAndShipping.toFixed(2)}</td></tr>
+                <tr><td>Total</td><td>${totalCalculator(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTotalWithDiscount.toFixed(2)}</td></tr>
             </table>
             <table>
                 <tr><th colSpan={2}>Order Info</th></tr>
