@@ -187,6 +187,7 @@ function ItemList({ items, setItems }) {
                                         <option value="vinyl">Standard Self Adhesive Vinyl</option>
                                         <option value="holo-vinyl">Holographic Self Adhesive Vinyl</option>
                                         <option value="foam-core">Foam Core</option>
+                                        <option value="ceramic-tile">Ceramic Tile</option>
                                     </select>
                                 </div>
                                 <div>
@@ -200,6 +201,7 @@ function ItemList({ items, setItems }) {
                                         <option>-</option>
                                         <option value="none">None</option>
                                         <option value="soft-touch">Soft Touch</option>
+                                        <option value="gloss">Gloss</option>
                                     </select>
                                 </div>
                                 <div>
@@ -254,7 +256,14 @@ function ItemList({ items, setItems }) {
                                 </div>
                                 <div>
                                     <label htmlFor="itemCost">Est. Cost</label>
-                                    <p>{data.itemCost}</p>
+                                    <input
+                                        type="number"
+                                        name="itemCost"
+                                        id="itemCost"
+                                        min="0"
+                                        value={data.itemCost}
+                                        onChange={handleChange}
+                                    />
                                 </div>
                             </div>
                             <div style={{ background: 'lightgrey', padding: '.25rem', maxHeight: '415px' }}>

@@ -156,12 +156,36 @@ function OrderInfo({data, setData}) {
                 </details>
                 <hr />
                 <div>
+                    <label htmlFor="orderShippingCost">Shipping Cost</label>
+                    <input type="number" name="orderShippingCost" id="orderShippingCost" defaultValue="0" min="0" value={data.orderShippingCost} onChange={handleChange}/>
+                </div>
+                <div>
+                    <label htmlFor="orderShippingMethod">Shipping Method</label>
+                    <input type="text" list="orderShippingMethodList" name="orderShippingMethod" id="orderShippingMethod" value={data.orderShippingMethod} onChange={handleChange}/>
+                    <datalist id="orderShippingMethodList">
+                        <option>Fed Ex | Ground</option>
+                        <option>Fed Ex | Next Day</option>
+                        <option>Fed Ex | 3 Day</option>
+                        <option>UPS | Ground</option>
+                        <option>UPS | Next Day</option>
+                        <option>UPS | 3 Day</option>
+                        <option>USPS | Priority Mail</option>
+                        <option>Freight</option>
+                        <option>Will Call</option>
+                    </datalist>
+                </div>
+                <hr />
+                <div>
                     <label htmlFor="dueDate">Due Date</label>
                     <input type="date" name="dueDate" id="dueDate" value={data.dueDate} onChange={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="notes">Notes</label>
                     <textarea name="notes" id="notes" value={data.notes} onChange={handleChange}></textarea>
+                </div>
+                <div>
+                    <label htmlFor="orderTaxRate">Tax Rate (%)</label>
+                    <input type="number" name="orderTaxRate" id="orderTaxRate" defaultValue="0" min="0" value={data.orderTaxRate} onChange={handleChange}/>
                 </div>
                 <div>
                     <label htmlFor="orderMarkup">Markup (%)</label>

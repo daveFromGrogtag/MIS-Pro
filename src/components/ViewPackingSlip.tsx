@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { db } from '../scripts/firebase/init.ts'
 import { query, collection, getDocs, doc, getDoc } from 'firebase/firestore'
 
-const ViewOrder = () => {
+const ViewPackingSlip = () => {
     const urlParams = new URLSearchParams(window.location.search)
     const [order, setOrder] = useState({})
     const [loading, setLoading] = useState(true)
@@ -97,4 +97,4 @@ const ViewOrder = () => {
     );
 };
 
-export default ViewOrder;
+export default ViewPackingSlip;

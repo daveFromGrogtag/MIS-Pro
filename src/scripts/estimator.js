@@ -7,6 +7,9 @@ const substrateList = {
     },
     "foam-core": {
         "costPerSquareInch": 0.0029
+    },
+    "ceramic-tile": {
+        "costPerSquareInch": 0.03125
     }
 }
 
@@ -17,6 +20,10 @@ const laminateList = {
     },
     "soft-touch": {
         "costPerSquareInch": .002,
+        "squareInchesPerHour": 345600
+    },
+    "soft-touch": {
+        "costPerSquareInch": .003,
         "squareInchesPerHour": 345600
     }
 }

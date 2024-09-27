@@ -1,12 +1,12 @@
 ---
 import PrintLayout from '../layouts/PrintLayout.astro';
-import ViewOrder from '../components/ViewOrder'
+import ViewPackingSlip from '../components/ViewPackingSlip'
 ---
 <PrintLayout>
 	<div class="packing-slip-container">
 		<div class="packing-slip-header">
 			<h1>Pangaea Print LLC</h1>
 		</div>
-        <ViewOrder client:only/>
+        <ViewPackingSlip client:only/>
 	</div>
 </PrintLayout>

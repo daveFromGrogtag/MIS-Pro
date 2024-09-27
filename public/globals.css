@@ -166,6 +166,29 @@ tfoot tr td button {
     margin: .25rem;
 }
 
+#order-pricing-table {
+    width: auto;
+}
+
+#order-pricing-table td {
+min-width: 200px;
+}
+
+.packing-slip-signature-box {
+    height: 5rem;
+}
+
+.packing-slip-container {
+    width: 8.5in;
+}
+
+.packing-slip-header {
+    text-align: center;
+    background-color: darkslategrey;
+    color: white;
+    padding: .25rem;
+}
+
 .spinner {
     border: 8px solid #f3f3f3;
     border-top: 8px solid darkslategray;
