@@ -22,7 +22,7 @@ const laminateList = {
         "costPerSquareInch": .002,
         "squareInchesPerHour": 345600
     },
-    "soft-touch": {
+    "gloss": {
         "costPerSquareInch": .003,
         "squareInchesPerHour": 345600
     }
@@ -91,19 +91,25 @@ const burden = {
 }
 
 
-function estimator(width, height, bleed, quantity, substrate, laminate, press, mode, quality, cutter) {
-    // const pulledMarkUp = parseFloat(document.getElementById('orderMarkup').value) / 100
-    // const pulledDiscount = parseFloat(document.getElementById('orderDiscount').value) / 100
-    let widthBleed = parseFloat(width) + (parseFloat(bleed) * 2)
-    let heightBleed = parseFloat(height) + (parseFloat(bleed) * 2)
-    let squareInches = (widthBleed * heightBleed * parseInt(quantity))
-    let materialCost = getMaterialCost(substrate, laminate, press, mode, quality) * squareInches
-    let laborCost = getTime(press, width, height, quantity, mode, quality, cutter, laminate).timeTotal * burden.totalPerHour
-    let finishingCost = getFinishingCost(width, height, quantity, cutter)
-    let totalTime = getTime(press, width, height, quantity, mode, quality, cutter, laminate).timeTotal
 
-    let totalCost = (materialCost + laborCost + finishingCost)
-    return {'materialCost': materialCost, 'squareInches': squareInches, 'laborCost': laborCost, 'totalCost': totalCost, 'totalTime': totalTime }
+function estimator(width, height, bleed, quantity, substrate, laminate, press, mode, quality, cutter) {
+    try {
+        // const pulledMarkUp = parseFloat(document.getElementById('orderMarkup').value) / 100
+        // const pulledDiscount = parseFloat(document.getElementById('orderDiscount').value) / 100
+        let widthBleed = parseFloat(width) + (parseFloat(bleed) * 2)
+        let heightBleed = parseFloat(height) + (parseFloat(bleed) * 2)
+        let squareInches = (widthBleed * heightBleed * parseInt(quantity))
+        let materialCost = getMaterialCost(substrate, laminate, press, mode, quality) * squareInches
+        let laborCost = getTime(press, width, height, quantity, mode, quality, cutter, laminate).timeTotal * burden.totalPerHour
+        let finishingCost = getFinishingCost(width, height, quantity, cutter)
+        let totalTime = getTime(press, width, height, quantity, mode, quality, cutter, laminate).timeTotal
+    
+        let totalCost = (materialCost + laborCost + finishingCost)
+        return {'materialCost': materialCost, 'squareInches': squareInches, 'laborCost': laborCost, 'totalCost': totalCost, 'totalTime': totalTime }
+    } catch (error) {
+        console.error(error);
+        return {'materialCost': 0, 'squareInches': 0, 'laborCost': 0, 'totalCost': 0, 'totalTime': 0 }
+    }
 }
 
 function getMaterialCost(substrate, laminate, press, mode, quality) {

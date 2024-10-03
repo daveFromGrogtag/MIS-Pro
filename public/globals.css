@@ -6,7 +6,7 @@ html {
 
 body {
     margin: 0;
-    max-width: 1250px;
+    /* max-width: 1250px; */
     box-sizing:border-box;
     display: flex;
 }
@@ -86,7 +86,11 @@ section {
 
 label {
     display: block;
+    font-size: 12px;
+    color: #777777;
+    text-transform: uppercase;
 }
+
 input, select {
     padding: .25rem;
     margin-bottom: .5rem;
@@ -202,4 +206,16 @@ min-width: 200px;
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+  }
+
+  .form-line {
+    display: flex;
+  }
+
+  .form-line div {
+    margin-right: 1rem;
+  }
+
+  .form-line input {
+    width: 250px;
   }

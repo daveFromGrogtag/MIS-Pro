@@ -98,7 +98,9 @@ const EditOrder = () => {
             <label htmlFor="status">Status:</label>
             <select name="status" id="status" onChange={handleStatusChange} defaultValue={status}>
                 <option value="closed">closed</option>
+                <option value="processing">processing</option>
                 <option value="open">open</option>
+                <option value="on-hold">on-hold</option>
             </select>
             <OrderInfo data={data} setData={setData}/>
             <ItemList items={items} setItems={setItems}/>

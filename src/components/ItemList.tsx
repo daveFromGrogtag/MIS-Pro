@@ -2,13 +2,29 @@ import { useState, useEffect } from 'react'
 import PreviewCanvas from './PreviewCanvas.tsx'
 import estimator from '../scripts/estimator.js'
 import generateUUID from '../scripts/generateUUID.js'
+import PopulatedDropdown from './PopulatedDropdown.tsx'
+
 // import { uploadFile } from '../scripts/firebase/uploadFiles.ts'
 // import { uploadFile } from "./firebase/upload-file.js";
 
 function ItemList({ items, setItems }) {
 
     // const [items, setItems] = useState([])
-    const [data, setData] = useState({})
+    const [data, setData] = useState({
+        itemThumbnail: '/images/no-image.jpg',
+        itemProduct: "",
+        itemPress: "",
+        itemPrintMode: "",
+        itemPrintQuality: "",
+        itemCutter: "",
+        itemSubstrate: "",
+        itemLaminate: "",
+        itemWidth: 0,
+        itemHeight: 0,
+        itemBleed: 0,
+        itemQuantity: 1,
+        itemCost: 0
+    })
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
@@ -130,9 +146,7 @@ function ItemList({ items, setItems }) {
                                         value={data.itemPress}
                                         onChange={handleChange}
                                     >
-                                        <option>-</option>
-                                        <option value="canon-colorado">CANON Colorado</option>
-                                        <option value="canon-arizona">CANON Arizona</option>
+                                    <PopulatedDropdown inputType={"presses"}/>
                                     </select>
                                 </div>
                                 <div>
@@ -143,10 +157,7 @@ function ItemList({ items, setItems }) {
                                         value={data.itemPrintMode}
                                         onChange={handleChange}
                                     >
-                                        <option>-</option>
-                                        <option value="cmyk-1-side">CMYK - 1 Side</option>
-                                        <option value="cmyk-2-side">CMYK - 2 Side</option>
-                                        <option value="cmyk-white">CMYK + White Spot</option>
+                                    <PopulatedDropdown inputType={"print_modes"}/>
                                     </select>
                                 </div>
                                 <div>
@@ -169,9 +180,7 @@ function ItemList({ items, setItems }) {
                                         value={data.itemCutter}
                                         onChange={handleChange}
                                     >
-                                        <option>-</option>
-                                        <option value="none">None</option>
-                                        <option value="graphtec">Graphtec</option>
+                                    <PopulatedDropdown inputType={"cutters"}/>
                                     </select>
                                 </div>
                                 <hr />
@@ -183,11 +192,12 @@ function ItemList({ items, setItems }) {
                                         value={data.itemSubstrate}
                                         onChange={handleChange}
                                     >
-                                        <option>-</option>
+                                    <PopulatedDropdown inputType={"substrates"}/>
+                                        {/* <option>-</option>
                                         <option value="vinyl">Standard Self Adhesive Vinyl</option>
                                         <option value="holo-vinyl">Holographic Self Adhesive Vinyl</option>
                                         <option value="foam-core">Foam Core</option>
-                                        <option value="ceramic-tile">Ceramic Tile</option>
+                                        <option value="ceramic-tile">Ceramic Tile</option> */}
                                     </select>
                                 </div>
                                 <div>
@@ -198,10 +208,7 @@ function ItemList({ items, setItems }) {
                                         value={data.itemLaminate}
                                         onChange={handleChange}
                                     >
-                                        <option>-</option>
-                                        <option value="none">None</option>
-                                        <option value="soft-touch">Soft Touch</option>
-                                        <option value="gloss">Gloss</option>
+                                        <PopulatedDropdown inputType={"laminates"}/>
                                     </select>
                                 </div>
                                 <div>

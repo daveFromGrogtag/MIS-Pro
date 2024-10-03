@@ -6,9 +6,6 @@ import ItemList from './ItemList'
 import { generateOrderId } from '../scripts/firebase/generateOrderId.ts'
 import totalCalculator from '../scripts/totalCalculator.js'
 
-
-
-
 const ExportOrder = () => {
     const [data, setData] = useState({})
     const [items, setItems] = useState([])
