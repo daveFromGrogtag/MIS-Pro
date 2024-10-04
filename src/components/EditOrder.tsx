@@ -87,6 +87,11 @@ const EditOrder = () => {
     return (
         <div>
             <h1>Order: {order}</h1>
+            <div className='edit-order-page-links'>
+                <b>Downloads: </b>
+                <a href={`/view-packing-slip?order=${order}`}>Packing List</a>
+                <a href={`/view-invoice?order=${order}`}>Invoice</a>
+            </div>
             <table id='order-pricing-table'>
                 <tr><td>Cost</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).cost.toFixed(2)}</td></tr>
                 <tr><td>Tax</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).clientTax.toFixed(2)}</td></tr>

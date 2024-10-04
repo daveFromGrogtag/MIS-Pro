@@ -53,6 +53,9 @@ const ViewPackingSlip = () => {
                     {order.data.billingState}<br/>
                     {order.data.billingZip}<br/>
                     {order.data.billingCountry}<br/>
+                    {order.data.billingEmail}<br/>
+                    {order.data.billingPhone}<br/>
+
                     </td>
                     <td>
                     {order.data.shippingCompany}<br/>
@@ -64,6 +67,8 @@ const ViewPackingSlip = () => {
                     {order.data.shippingState}<br/>
                     {order.data.shippingZip}<br/>
                     {order.data.shippingCountry}<br/>
+                    {order.data.shippingEmail}<br/>
+                    {order.data.shippingPhone}<br/>
                     </td>
                 </tr>
             </table>

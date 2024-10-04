@@ -3,6 +3,7 @@ import PreviewCanvas from './PreviewCanvas.tsx'
 import estimator from '../scripts/estimator.js'
 import generateUUID from '../scripts/generateUUID.js'
 import PopulatedDropdown from './PopulatedDropdown.tsx'
+import UploadThumbnail from './UploadThumbnail'
 
 // import { uploadFile } from '../scripts/firebase/uploadFiles.ts'
 // import { uploadFile } from "./firebase/upload-file.js";
@@ -97,23 +98,11 @@ function ItemList({ items, setItems }) {
         setItems([...items])
     }
 
-    const handleThumbnailUpload = (e) => {
-        // const thumbnailFile = e.target.files[0]
-        // const reader = new FileReader()
-        // if (thumbnailFile && thumbnailFile.type.startsWith('image/')) {
-        //     console.log("Image");
-        //     reader.onload = (e) => {
+    const handleThumbnailUpload = (url) => {
 
-        //     }
-        // } else if (thumbnailFile && thumbnailFile.type === 'application/pdf') {
-        //     const thumbnailUrl = uploadFile(e.target.files[0])
-        //     setData({ ...data, itemThumbnail: thumbnailUrl })
-        //     console.log("PDF");
-            
-        // }
         setData({
             ...data,
-            itemThumbnail: '/images/no-image.jpg'
+            itemThumbnail: url
         })
     }
 
@@ -257,8 +246,8 @@ function ItemList({ items, setItems }) {
                                 </div>
                                 <div>
                                     <label htmlFor="itemThumbnail">Item Thumbnail</label>
-                                    {/* <input type="file" name="itemThumbnail" id="itemThumbnail" onChange={handleThumbnailUpload} /> */}
-                                    <button onClick={handleThumbnailUpload}>Thumbnail</button>
+                                    <UploadThumbnail onThumbnailUrlChange={handleThumbnailUpload} />
+                                    {/* <button onClick={handleThumbnailUpload}>Thumbnail</button> */}
                                     <img src={data.itemThumbnail} alt="Thumbnail Image" />
                                 </div>
                                 <div>

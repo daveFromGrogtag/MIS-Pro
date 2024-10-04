@@ -1,9 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import UploadThumbnail from '../components/UploadThumbnail';
 ---
 
 <Layout title="Reports | HMB">
 	<main>
         <h1 class="branded-title">Reports</h1>
+		<UploadThumbnail client:only/>
 	</main>
 </Layout>

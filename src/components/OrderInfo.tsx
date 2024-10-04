@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import PopulatedDropdown from './PopulatedDropdown.tsx'
 
 
@@ -32,17 +32,18 @@ function OrderInfo({data, setData}) {
                 'billingZip': '94544'
             }
         }
-        if (clientName == 'Custy2') {
+
+        if (clientName == 'RR Donnelley') {
             payload = {
                 ...data,
                 'client': clientName,
-                'billingAddress1': "1234 Fake Street",
-                'billingAttn': "Mr Fake",
-                'billingCity': "Fakersfield",
-                'billingCompany': "Fake Co",
+                'billingAttn': 'Justin Bradley',
+                'billingAddress1': "1281 W. National Drive",
+                'billingCity': "Sacramento",
+                'billingCompany': "RR Donnelley",
                 'billingCountry': "USA",
                 'billingState': "CA",
-                'billingZip': "95831"
+                'billingZip': "95834"
             }
         }
         else {
@@ -92,6 +93,16 @@ function OrderInfo({data, setData}) {
                         <div>
                             <label htmlFor="billingAttn">Billing Attention</label>
                             <input type="text" id="billingAttn" name="billingAttn" placeholder="Billing Attention.." required value={data.billingAttn} onChange={handleChange}/>
+                        </div>
+                    </div>
+                    <div className="form-line">
+                        <div>
+                            <label htmlFor="billingPhone">Billing Phone Number</label>
+                            <input type="text" id="billingPhone" name="billingPhone" placeholder="Billing Phone Number.." required value={data.billingPhone} onChange={handleChange}/>
+                        </div>
+                        <div>
+                            <label htmlFor="billingEmail">Billing Email</label>
+                            <input type="email" id="billingEmail" name="billingEmail" placeholder="Billing Email.." required value={data.billingEmail} onChange={handleChange}/>
                         </div>
                     </div>
                     <div>
@@ -146,6 +157,16 @@ function OrderInfo({data, setData}) {
                         <div>
                             <label htmlFor="shippingAttn">Shipping Attention</label>
                             <input type="text" id="shippingAttn" name="shippingAttn" placeholder="Shipping Attention.." required value={data.shippingAttn} onChange={handleChange}/>
+                        </div>
+                    </div>
+                    <div className="form-line">
+                        <div>
+                            <label htmlFor="shippingPhone">Shipping Phone Number</label>
+                            <input type="text" id="shippingPhone" name="shippingPhone" placeholder="Shipping Phone Number.." required value={data.shippingPhone} onChange={handleChange}/>
+                        </div>
+                        <div>
+                            <label htmlFor="shippingEmail">Shipping Email</label>
+                            <input type="email" id="shippingEmail" name="shippingEmail" placeholder="Shipping Email.." required value={data.shippingEmail} onChange={handleChange}/>
                         </div>
                     </div>
                     <div>

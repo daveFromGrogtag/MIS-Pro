@@ -219,3 +219,7 @@ min-width: 200px;
   .form-line input {
     width: 250px;
   }
+
+  .edit-order-page-links  a {
+    margin-right: .5rem;
+  }
