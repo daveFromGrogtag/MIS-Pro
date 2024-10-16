@@ -4,7 +4,7 @@ import { getDocument, GlobalWorkerOptions } from '../scripts/pdfjs-dist'
 
 const UploadPdf = ({ onThumbnailUrlChange }) => {
 
-    GlobalWorkerOptions.workerSrc = '../../node_modules/pdfjs-dist/build/pdf.worker.mjs'
+    GlobalWorkerOptions.workerSrc = '../scripts/pdfjs-dist/build/pdf.worker.mjs'
     const fileInputRef = useRef(null);
     const canvasRef = useRef(null);
     const storage = getStorage();
