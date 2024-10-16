@@ -4,7 +4,7 @@ import { getDocument, GlobalWorkerOptions } from '../scripts/pdfjs-dist'
 
 const UploadPdf = ({ onThumbnailUrlChange }) => {
 
-    GlobalWorkerOptions.workerSrc = '../scripts/pdfjs-dist/build/pdf.worker.mjs'
+    GlobalWorkerOptions.workerSrc = 'https://raw.githubusercontent.com/daveFromGrogtag/MIS-Pro/refs/heads/master/src/scripts/pdfjs-dist/build/pdf.worker.mjs'
     const fileInputRef = useRef(null);
     const canvasRef = useRef(null);
     const storage = getStorage();
