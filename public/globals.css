@@ -223,3 +223,7 @@ min-width: 200px;
   .edit-order-page-links  a {
     margin-right: .5rem;
   }
+
+  ::placeholder {
+    color: #ccc;
+  }

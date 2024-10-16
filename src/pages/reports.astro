@@ -1,11 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import UploadThumbnail from '../components/UploadThumbnail';
+import ItemizedOrderList from '../components/ItemizedOrderList'
 ---
 
 <Layout title="Reports | HMB">
 	<main>
         <h1 class="branded-title">Reports</h1>
-		<UploadThumbnail client:only/>
+		<ItemizedOrderList client:only/>
 	</main>
 </Layout>

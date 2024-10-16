@@ -1,14 +1,14 @@
 const substrateList = {
-    "vinyl": {
+    "white_vinyl": {
         "costPerSquareInch": 0.0024034
     },
-    "holo-vinyl": {
+    "holo_vinyl": {
         "costPerSquareInch": 0.0066450
     },
-    "foam-core": {
+    "foam_core": {
         "costPerSquareInch": 0.0029
     },
-    "ceramic-tile": {
+    "ceramic_tile": {
         "costPerSquareInch": 0.03125
     }
 }
@@ -29,7 +29,7 @@ const laminateList = {
 }
 
 const pressList = {
-    "canon-colorado": {
+    "canon-colorado-production": {
         "inkCostPerSquareInch": 0.0004,
         "printMode": {
             "cmyk-1-side": {
@@ -51,7 +51,7 @@ const pressList = {
             }
         }
     },
-    "canon-arizona": {
+    "canon-arizona-production": {
         "inkCostPerSquareInch": 0.0016,
         "printMode": {
             "cmyk-1-side": {
@@ -80,7 +80,7 @@ const cutterList = {
         'costPerSquareInch': 0,
         'squareInchesPerHour': 0
     },
-    'graphtec': {
+    'graptec-fc9000': {
         'costPerSquareInch': 0.001,
         'squareInchesPerHour': 61488
     }
@@ -108,6 +108,7 @@ function estimator(width, height, bleed, quantity, substrate, laminate, press, m
         return {'materialCost': materialCost, 'squareInches': squareInches, 'laborCost': laborCost, 'totalCost': totalCost, 'totalTime': totalTime }
     } catch (error) {
         console.error(error);
+        console.log(width, height, bleed, quantity, substrate, laminate, press, mode, quality, cutter)
         return {'materialCost': 0, 'squareInches': 0, 'laborCost': 0, 'totalCost': 0, 'totalTime': 0 }
     }
 }

@@ -3,7 +3,8 @@ import PreviewCanvas from './PreviewCanvas.tsx'
 import estimator from '../scripts/estimator.js'
 import generateUUID from '../scripts/generateUUID.js'
 import PopulatedDropdown from './PopulatedDropdown.tsx'
-import UploadThumbnail from './UploadThumbnail'
+// import UploadThumbnail from './UploadThumbnail'
+import UploadPdf from './UploadPdf.tsx'
 
 // import { uploadFile } from '../scripts/firebase/uploadFiles.ts'
 // import { uploadFile } from "./firebase/upload-file.js";
@@ -99,7 +100,6 @@ function ItemList({ items, setItems }) {
     }
 
     const handleThumbnailUpload = (url) => {
-
         setData({
             ...data,
             itemThumbnail: url
@@ -246,7 +246,9 @@ function ItemList({ items, setItems }) {
                                 </div>
                                 <div>
                                     <label htmlFor="itemThumbnail">Item Thumbnail</label>
-                                    <UploadThumbnail onThumbnailUrlChange={handleThumbnailUpload} />
+                                    {/* <UploadThumbnail onThumbnailUrlChange={handleThumbnailUpload} /> */}
+                                    <UploadPdf onThumbnailUrlChange={handleThumbnailUpload}/>
+                                    {/* <UploadContainer/> */}
                                     {/* <button onClick={handleThumbnailUpload}>Thumbnail</button> */}
                                     <img src={data.itemThumbnail} alt="Thumbnail Image" />
                                 </div>

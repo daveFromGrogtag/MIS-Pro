@@ -1,6 +1,7 @@
+// Please take this code and give me 
+
 import { useState } from 'react';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-// import html2canvas from 'html2canvas';
 
 const UploadThumbnail = ({ onThumbnailUrlChange }) => {
   const [file, setFile] = useState(null);
@@ -56,8 +57,9 @@ const UploadThumbnail = ({ onThumbnailUrlChange }) => {
 
   return (
     <div>
-      <input type="file" accept=".png,.jpeg,.jpg" onChange={handleFileChange} />
+      <input type="file" accept=".png,.jpeg,.jpg,.pdf" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload and Generate Thumbnail</button>
+      {/* <canvas id='pdfCanvas'></canvas> */}
     </div>
   );
 };
