@@ -3,8 +3,6 @@ import PreviewCanvas from './PreviewCanvas.tsx'
 import estimator from '../scripts/estimator.js'
 import generateUUID from '../scripts/generateUUID.js'
 import PopulatedDropdown from './PopulatedDropdown.tsx'
-import '../scripts/polyfill.js'
-// import UploadThumbnail from './UploadThumbnail'
 import UploadPdf from './UploadPdf.tsx'
 
 // import { uploadFile } from '../scripts/firebase/uploadFiles.ts'

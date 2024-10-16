@@ -1,7 +1,6 @@
 import { useRef } from 'react'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import '../scripts/polyfill.js'
-import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist'
+import { getDocument, GlobalWorkerOptions } from '../scripts/pdfjs-dist'
 
 const UploadPdf = ({ onThumbnailUrlChange }) => {
 
