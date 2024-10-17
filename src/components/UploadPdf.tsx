@@ -1,10 +1,10 @@
 import { useRef } from 'react'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { getDocument, GlobalWorkerOptions } from '../scripts/pdfjs-dist'
+import { getDocument, GlobalWorkerOptions, version } from '../scripts/pdfjs-dist'
 
 const UploadPdf = ({ onThumbnailUrlChange }) => {
 
-    GlobalWorkerOptions.workerSrc = 'https://raw.githubusercontent.com/daveFromGrogtag/MIS-Pro/refs/heads/master/src/scripts/pdfjs-dist/build/pdf.worker.mjs'
+    GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${version}/pdf.worker.mjs`
     const fileInputRef = useRef(null);
     const canvasRef = useRef(null);
     const storage = getStorage();
