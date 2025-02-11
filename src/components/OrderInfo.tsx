@@ -77,9 +77,15 @@ function OrderInfo({data, setData}) {
                         <input type="text" name="ref2" value={data.ref2} onChange={handleChange}/>
                     </div>
                 </div>
+                <div className="form-line">
                 <div>
                     <label htmlFor="desc">Description</label>
                     <input type="text" name="desc" value={data.desc} onChange={handleChange}/>
+                </div>
+                <div>
+                    <label htmlFor="qbRef">QuickBooks Ref</label>
+                    <input type="text" name="qbRef" value={data.qbRef} onChange={handleChange}/>
+                </div>
                 </div>
                 <hr />
                 <details>

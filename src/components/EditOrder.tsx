@@ -102,10 +102,16 @@ const EditOrder = () => {
             </table>
             <label htmlFor="status">Status:</label>
             <select name="status" id="status" onChange={handleStatusChange} defaultValue={status}>
-                <option value="closed">closed</option>
-                <option value="processing">processing</option>
                 <option value="open">open</option>
-                <option value="on-hold">on-hold</option>
+                <option value="pending">pending</option>
+                <option value="oop">out on proof</option>
+                <option value="prepress">prepress</option>
+                <option value="production">production</option>
+                <option value="processing">processing</option>
+                <option value="shipped">shipped</option>
+                <option value="cancelled">cancelled</option>
+                <option value="onhold">on-hold</option>
+                <option value="closed">closed</option>
             </select>
             <OrderInfo data={data} setData={setData}/>
             <ItemList items={items} setItems={setItems}/>

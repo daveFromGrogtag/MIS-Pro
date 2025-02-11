@@ -227,3 +227,24 @@ min-width: 200px;
   ::placeholder {
     color: #ccc;
   }
+
+  .orderListSearchBar {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: unset;
+    padding: .5rem;
+  }
+
+  .hideIt {
+    display: none;
+  }
+
+  .statusCheckBoxContainer input {
+    width: auto;
+    max-width: unset;
+  }
+
+  .statusCheckBoxContainer label {
+    display: unset;
+    margin-right: 1rem;
+  }

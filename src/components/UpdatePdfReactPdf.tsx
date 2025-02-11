@@ -17,6 +17,7 @@ const UpdatePdfReactPdf = () => {
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
+    console.log();
   };
 
   return (
@@ -29,7 +30,7 @@ const UpdatePdfReactPdf = () => {
             renderMode={'canvas'}
             onLoadSuccess={onDocumentLoadSuccess}
           >
-            <Page pageNumber={1} />
+            <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} id={"pdf-canvas"}/>
           </Document>
         </div>
       )}

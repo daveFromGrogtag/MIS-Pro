@@ -1,96 +1,95 @@
-const substrateList = {
-    "white_vinyl": {
-        "costPerSquareInch": 0.0024034
-    },
-    "holo_vinyl": {
-        "costPerSquareInch": 0.0066450
-    },
-    "foam_core": {
-        "costPerSquareInch": 0.0029
-    },
-    "ceramic_tile": {
-        "costPerSquareInch": 0.03125
-    }
-}
 
-const laminateList = {
-    "none": {
-        "costPerSquareInch": 0,
-        "squareInchesPerHour": 0
-    },
-    "soft-touch": {
-        "costPerSquareInch": .002,
-        "squareInchesPerHour": 345600
-    },
-    "gloss": {
-        "costPerSquareInch": .003,
-        "squareInchesPerHour": 345600
-    }
-}
+// const substrateList = {
+//     "white_vinyl": {
+//         "costPerSquareInch": 0.0024034
+//     },
+//     "holo_vinyl": {
+//         "costPerSquareInch": 0.0066450
+//     },
+//     "foam_core": {
+//         "costPerSquareInch": 0.0029
+//     },
+//     "ceramic_tile": {
+//         "costPerSquareInch": 0.03125
+//     }
+// }
 
-const pressList = {
-    "canon-colorado-production": {
-        "inkCostPerSquareInch": 0.0004,
-        "printMode": {
-            "cmyk-1-side": {
-                "inkCostPerSquareInch":  0.0004
-            },
-            "cmyk-2-side": {
-                "inkCostPerSquareInch":  0.0009
-            },
-            "cmyk-white": {
-                "inkCostPerSquareInch":  0.0009
-            }
-        },
-        "printQuality": {
-            "production-gloss": {
-                "squareInchesPerHour": 87840
-            },
-            "high-quality-gloss": {
-                "squareInchesPerHour": 61488
-            }
-        }
-    },
-    "canon-arizona-production": {
-        "inkCostPerSquareInch": 0.0016,
-        "printMode": {
-            "cmyk-1-side": {
-                "inkCostPerSquareInch":  0.0008
-            },
-            "cmyk-2-side": {
-                "inkCostPerSquareInch":  0.0016
-            },
-            "cmyk-white": {
-                "inkCostPerSquareInch":  0.0017
-            }
-        },
-        "printQuality": {
-            "production-gloss": {
-                "squareInchesPerHour": 32241
-            },
-            "high-quality-gloss": {
-                "squareInchesPerHour": 22636
-            }
-        }
-    }
-}
+// const laminateList = {
+//     "none": {
+//         "costPerSquareInch": 0,
+//         "squareInchesPerHour": 0
+//     },
+//     "soft-touch": {
+//         "costPerSquareInch": .002,
+//         "squareInchesPerHour": 345600
+//     },
+//     "gloss": {
+//         "costPerSquareInch": .003,
+//         "squareInchesPerHour": 345600
+//     }
+// }
 
-const cutterList = {
-    'none': {
-        'costPerSquareInch': 0,
-        'squareInchesPerHour': 0
-    },
-    'graptec-fc9000': {
-        'costPerSquareInch': 0.001,
-        'squareInchesPerHour': 61488
-    }
-}
+// const pressList = {
+//     "canon-colorado-production": {
+//         "inkCostPerSquareInch": 0.0004,
+//         "printMode": {
+//             "cmyk-1-side": {
+//                 "inkCostPerSquareInch":  0.0004
+//             },
+//             "cmyk-2-side": {
+//                 "inkCostPerSquareInch":  0.0009
+//             },
+//             "cmyk-white": {
+//                 "inkCostPerSquareInch":  0.0009
+//             }
+//         },
+//         "printQuality": {
+//             "production-gloss": {
+//                 "squareInchesPerHour": 87840
+//             },
+//             "high-quality-gloss": {
+//                 "squareInchesPerHour": 61488
+//             }
+//         }
+//     },
+//     "canon-arizona-production": {
+//         "inkCostPerSquareInch": 0.0016,
+//         "printMode": {
+//             "cmyk-1-side": {
+//                 "inkCostPerSquareInch":  0.0008
+//             },
+//             "cmyk-2-side": {
+//                 "inkCostPerSquareInch":  0.0016
+//             },
+//             "cmyk-white": {
+//                 "inkCostPerSquareInch":  0.0017
+//             }
+//         },
+//         "printQuality": {
+//             "production-gloss": {
+//                 "squareInchesPerHour": 32241
+//             },
+//            "high-quality-gloss": {
+//                 "squareInchesPerHour": 22636
+//             }
+//         }
+//     }
+// }
+
+// const cutterList = {
+//     'none': {
+//         'costPerSquareInch': 0,
+//         'squareInchesPerHour': 0
+//     },
+//     'graptec-fc9000': {
+//         'costPerSquareInch': 0.001,
+//         'squareInchesPerHour': 61488
+//     }
+// } 
 
 const burden = {
     "totalPerHour": 175
 }
-
-
 
 function estimator(width, height, bleed, quantity, substrate, laminate, press, mode, quality, cutter) {
     try {
@@ -116,7 +115,8 @@ function estimator(width, height, bleed, quantity, substrate, laminate, press, m
 function getMaterialCost(substrate, laminate, press, mode, quality) {
     let substrateCost = substrateList[substrate]["costPerSquareInch"]
     let laminateCost = laminateList[laminate]["costPerSquareInch"]
-    let inkCost = pressList[press].printMode[mode].inkCostPerSquareInch
+    // let inkCost = pressList[press].printMode[mode].inkCostPerSquareInch
+    let inkCost = pressList[press]["costPerSquareInch"]
     return substrateCost + laminateCost + inkCost
 }
 

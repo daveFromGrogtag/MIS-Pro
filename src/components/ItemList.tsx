@@ -4,6 +4,8 @@ import estimator from '../scripts/estimator.js'
 import generateUUID from '../scripts/generateUUID.js'
 import PopulatedDropdown from './PopulatedDropdown.tsx'
 import UploadPdf from './UploadPdf.tsx'
+import { db } from '../scripts/firebase/init.ts'
+import { query, collection, getDocs } from 'firebase/firestore'
 
 // import { uploadFile } from '../scripts/firebase/uploadFiles.ts'
 // import { uploadFile } from "./firebase/upload-file.js";
@@ -27,6 +29,18 @@ function ItemList({ items, setItems }) {
         itemCost: 0
     })
     const [isVisible, setIsVisible] = useState(false)
+    const [pressVal, setPressVal] = useState([])
+
+    useEffect(() => {
+        async function grabDbValues(collectionName:string) {
+            const querySnapshot = await getDocs(query(collection(db, collectionName)));
+                    const docs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    setPressVal(docs)
+        }
+        grabDbValues('presses')
+        
+        console.log(pressVal);
+    }, [])
 
     useEffect(() => {
         let currentItemCost;

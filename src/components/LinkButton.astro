@@ -1,5 +1,22 @@
 ---
-const { link, title } = Astro.props;
+const { link, title, kind } = Astro.props;
 ---
-
-<a href={ "/" + link }><button>{title}</button></a>
+<style>
+    button {
+        border: none;
+        background-color: darkslategray;
+        color: white;
+        text-transform: uppercase;
+        font-weight: 600;
+        padding: .5rem;
+    }
+    button:hover {
+        color: lightblue;
+        box-shadow: 2px 2px 5px #ccc;
+    }
+    button.big {
+        font-size: 1.5rem;
+        padding: 1rem;
+    }
+</style>
+<a href={ "/" + link }><button class={kind}>{title}</button></a>
