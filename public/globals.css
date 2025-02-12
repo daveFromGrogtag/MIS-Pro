@@ -248,3 +248,19 @@ min-width: 200px;
     display: unset;
     margin-right: 1rem;
   }
+
+  @media print {
+    header {
+        display: none;
+    }    
+    main {
+        margin-left: 0;
+    }
+
+    button.big {
+        display: none;
+    }
+    .branded-title {
+        display: none;
+    }
+  }
