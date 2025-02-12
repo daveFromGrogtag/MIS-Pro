@@ -57,7 +57,7 @@ function OrderInfo({data, setData}) {
                 <div>
                     <label htmlFor="client">Client</label>
                     <input list="client-list" type="text" name="client" value={data.client} onChange={handleClientChange}/>
-                        <button>Add New Client</button>
+                        {/* <button>Add New Client</button> */}
                         <datalist id="client-list">
                         <PopulatedCustomerDropdown inputType={"customers"}/>
                             {/* <option value="techstyles">TechStyles</option> */}
