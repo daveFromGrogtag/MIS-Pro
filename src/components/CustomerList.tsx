@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { db } from '../scripts/firebase/init.ts'
 import { query, collection, getDocs } from 'firebase/firestore'
 import Loading from "./Loading.tsx"
+import AddNewCustomer from "./AddNewCustomer.tsx"
 
 const CustomerList = () => {
     const [data, setData] = useState([])
@@ -41,11 +42,11 @@ const CustomerList = () => {
         </thead>
         <tbody>
             {data.map((item) => (
-                <tr key={item.id}><td>{item.customerId}</td><td>{item.billingAddress1}</td><td><button>Edit</button><button>Delete</button></td></tr>
+                <tr key={item.id}><td>{item.name}</td><td>{item.billingAddress1 || "-"}</td><td><button><a href={"/edit-customer?customer=" + item.customerId}>Edit</a></button><button>Delete</button></td></tr>
             ))}
         </tbody>
         <tfoot>
-            <tr><td colSpan={3}><button>Add New Customer +</button></td></tr>
+            <tr><td colSpan={3}><AddNewCustomer/></td></tr>
         </tfoot>
         </table>
     );

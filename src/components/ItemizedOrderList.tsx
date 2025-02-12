@@ -30,7 +30,18 @@ const ItemizedOrderList = () => {
     }
 
     return (
-        <>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Status</th>
+                <th>Client</th>
+                <th>Prod</th>
+                <th>Press</th>
+                <th>Sub</th>
+                <th>Mode</th>
+                <th>Quality</th>
+                <th>Due</th>
+            </tr>
             {data.map((order) => (
                 order.items.map((item) => (
                     <tr key={item.id}>
@@ -42,14 +53,13 @@ const ItemizedOrderList = () => {
                         <td>{item.itemSubstrate}</td>
                         <td>{item.itemPrintMode}</td>
                         <td>{item.itemPrintQuality}</td>
-
                         <td>{order.data.dueDate}</td>
                         {/* <td><img src={item.itemThumbnail} alt="image" /></td> */}
                     </tr>
 
                 ))
             ))}
-        </>
+        </table>
     );
 
 }

@@ -162,7 +162,7 @@ const OrderItemList = () => {
                 <thead>
                     <tr><th colSpan={10}>
                         <input
-                            className="OrderItemListSearchBar"
+                            className="orderListSearchBar"
                             type="text"
                             placeholder="SEARCH?"
                             value={search}

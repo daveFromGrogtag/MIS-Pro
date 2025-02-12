@@ -1,25 +1,31 @@
-import { useState, useEffect } from "react"
-import PopulatedCustomerDropdown from './PopulatedCustomerDropdown.tsx'
-import { db } from '../scripts/firebase/init.ts'
-import { query, collection, getDocs } from 'firebase/firestore'
+import { useState, useEffect } from 'react'
+import {db} from '../scripts/firebase/init.ts'
+import { doc, getDoc, updateDoc } from 'firebase/firestore'
+import OrderInfo from './OrderInfo'
+import ItemList from './ItemList'
+import Loading from './Loading.tsx'
+import totalCalculator from '../scripts/totalCalculator.js'
 
 
-function OrderInfo({data, setData}) {
-    // const [data, setData] = useState({})
-    const [customerList, setCustomerList] = useState([])
+const EditCustomer = () => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const [customerName, setCustomerName] = useState("")
+    const [customerId, setCustomerId] = useState("")
+    const [data, setData] = useState({})
+    const [loading, setLoading] = useState(true)
+    const [notFound, setNotFound] = useState(false)
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const querySnapshot = await getDocs(query(collection(db, 'customers')));
-                const docs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                setCustomerList(docs);
-                console.log(docs);
-            } catch  {
-            }
+    const exportToFirebase = () => {
+        try {
+            updateDoc(doc(db, "customers", urlParams.get('customer')), {
+                data,
+            }).then(() => {
+                alert('customer saved')
+            })
+        } catch (error) {
+            console.error(error);
         }
-        fetchData()
-    }, [])
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -30,61 +36,44 @@ function OrderInfo({data, setData}) {
         setData(payload)
     }
 
-    const handleClientChange = (e) => {
-        let clientName = e.target.value
-        let foundCustomer = customerList.find(obj => obj["name"] === clientName) || {}
-        let payload;
-        if (foundCustomer) {
-            payload = {
-                ...data,
-                'client': clientName,
-                ...foundCustomer.data
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const docRef = doc(db, "customers", urlParams.get('customer'))
+                const docSnap = await getDoc(docRef)
+                setCustomerId(urlParams.get('customer'))
+                setCustomerName(docSnap.data().name)
+                setData(docSnap.data().data)
+            } catch (error) {
+                console.error(error);
+                setNotFound(true)
+            } finally {
+                setLoading(false)
             }
         }
-        else {
-            payload = {
-                ...data,
-                'client': clientName
-            }
-        }
-        console.log(foundCustomer);
-        setData(payload)
+        fetchData()
+    }, [])
+
+    if (loading) {
+        return <Loading/>
+    }
+
+    if (notFound) {
+        return (<>
+            <h1 className="branded-title">Customer not found</h1>
+            <h3 className="branded-title">Are you sure this is the right customer?</h3>
+            <a href="/customers">Back to customers?</a>
+        </>
+        )
     }
 
     return (
-        <>
-            <section id="order-info-section">
-                <div>
-                    <label htmlFor="client">Client</label>
-                    <input list="client-list" type="text" name="client" value={data.client} onChange={handleClientChange}/>
-                        <button>Add New Client</button>
-                        <datalist id="client-list">
-                        <PopulatedCustomerDropdown inputType={"customers"}/>
-                            {/* <option value="techstyles">TechStyles</option> */}
-                        </datalist>
-                </div>
-                <div className="form-line">
-                    <div>
-                        <label htmlFor="ref1">Client Reference 1</label>
-                        <input type="text" name="ref1" value={data.ref1} onChange={handleChange}/>
-                    </div>
-                    <div>
-                        <label htmlFor="ref2">Client Reference 2</label>
-                        <input type="text" name="ref2" value={data.ref2} onChange={handleChange}/>
-                    </div>
-                </div>
-                <div className="form-line">
-                <div>
-                    <label htmlFor="desc">Description</label>
-                    <input type="text" name="desc" value={data.desc} onChange={handleChange}/>
-                </div>
-                <div>
-                    <label htmlFor="qbRef">QuickBooks Ref</label>
-                    <input type="text" name="qbRef" value={data.qbRef} onChange={handleChange}/>
-                </div>
-                </div>
-                <hr />
-                <details>
+        <div>
+            <h1 className='branded-title'>{customerName}</h1>
+            <h3 className="branded-title">Edit Customer</h3>
+            <div>
+
+            <details>
                     <summary>Billing Info</summary>
                     <br />
                     <div className="form-line">
@@ -149,7 +138,7 @@ function OrderInfo({data, setData}) {
                 </details>
                 <hr />
                 <details>
-                    <summary>Shipping Info</summary>
+                    <summary>Shipping Info (Ignore if varies)</summary>
                     <br />
                     <div className="form-line">
                         <div>
@@ -211,53 +200,12 @@ function OrderInfo({data, setData}) {
                         </div>
                     </div>
                 </details>
-                <hr />
-                <div className="form-line">
-                    <div>
-                        <label htmlFor="orderShippingMethod">Shipping Method</label>
-                        <input type="text" list="orderShippingMethodList" name="orderShippingMethod" id="orderShippingMethod" value={data.orderShippingMethod} onChange={handleChange}/>
-                        <datalist id="orderShippingMethodList">
-                            <option>Fed Ex | Ground</option>
-                            <option>Fed Ex | Next Day</option>
-                            <option>Fed Ex | 3 Day</option>
-                            <option>UPS | Ground</option>
-                            <option>UPS | Next Day</option>
-                            <option>UPS | 3 Day</option>
-                            <option>USPS | Priority Mail</option>
-                            <option>Freight</option>
-                            <option>Will Call</option>
-                        </datalist>
-                    </div>
-                    <div>
-                        <label htmlFor="orderShippingCost">Shipping Cost</label>
-                        <input type="number" name="orderShippingCost" id="orderShippingCost" defaultValue="0" min="0" value={data.orderShippingCost} onChange={handleChange}/>
-                    </div>
-                </div>
-                <hr />
-                <div>
-                    <label htmlFor="dueDate">Due Date</label>
-                    <input type="date" name="dueDate" id="dueDate" value={data.dueDate} onChange={handleChange}/>
-                </div>
-                <div>
-                    <label htmlFor="notes">Notes</label>
-                    <textarea name="notes" id="notes" value={data.notes} onChange={handleChange}></textarea>
-                </div>
-                <hr />
-                <div>
-                    <label htmlFor="orderTaxRate">Tax Rate (%)</label>
-                    <input type="number" name="orderTaxRate" id="orderTaxRate" defaultValue="0" min="0" value={data.orderTaxRate} onChange={handleChange}/>
-                </div>
-                <div>
-                    <label htmlFor="orderMarkup">Markup (%)</label>
-                    <input type="number" name="orderMarkup" id="orderMarkup" defaultValue="0" min="0" value={data.orderMarkup} onChange={handleChange}/>
-                </div>
-                <div>
-                    <label htmlFor="orderDiscount">Discount (% after markup)</label>
-                    <input type="number" name="orderDiscount" id="orderDiscount" defaultValue="0" min="0" max="100" value={data.orderDiscount} onChange={handleChange}/>
-                </div>
-            </section>
-        </>
+            </div>
+        <br />
+            
+        <button onClick={exportToFirebase}>Save Changes</button>
+        </div>
     )
 }
 
-export default OrderInfo
+export default EditCustomer
