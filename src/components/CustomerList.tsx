@@ -34,19 +34,19 @@ const CustomerList = () => {
         <table>
         <thead>
             <tr>
-                <th colSpan={4} style={{textAlign: "center", textTransform: "uppercase"}}>Customers</th>
+                <th colSpan={5} style={{textAlign: "center", textTransform: "uppercase"}}>Customers</th>
             </tr>
             <tr>
-                <th>Name</th><th>Contact</th><th>Address</th><th>action</th>
+                <th>Name</th><th>Contact</th><th>Email</th><th>Address</th><th>action</th>
             </tr>
         </thead>
         <tbody>
             {data.map((item) => (
-                <tr key={item.id}><td>{item.name}</td><td>{item.data.billingAttn || "-"}</td><td>{item.data.billingAddress1 || "-"}</td><td><button><a href={"/edit-customer?customer=" + item.customerId}>Edit</a></button><button>Delete</button></td></tr>
+                <tr key={item.id}><td>{item.name}</td><td>{item.data.billingAttn || "-"}</td><td>{item.data.billingEmail || "-"}</td><td>{item.data.billingAddress1 || "-"}</td><td><button><a href={"/edit-customer?customer=" + item.customerId}>Edit</a></button><button>Delete</button></td></tr>
             ))}
         </tbody>
         <tfoot>
-            <tr><td colSpan={4}><AddNewCustomer/></td></tr>
+            <tr><td colSpan={5}><AddNewCustomer/></td></tr>
         </tfoot>
         </table>
     );

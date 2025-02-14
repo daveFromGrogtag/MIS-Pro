@@ -183,7 +183,7 @@ const OrderItemList = () => {
                 </thead>
                 <tbody>
                     {data.map((order) => (
-                        order.items.map((item) => (
+                        order.items.map((item, index) => (
                             <tr key={item.id} className={orderTableFilter([order.id, order.data.client, order.data.desc], order.status)}>
                                 <td>{order.id}</td>
                                 <td>{order.status}</td>
@@ -195,7 +195,7 @@ const OrderItemList = () => {
                                 <td>{order.data.dueDate}</td>
                                 <td><img style={{maxHeight: '100px', height: 'auto', width: 'auto', maxWidth: '300px'}} src={item.itemThumbnail}/></td>
                                 <td>
-                                    <a href={`/edit-order?order=${order.id}`}>Edit</a> 
+                                    <a href={`/edit-item?order=${order.id}&item=${index + 1}`}>Edit</a> 
                                     {/* |
                                     <a href={`/view-packing-slip?order=${order.id}`}>Pack List</a> |
                                     <a href={`/view-invoice?order=${order.id}`}>Invoice</a> */}

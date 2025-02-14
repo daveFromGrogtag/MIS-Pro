@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { db } from '../scripts/firebase/init.ts'
 import { query, collection, getDocs } from 'firebase/firestore'
 
-const PopulatedDropdown = ({inputType}) => {
+const PopulatedDropdown = ({inputType, eventEmitter, setEventEmitter}) => {
     const [listOptions, setListOptions] = useState([])
     const [loading, setLoading] = useState(true);
 
@@ -17,6 +17,7 @@ const PopulatedDropdown = ({inputType}) => {
 
             } finally {
                 setLoading(false)
+                await setEventEmitter(eventEmitter + 1)
             }
         }
         fetchData()
@@ -28,7 +29,7 @@ const PopulatedDropdown = ({inputType}) => {
 
     return (
         <>
-            <option>-</option>
+            <option></option>
             {listOptions.map((listOption, index) => (
                 <option key={index} value={listOption.id}>{listOption.name}</option>
             ))}

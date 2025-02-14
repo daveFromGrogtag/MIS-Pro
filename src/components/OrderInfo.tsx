@@ -233,6 +233,11 @@ function OrderInfo({data, setData}) {
                         <input type="number" name="orderShippingCost" id="orderShippingCost" defaultValue="0" min="0" value={data.orderShippingCost} onChange={handleChange}/>
                     </div>
                 </div>
+                {/* tracking information */}
+                <div>
+                    <label htmlFor="trackingNumber">Tracking Number</label>
+                    <input type="text" name="trackingNumber" id="trackingNumber" value={data.trackingNumber} onChange={handleChange}/>
+                </div>
                 <hr />
                 <div>
                     <label htmlFor="dueDate">Due Date</label>
