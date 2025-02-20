@@ -114,7 +114,7 @@ const EditOrder = () => {
                 <option value="closed">closed</option>
             </select>
             <OrderInfo data={data} setData={setData}/>
-            <ItemList items={items} setItems={setItems}/>
+            <ItemList items={items} setItems={setItems} orderId={order}/>
         <button onClick={exportToFirebase}>Save Changes</button>
         </div>
     )

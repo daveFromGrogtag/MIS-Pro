@@ -10,7 +10,7 @@ import { query, collection, getDocs } from 'firebase/firestore'
 // import { uploadFile } from '../scripts/firebase/uploadFiles.ts'
 // import { uploadFile } from "./firebase/upload-file.js";
 
-function ItemList({ items, setItems }) {
+function ItemList({ items, setItems, orderId }) {
 
     // const [items, setItems] = useState([])
     const [data, setData] = useState({
@@ -320,7 +320,11 @@ function ItemList({ items, setItems }) {
                             {/* <td>{estimator(item.itemWidth, item.itemHeight, item.itemBleed, item.itemQuantity, item.itemSubstrate, item.itemLaminate, item.itemPress, item.itemPrintMode, item.itemPrintQuality).totalCost.toFixed(2)}</td> */}
                             <td>$ {item.itemCost}</td>
                             <td><img src={item.itemThumbnail} alt="no-image" /></td>
-                            <td><button onClick={() => removeItem(item.id)}>Remove</button></td>
+                            <td>
+                                <button onClick={() => removeItem(item.id)}>Remove</button>
+                                {orderId && <button><a href={`/edit-item?order=${orderId}&item=${index + 1}`}>Edit</a></button>}
+                            </td>
+                            
                         </tr>
                     ))}
                 </tbody>

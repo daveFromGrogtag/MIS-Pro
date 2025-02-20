@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { db } from '../scripts/firebase/init.ts'
 import { query, collection, getDocs } from 'firebase/firestore'
+import AddNewAttribute from "./AddNewAttribute.tsx"
 import Loading from "./Loading.tsx"
 
 const MaterialCost = ({materialType}) => {
@@ -33,19 +34,19 @@ const MaterialCost = ({materialType}) => {
         <table>
         <thead>
             <tr>
-                <th colSpan={3} style={{textAlign: "center", textTransform: "uppercase"}}>{materialType}</th>
+                <th colSpan={4} style={{textAlign: "center", textTransform: "uppercase"}}>{materialType}</th>
             </tr>
             <tr>
-                <th>Name</th><th>Cost per sq. in.</th><th>action</th>
+                <th>Name</th><th>Cost per sq. in.</th><th>Time per sq. in. (Seconds)</th><th>Action</th>
             </tr>
         </thead>
         <tbody>
             {data.map((item) => (
-                <tr key={item.id}><td>{item.name}</td><td>{item.costPerSquareInch}</td><td><button>Edit</button><button>Delete</button></td></tr>
+                <tr key={item.id}><td>{item.name}</td><td>{item.costPerSquareInch}</td><td>{item.timePerSquareInch}</td><td><button><a href={`/edit-attribute?category=${materialType}&attributeId=${item.id}`}>Edit</a></button></td></tr>
             ))}
         </tbody>
         <tfoot>
-            <tr><td colSpan={3}><button>Add New {materialType} +</button></td></tr>
+            <tr><td colSpan={3}><AddNewAttribute category={materialType}/></td></tr>
         </tfoot>
         </table>
     );

@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react'
 import {db} from '../scripts/firebase/init.ts'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
-import OrderInfo from './OrderInfo'
-import ItemList from './ItemList'
 import Loading from './Loading.tsx'
-import totalCalculator from '../scripts/totalCalculator.js'
 
 
 const EditCustomer = () => {
@@ -71,6 +68,8 @@ const EditCustomer = () => {
         <div>
             <h1 className='branded-title'>{customerName}</h1>
             <h3 className="branded-title">Edit Customer</h3>
+            <a href="/customers">Back to customers?</a>
+
             <div>
 
             <details>

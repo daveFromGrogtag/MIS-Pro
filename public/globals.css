@@ -264,3 +264,9 @@ min-width: 200px;
         display: none;
     }
   }
+
+  .costConverter {
+    background-color: #ccc;
+    padding: 1rem;
+    border-radius: 5px;
+  }

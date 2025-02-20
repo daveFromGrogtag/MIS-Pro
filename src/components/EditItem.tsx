@@ -74,10 +74,9 @@ const EditItem = () => {
 
     return (
         <div>
-            <h1>Item: {order}-{itemIndex+1}</h1>
-            <p>{JSON.stringify(itemData)}</p>
+            <h1 className='branded-title'>Edit Item</h1>
+            <h3 className='branded-title'>Item: {order}-{itemIndex+1}</h3>
 
-            <h2>Add New Item</h2>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <div>
                                 <div>
