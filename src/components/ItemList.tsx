@@ -26,7 +26,11 @@ function ItemList({ items, setItems, orderId }) {
         itemHeight: 0,
         itemBleed: 0,
         itemQuantity: 1,
-        itemCost: 0
+        itemCost: 0,
+        itemNotes: "",
+        itemHiddenNotes: "",
+        itemProof: "PDF Proof",
+        itemFinishing: ""
     })
     const [isVisible, setIsVisible] = useState(false)
     const [pressVal, setPressVal] = useState([])
@@ -93,7 +97,11 @@ function ItemList({ items, setItems, orderId }) {
                 itemBleed: data.itemBleed,
                 itemQuantity: data.itemQuantity,
                 itemThumbnail: data.itemThumbnail,
-                itemCost: data.itemCost
+                itemCost: data.itemCost,
+                itemNotes: data.itemNotes,
+                itemHiddenNotes: data.itemHiddenNotes,
+                itemProof: data.itemProof,
+                itemFinishing: data.itemFinishing
             }
         ]
         setItems(payload)
@@ -254,6 +262,49 @@ function ItemList({ items, setItems, orderId }) {
                                         id="itemQuantity"
                                         min="1"
                                         value={data.itemQuantity}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                {/* itemNotes: data.itemNotes, */}
+                                <div>
+                                    <label htmlFor="itemNotes">Notes</label>
+                                    <textarea
+                                        name="itemNotes"
+                                        id="itemNotes"
+                                        value={data.itemNotes}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                {/* itemHiddenNotes: data.itemHiddenNotes, */}
+                                <div>
+                                    <label htmlFor="itemHiddenNotes">Hidden Notes</label>
+                                    <textarea
+                                        name="itemHiddenNotes"
+                                        id="itemHiddenNotes"
+                                        value={data.itemHiddenNotes}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                {/* itemProof: data.itemProof, */}
+                                <div>
+                                    <label htmlFor="itemProof">Proof</label>
+                                    <select
+                                        name="itemProof"
+                                        id="itemProof"
+                                        value={data.itemProof}
+                                        onChange={handleChange}
+                                    >
+                                    <option>PDF Proof</option>
+                                    <option>Physical Proof</option>
+                                    </select>
+                                </div>
+                                {/* itemFinishing: data.itemFinishing */}
+                                <div>
+                                    <label htmlFor="itemFinishing">Finishing</label>
+                                    <textarea
+                                        name="itemFinishing"
+                                        id="itemFinishing"
+                                        value={data.itemFinishing}
                                         onChange={handleChange}
                                     />
                                 </div>

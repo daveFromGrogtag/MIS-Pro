@@ -234,9 +234,22 @@ function OrderInfo({data, setData}) {
                     </div>
                 </div>
                 {/* tracking information */}
-                <div>
-                    <label htmlFor="trackingNumber">Tracking Number</label>
-                    <input type="text" name="trackingNumber" id="trackingNumber" value={data.trackingNumber} onChange={handleChange}/>
+                <div className="form-line">
+                    <div>
+                        <label htmlFor="trackingNumber">Tracking Number</label>
+                        <input type="text" name="trackingNumber" id="trackingNumber" value={data.trackingNumber} onChange={handleChange}/>
+                    </div>
+                    <div>
+                        <label htmlFor="orderPackaging">Order Packaging</label>
+                        <input type="text" list="orderPackagingList" name="orderPackaging" id="orderPackaging" value={data.orderPackaging} onChange={handleChange}/>
+                        <datalist id="orderPackagingList">
+                            <option>10x10x14 Box | $3.00</option>
+                            <option>6x10x12 Box | $2.50</option>
+                            <option>4x10x12 Box | $2.00</option>
+                            <option>14x10x1 Envelope | $0.75</option>
+
+                        </datalist>
+                    </div>
                 </div>
                 <hr />
                 <div>

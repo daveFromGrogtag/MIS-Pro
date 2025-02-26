@@ -270,3 +270,26 @@ min-width: 200px;
     padding: 1rem;
     border-radius: 5px;
   }
+
+  .job-ticket {
+    width: 8.5in
+  }
+
+  .job-ticket .address-container {
+    border: #777777 solid 1px;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .job-ticket .address-container div {
+    border: #777777 solid 1px;
+    flex-grow: 1;
+    margin: 5px;
+    padding: 5px;
+  }
+
+  .job-ticket .ticket-thumbnail-container {
+    border: #777777 solid 1px;
+    padding: 1rem;
+
+  }

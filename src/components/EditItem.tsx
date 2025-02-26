@@ -34,9 +34,10 @@ const EditItem = () => {
             ...itemData,
             [name]: value
         }
+        let itemsPayload = items
+        itemsPayload[itemIndex] = payload
         setItemData(payload)
-        setItems(items[itemIndex] = payload)
-        console.log(items);  
+        setItems(itemsPayload)
     }
 
     useEffect(() => {
@@ -76,6 +77,7 @@ const EditItem = () => {
         <div>
             <h1 className='branded-title'>Edit Item</h1>
             <h3 className='branded-title'>Item: {order}-{itemIndex+1}</h3>
+            <a href={`/edit-order/?order=${order}`}>Back to order {order}</a>
 
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <div>
@@ -201,6 +203,51 @@ const EditItem = () => {
                                         onChange={handleChange}
                                     />
                                 </div>
+
+                                {/* itemNotes: data.itemNotes, */}
+                                <div>
+                                    <label htmlFor="itemNotes">Notes</label>
+                                    <textarea
+                                        name="itemNotes"
+                                        id="itemNotes"
+                                        value={itemData.itemNotes}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                {/* itemHiddenNotes: data.itemHiddenNotes, */}
+                                <div>
+                                    <label htmlFor="itemHiddenNotes">Hidden Notes</label>
+                                    <textarea
+                                        name="itemHiddenNotes"
+                                        id="itemHiddenNotes"
+                                        value={itemData.itemHiddenNotes}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                {/* itemProof: data.itemProof, */}
+                                <div>
+                                    <label htmlFor="itemProof">Proof</label>
+                                    <select
+                                        name="itemProof"
+                                        id="itemProof"
+                                        value={itemData.itemProof}
+                                        onChange={handleChange}
+                                    >
+                                    <option>PDF Proof</option>
+                                    <option>Physical Proof</option>
+                                    </select>
+                                </div>
+                                {/* itemFinishing: data.itemFinishing */}
+                                <div>
+                                    <label htmlFor="itemFinishing">Finishing</label>
+                                    <textarea
+                                        name="itemFinishing"
+                                        id="itemFinishing"
+                                        value={itemData.itemFinishing}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+
                                 <div>
                                     <label htmlFor="itemThumbnail">Item Thumbnail</label>
                                     {/* <UploadPdf onThumbnailUrlChange={handleThumbnailUpload}/> */}

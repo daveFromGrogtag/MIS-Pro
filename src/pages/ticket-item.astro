@@ -1,0 +1,10 @@
+---
+import PrintLayout from '../layouts/PrintLayout.astro';
+import TicketItem from '../components/TicketItem.tsx';
+---
+
+<PrintLayout title="Edit Order | HMB">
+	<div>
+		<TicketItem client:only/>
+	</div>
+</PrintLayout>
