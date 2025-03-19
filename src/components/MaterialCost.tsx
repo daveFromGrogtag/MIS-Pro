@@ -46,7 +46,7 @@ const MaterialCost = ({materialType}) => {
             ))}
         </tbody>
         <tfoot>
-            <tr><td colSpan={3}><AddNewAttribute category={materialType}/></td></tr>
+            <tr><td colSpan={4}><AddNewAttribute category={materialType}/></td></tr>
         </tfoot>
         </table>
     );

@@ -195,7 +195,8 @@ const OrderItemList = () => {
                                 <td>{order.data.dueDate}</td>
                                 <td><img style={{maxHeight: '100px', height: 'auto', width: 'auto', maxWidth: '300px'}} src={item.itemThumbnail}/></td>
                                 <td>
-                                    <a href={`/edit-item?order=${order.id}&item=${index + 1}`}>Edit</a> 
+                                    <a href={`/edit-item?order=${order.id}&item=${index + 1}`}>Edit</a><br/>
+                                    <a href={`/ticket-item?order=${order.id}&item=${index + 1}`}>Ticket</a> 
                                     {/* |
                                     <a href={`/view-packing-slip?order=${order.id}`}>Pack List</a> |
                                     <a href={`/view-invoice?order=${order.id}`}>Invoice</a> */}

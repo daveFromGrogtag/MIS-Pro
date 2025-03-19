@@ -33,18 +33,20 @@ function ItemList({ items, setItems, orderId }) {
         itemFinishing: ""
     })
     const [isVisible, setIsVisible] = useState(false)
-    const [pressVal, setPressVal] = useState([])
+    const [estInfo, setEstInfo] = useState({"presses":[], "laminates":[], "substrates": [], "cutters": []})
 
     useEffect(() => {
         async function grabDbValues(collectionName:string) {
             const querySnapshot = await getDocs(query(collection(db, collectionName)));
                     const docs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    setPressVal(docs)
+                    let payload = {
+                        ...estInfo,
+                        
+                    }
+                    setEstInfo(docs)
         }
         grabDbValues('presses')
-        
-        console.log(pressVal);
-    }, [])
+    }, [data.itemWidth])
 
     useEffect(() => {
         let currentItemCost;
@@ -374,6 +376,7 @@ function ItemList({ items, setItems, orderId }) {
                             <td>
                                 <button onClick={() => removeItem(item.id)}>Remove</button>
                                 {orderId && <button><a href={`/edit-item?order=${orderId}&item=${index + 1}`}>Edit</a></button>}
+                                {orderId && <button><a href={`/ticket-item?order=${orderId}&item=${index + 1}`}>Ticket</a></button>}
                             </td>
                             
                         </tr>

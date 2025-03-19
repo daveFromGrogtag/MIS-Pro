@@ -257,6 +257,10 @@ function OrderInfo({data, setData}) {
                     <input type="date" name="dueDate" id="dueDate" value={data.dueDate} onChange={handleChange}/>
                 </div>
                 <div>
+                    <label htmlFor="fob">fob</label>
+                    <input type="text" name="fob" value={data.fob} onChange={handleChange}/>
+                </div>
+                <div>
                     <label htmlFor="notes">Notes</label>
                     <textarea name="notes" id="notes" value={data.notes} onChange={handleChange}></textarea>
                 </div>

@@ -189,7 +189,8 @@ const OrderList = () => {
                             <td>${order.total ? order.total.toFixed(2) : 0}</td>
                             <td>
                                 <a href={`/edit-order?order=${order.id}`}>Edit</a> |
-                                <a href={`/view-packing-slip?order=${order.id}`}>Pack List</a> |
+                                <a href={`/view-packing-slip?order=${order.id}`}>Pack</a> |
+                                <a href={`/ticket-order?order=${order.id}`}>Ticket</a> |
                                 <a href={`/view-invoice?order=${order.id}`}>Invoice</a>
                             </td>
                         </tr>
