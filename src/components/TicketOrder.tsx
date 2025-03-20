@@ -91,7 +91,7 @@ const TicketOrder = () => {
                         order.items.map((item, index) => {
                             return <tr>
                                 <td>{index + 1}</td>
-                                <td>{item.itemProduct}</td>
+                                <td>{item.itemProduct}<br/><em>{item.itemNotes?`Notes: ${item.itemNotes}`:""}</em></td>
                                 <td>Sub: {item.itemSubstrate}<br/>Lam: {item.itemLaminate}</td>
                                 <td>{item.itemWidth}" x {item.itemHeight}"</td>
                                 <td>{item.itemPress}</td>

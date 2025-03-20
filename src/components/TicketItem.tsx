@@ -54,6 +54,7 @@ const TicketItem = () => {
                 <div>
                     <p><b>Client: </b>{orderData.dueDate} | <b>Due Date: </b>{orderData.dueDate} | <b>Order Desc: </b>{orderData.desc} | <b>Quantity: </b>{itemData.itemQuantity}</p>
                 </div>
+                
                 <div className='address-container'>
                     <div>
                     <b>Billing Info</b>
@@ -74,6 +75,7 @@ const TicketItem = () => {
             </div>
             <div>
                 <p><b>Product: </b>{itemData.itemProduct}</p>
+                <p><b>Notes: </b>{itemData.itemNotes}</p>
                 <p><b>Press: </b>{itemData.itemPress} | <b>Print Mode: </b>{itemData.itemPrintMode} | <b>Print Quality: </b>{itemData.itemPrintQuality}</p>
                 <p><b>Cutter: </b>{itemData.itemCutter}</p>
                 <hr />
