@@ -151,7 +151,7 @@ const OrderItemList = () => {
             <label>
                 <input
                     type="checkbox"
-                    name="on-hold"
+                    name="onhold"
                     checked={statusChecks.onhold}
                     onChange={handleCheckBoxChange}
                 />
