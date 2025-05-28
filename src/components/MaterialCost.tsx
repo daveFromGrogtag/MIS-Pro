@@ -31,24 +31,27 @@ const MaterialCost = ({materialType}) => {
     }
 
     return (
-        <table>
-        <thead>
-            <tr>
-                <th colSpan={4} style={{textAlign: "center", textTransform: "uppercase"}}>{materialType}</th>
-            </tr>
-            <tr>
-                <th>Name</th><th>Cost per sq. in.</th><th>Time per sq. in. (Seconds)</th><th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {data.map((item) => (
-                <tr key={item.id}><td>{item.name}</td><td>{item.costPerSquareInch}</td><td>{item.timePerSquareInch}</td><td><button><a href={`/edit-attribute?category=${materialType}&attributeId=${item.id}`}>Edit</a></button></td></tr>
-            ))}
-        </tbody>
-        <tfoot>
-            <tr><td colSpan={4}><AddNewAttribute category={materialType}/></td></tr>
-        </tfoot>
-        </table>
+        <details className="material-table-details">
+            <summary style={{color: "white", background: "darkslategrey", fontSize: "18pt", padding: "12px", fontWeight: "700", textTransform: "capitalize"}}>{materialType}</summary>
+            <table>
+            <thead>
+                <tr>
+                    <th colSpan={4} style={{textAlign: "center", textTransform: "uppercase"}}>{materialType}</th>
+                </tr>
+                <tr>
+                    <th>Name</th><th>Cost per sq. in.</th><th>Time per sq. in. (Seconds)</th><th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {data.map((item) => (
+                    <tr key={item.id}><td>{item.name}</td><td>{item.costPerSquareInch}</td><td>{item.timePerSquareInch}</td><td><button><a href={`/edit-attribute?category=${materialType}&attributeId=${item.id}`}>Edit</a></button></td></tr>
+                ))}
+            </tbody>
+            <tfoot>
+                <tr><td colSpan={4}><AddNewAttribute category={materialType}/></td></tr>
+            </tfoot>
+            </table>
+        </details>
     );
 
 }

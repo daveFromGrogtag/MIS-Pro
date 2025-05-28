@@ -322,3 +322,14 @@ min-width: 200px;
   .reports-page .onhold {
     background-color: lightgoldenrodyellow;
   }
+
+  .material-table-details summary {
+    font-size: 18pt;
+    font-weight: 700;
+    color: white;
+    background-color: darkslategray;
+    padding: 12pt;
+  }
+  .material-table-details table {
+    margin-top: 0 !important;
+  }
