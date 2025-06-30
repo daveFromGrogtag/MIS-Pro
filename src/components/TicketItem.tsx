@@ -76,6 +76,8 @@ const TicketItem = () => {
             <div>
                 <p><b>Product: </b>{itemData.itemProduct}</p>
                 <p><b>Notes: </b>{itemData.itemNotes}</p>
+                <p><b>H. Notes: </b>{itemData.itemHiddenNotes}</p>
+                <p><b>Finishing: </b>{itemData.itemFinishing}</p>
                 <p><b>Press: </b>{itemData.itemPress} | <b>Print Mode: </b>{itemData.itemPrintMode} | <b>Print Quality: </b>{itemData.itemPrintQuality}</p>
                 <p><b>Cutter: </b>{itemData.itemCutter}</p>
                 <hr />
