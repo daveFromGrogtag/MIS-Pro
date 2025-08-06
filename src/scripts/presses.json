@@ -1,0 +1,173 @@
+{
+    "CANON Colorado M5": {
+        "print_mode": {
+            "CMYK": {
+                "cost_per_square_inch": 0.0004
+            },
+            "CMYK Double Sided": {
+                "cost_per_square_inch": 0.0009
+            },
+            "Spot White": {
+                "cost_per_square_inch": 0.0004
+            },
+            "CMYK + White": {
+                "cost_per_square_inch": 0.0009
+            },
+            "3 Layer": {
+                "cost_per_square_inch": 0.0013
+            },
+            "5 Layer": {
+                "cost_per_square_inch": 0.0022
+            }
+        },
+        "quality_mode": {
+            "High Key Gloss": {
+                "seconds_per_square_inch": 0.0146284376828555
+            },
+            "Express Gloss": {
+                "seconds_per_square_inch": 0.0203417412530513
+            },
+            "Speed Gloss": {
+                "seconds_per_square_inch": 0.0290360046457607
+            },
+            "Production Gloss": {
+                "seconds_per_square_inch": 0.040983606557377
+            },
+            "High Quality Gloss": {
+                "seconds_per_square_inch": 0.0585480093676815
+            },
+            "Premium Gloss": {
+                "seconds_per_square_inch": 0.0862068965517241
+            },
+            "Specialty Gloss ": {
+                "seconds_per_square_inch": 0.112612612612613
+            },
+            "Express Matte": {
+                "seconds_per_square_inch": 0.0505050505050505
+            },
+            "Speed Matte": {
+                "seconds_per_square_inch": 0.0611246943765281
+            },
+            "Production Matte": {
+                "seconds_per_square_inch": 0.0750750750750751
+            },
+            "High Quality Matte": {
+                "seconds_per_square_inch": 0.0862068965517241
+            },
+            "Specialty Matte": {
+                "seconds_per_square_inch": 0.116279069767442
+            },
+            "Backlit Matte": {
+                "seconds_per_square_inch": 0.116279069767442
+            },
+            "Backlit Density Matte": {
+                "seconds_per_square_inch": 0.116279069767442
+            },
+            "FLXfinish+": {
+                "seconds_per_square_inch": 0.333333333333333
+            },
+            "Express White 1 Layer": {
+                "seconds_per_square_inch": 0.0644329896907216
+            },
+            "Speed White 1 Layer": {
+                "seconds_per_square_inch": 0.0764525993883792
+            },
+            "Production White 1 Layer": {
+                "seconds_per_square_inch": 0.0968992248062016
+            },
+            "High Quality White 1 Layer": {
+                "seconds_per_square_inch": 0.128865979381443
+            },
+            "Specialty White 1 Layer": {
+                "seconds_per_square_inch": 0.193798449612403
+            },
+            "Speed White 2 Layer Underflood / Overflood": {
+                "seconds_per_square_inch": 0.116279069767442
+            },
+            "Production White 2 Layer Underflood / Overflood": {
+                "seconds_per_square_inch": 0.165562913907285
+            },
+            "High Quality White 2 Layer Underflood / Overflood": {
+                "seconds_per_square_inch": 0.231481481481481
+            },
+            "Specialty White 2 Layer Underflood / Overflood": {
+                "seconds_per_square_inch": 0.333333333333333
+            },
+            "High Quality White 3 Layer (image white image)": {
+                "seconds_per_square_inch": 0.333333333333333
+            },
+            "Specialty White 3 Layer (image white image)": {
+                "seconds_per_square_inch": 0.462962962962963
+            },
+            "High Quality White 5 Layer (image white Black White image)": {
+                "seconds_per_square_inch": 0.581395348837209
+            },
+            "Specialty White 5 Layer (image white Black White image)": {
+                "seconds_per_square_inch": 0.78125
+            }
+        }
+    },
+    "CANON Arizona 1380 GT": {
+        "print_mode": {
+            "CMYK": {
+                "cost_per_square_inch": 0.0008
+            },
+            "CMYK Double Sided": {
+                "cost_per_square_inch": 0.0016
+            },
+            "White": {
+                "cost_per_square_inch": 0.0009
+            },
+            "CMYK + White": {
+                "cost_per_square_inch": 0.0017
+            },
+            "CMYK + White + CMYK": {
+                "cost_per_square_inch": 0.0025
+            }
+        },
+        "quality_mode": {
+            "High Key Gloss": {
+                "seconds_per_square_inch": 0.0456287643730608
+            },
+            "Express Gloss": {
+                "seconds_per_square_inch": 0.0679163270850313
+            },
+            "Production Gloss": {
+                "seconds_per_square_inch": 0.111656989727557
+            },
+            "Production Gloss Double": {
+                "seconds_per_square_inch": 0.223313979455114
+            },
+            "Quality Gloss": {
+                "seconds_per_square_inch": 0.159033078880407
+            },
+            "Quality Gloss Double": {
+                "seconds_per_square_inch": 0.318066157760814
+            },
+            "Quality Matte": {
+                "seconds_per_square_inch": 0.223413762287757
+            },
+            "Quality Matte Double": {
+                "seconds_per_square_inch": 0.446827524575514
+            },
+            "Quality Density": {
+                "seconds_per_square_inch": 0.294117647058824
+            },
+            "Quality - Layered (2)": {
+                "seconds_per_square_inch": 0.318066157760814
+            },
+            "Quality - Layered (3)": {
+                "seconds_per_square_inch": 0.483558994197292
+            },
+            "Fine Art Gloss": {
+                "seconds_per_square_inch": 0.198570293884035
+            },
+            "High Definition Gloss": {
+                "seconds_per_square_inch": 0.374812593703148
+            },
+            "Varnish": {
+                "seconds_per_square_inch": 0.580046403712297
+            }
+        }
+    }
+}

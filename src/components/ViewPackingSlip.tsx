@@ -22,7 +22,7 @@ const ViewPackingSlip = () => {
         }
         fetchData()
     }, [])
-    
+
     if (loading) {
         return <p>loading...</p>
     }
@@ -44,31 +44,31 @@ const ViewPackingSlip = () => {
                 </tr>
                 <tr>
                     <td>
-                    {order.data.billingCompany}<br/>
-                    {order.data.billingAttn}<br/>
-                    {order.data.billingAddress1}<br/>
-                    {order.data.billingAddress2}<br/>
-                    {order.data.billingAddress3}<br/>
-                    {order.data.billingCity}<br/>
-                    {order.data.billingState}<br/>
-                    {order.data.billingZip}<br/>
-                    {order.data.billingCountry}<br/>
-                    {order.data.billingEmail}<br/>
-                    {order.data.billingPhone}<br/>
+                        {order.data.billingCompany}<br />
+                        {order.data.billingAttn}<br />
+                        {order.data.billingAddress1}<br />
+                        {order.data.billingAddress2}<br />
+                        {order.data.billingAddress3}<br />
+                        {order.data.billingCity}<br />
+                        {order.data.billingState}<br />
+                        {order.data.billingZip}<br />
+                        {order.data.billingCountry}<br />
+                        {order.data.billingEmail}<br />
+                        {order.data.billingPhone}<br />
 
                     </td>
                     <td>
-                    {order.data.shippingCompany}<br/>
-                    {order.data.shippingAttn}<br/>
-                    {order.data.shippingAddress1}<br/>
-                    {order.data.shippingAddress2}<br/>
-                    {order.data.shippingAddress3}<br/>
-                    {order.data.shippingCity}<br/>
-                    {order.data.shippingState}<br/>
-                    {order.data.shippingZip}<br/>
-                    {order.data.shippingCountry}<br/>
-                    {order.data.shippingEmail}<br/>
-                    {order.data.shippingPhone}<br/>
+                        {order.data.shippingCompany}<br />
+                        {order.data.shippingAttn}<br />
+                        {order.data.shippingAddress1}<br />
+                        {order.data.shippingAddress2}<br />
+                        {order.data.shippingAddress3}<br />
+                        {order.data.shippingCity}<br />
+                        {order.data.shippingState}<br />
+                        {order.data.shippingZip}<br />
+                        {order.data.shippingCountry}<br />
+                        {order.data.shippingEmail}<br />
+                        {order.data.shippingPhone}<br />
                     </td>
                 </tr>
             </table>
@@ -92,11 +92,29 @@ const ViewPackingSlip = () => {
                     }
                 </tbody>
             </table>
+            {/* <table>
+                <thead>
+                    <tr><th>#</th><th>Product</th><th>notes</th><th>Quantity</th><th>Thumb</th></tr>
+                </thead>
+                <tbody>
+                    {
+                        order.items.map((item, index) => {
+                            return <tr>
+                                <td>{index + 1}</td>
+                                <td>{item.itemProduct}</td>
+                                <td>{item.itemNotes}</td>
+                                <td>{item.itemQuantity}</td>
+                                <td><img src={item.itemThumbnail} alt="no-image" /></td>
+                            </tr>
+                        })
+                    }
+                </tbody>
+            </table> */}
             <table>
                 <thead><tr><th colSpan={3}>Recieved By</th></tr></thead>
                 <tr className='packing-slip-signature-box'><td></td><td></td><td></td></tr>
                 <tr><td>Signature</td><td>Name</td><td>Date</td></tr>
-                
+
             </table>
         </div>
     );

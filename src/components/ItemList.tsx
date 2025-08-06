@@ -30,45 +30,61 @@ function ItemList({ items, setItems, orderId }) {
         itemNotes: "",
         itemHiddenNotes: "",
         itemProof: "PDF Proof",
-        itemFinishing: ""
+        itemFinishing: "",
+
     })
     const [isVisible, setIsVisible] = useState(false)
-    const [estInfo, setEstInfo] = useState({"presses":[], "laminates":[], "substrates": [], "cutters": []})
 
-    useEffect(() => {
-        async function grabDbValues(collectionName:string) {
-            const querySnapshot = await getDocs(query(collection(db, collectionName)));
-                    const docs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    let payload = {
-                        ...estInfo,
-                        
-                    }
-                    setEstInfo(docs)
+    // useEffect(() => {
+    //     async function loadEstimate() {
+    //         try {
+    //             let currentItemCost;
+    //             if (data.itemWidth && data.itemHeight && data.itemBleed && data.itemQuantity && data.itemSubstrate && data.itemLaminate && data.itemPress && data.itemPrintMode && data.itemPrintQuality && data.itemCutter) {
+    //                 currentItemCost = estimator(data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter).totalCost.toFixed(2)
+    //                 console.log(estimator(data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter));
+    //             } else {
+    //                 currentItemCost = 0
+    //             }
+    //             let payload = {
+    //                 ...data,
+    //                 itemCost: currentItemCost
+    //             }
+    //             setData(payload)
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     }
+    //     loadEstimate()
+    // }, [data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter])
+
+
+    const getEstimate = async () => {
+        try {
+            let currentItemCost;
+            if (data.itemWidth && data.itemHeight && data.itemBleed && data.itemQuantity && data.itemSubstrate && data.itemLaminate && data.itemPress && data.itemPrintMode && data.itemPrintQuality && data.itemCutter) {
+                // currentItemCost = await estimator(data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter).totalCost.toFixed(2)
+                let currentItemCostObject = await estimator(data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter)
+                currentItemCost = currentItemCostObject["totalCost"].toFixed(2)
+                console.log(currentItemCost);
+                
+            } else {
+                currentItemCost = 0
+            }
+            let payload = {
+                ...data,
+                itemCost: currentItemCost
+            }
+            setData(payload)
+        } catch (error) {
+            console.error(error);
         }
-        grabDbValues('presses')
-    }, [data.itemWidth])
-
-    useEffect(() => {
-        let currentItemCost;
-        if (data.itemWidth && data.itemHeight && data.itemBleed && data.itemQuantity && data.itemSubstrate && data.itemLaminate && data.itemPress && data.itemPrintMode && data.itemPrintQuality && data.itemCutter) {
-            currentItemCost = estimator(data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter).totalCost.toFixed(2)
-            console.log(estimator(data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter));
-
-        } else {
-            currentItemCost = 0
-        }
-        let payload = {
-            ...data,
-            itemCost: currentItemCost
-        }
-        setData(payload)
-    }, [data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter])
-
+    }
 
     const handleChange = (e) => {
         // let currentItemCost;
         // if (data.itemWidth && data.itemHeight && data.itemBleed && data.itemQuantity && data.itemSubstrate && data.itemLaminate && data.itemPress) {
         //     currentItemCost = estimator(data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, 0, 0).totalCost.toFixed(2)
+        //     // currentItemCost = 2.5
         // } else {
         //     currentItemCost = 0
         // }
@@ -158,7 +174,7 @@ function ItemList({ items, setItems, orderId }) {
                                         value={data.itemPress}
                                         onChange={handleChange}
                                     >
-                                    <PopulatedDropdown inputType={"presses"}/>
+                                        <PopulatedDropdown inputType={"presses"} />
                                     </select>
                                 </div>
                                 <div>
@@ -169,7 +185,7 @@ function ItemList({ items, setItems, orderId }) {
                                         value={data.itemPrintMode}
                                         onChange={handleChange}
                                     >
-                                    <PopulatedDropdown inputType={"print_modes"}/>
+                                        <PopulatedDropdown inputType={"print_modes"} />
                                     </select>
                                 </div>
                                 <div>
@@ -192,7 +208,7 @@ function ItemList({ items, setItems, orderId }) {
                                         value={data.itemCutter}
                                         onChange={handleChange}
                                     >
-                                    <PopulatedDropdown inputType={"cutters"}/>
+                                        <PopulatedDropdown inputType={"cutters"} />
                                     </select>
                                 </div>
                                 <hr />
@@ -204,12 +220,7 @@ function ItemList({ items, setItems, orderId }) {
                                         value={data.itemSubstrate}
                                         onChange={handleChange}
                                     >
-                                    <PopulatedDropdown inputType={"substrates"}/>
-                                        {/* <option>-</option>
-                                        <option value="vinyl">Standard Self Adhesive Vinyl</option>
-                                        <option value="holo-vinyl">Holographic Self Adhesive Vinyl</option>
-                                        <option value="foam-core">Foam Core</option>
-                                        <option value="ceramic-tile">Ceramic Tile</option> */}
+                                        <PopulatedDropdown inputType={"substrates"} />
                                     </select>
                                 </div>
                                 <div>
@@ -220,7 +231,7 @@ function ItemList({ items, setItems, orderId }) {
                                         value={data.itemLaminate}
                                         onChange={handleChange}
                                     >
-                                        <PopulatedDropdown inputType={"laminates"}/>
+                                        <PopulatedDropdown inputType={"laminates"} />
                                     </select>
                                 </div>
                                 <div>
@@ -267,7 +278,6 @@ function ItemList({ items, setItems, orderId }) {
                                         onChange={handleChange}
                                     />
                                 </div>
-                                {/* itemNotes: data.itemNotes, */}
                                 <div>
                                     <label htmlFor="itemNotes">Notes</label>
                                     <textarea
@@ -277,7 +287,6 @@ function ItemList({ items, setItems, orderId }) {
                                         onChange={handleChange}
                                     />
                                 </div>
-                                {/* itemHiddenNotes: data.itemHiddenNotes, */}
                                 <div>
                                     <label htmlFor="itemHiddenNotes">Hidden Notes</label>
                                     <textarea
@@ -287,7 +296,6 @@ function ItemList({ items, setItems, orderId }) {
                                         onChange={handleChange}
                                     />
                                 </div>
-                                {/* itemProof: data.itemProof, */}
                                 <div>
                                     <label htmlFor="itemProof">Proof</label>
                                     <select
@@ -296,11 +304,32 @@ function ItemList({ items, setItems, orderId }) {
                                         value={data.itemProof}
                                         onChange={handleChange}
                                     >
-                                    <option>PDF Proof</option>
-                                    <option>Physical Proof</option>
+                                        <option>PDF Proof</option>
+                                        <option>Physical Proof</option>
                                     </select>
                                 </div>
-                                {/* itemFinishing: data.itemFinishing */}
+                                {/* <div className="checkboxes">
+                                    <div className="checkbox-container">
+                                        <label htmlFor="finishing-1">Finishing 1</label>
+                                        <input type="checkbox" name="finishing-1" id="finishing-1" />
+                                        <label htmlFor="finishing-2">Finishing 2</label>
+                                        <input type="checkbox" name="finishing-2" id="finishing-2" />
+                                        <label htmlFor="finishing-1">Finishing 1</label>
+                                        <input type="checkbox" name="finishing-1" id="finishing-1" />
+                                        <label htmlFor="finishing-2">Finishing 2</label>
+                                        <input type="checkbox" name="finishing-2" id="finishing-2" />
+                                    </div>
+                                    <div className="checkbox-container">
+                                        <label htmlFor="finishing-1">Finishing 1</label>
+                                        <input type="checkbox" name="finishing-1" id="finishing-1" />
+                                        <label htmlFor="finishing-2">Finishing 2</label>
+                                        <input type="checkbox" name="finishing-2" id="finishing-2" />
+                                        <label htmlFor="finishing-1">Finishing 1</label>
+                                        <input type="checkbox" name="finishing-1" id="finishing-1" />
+                                        <label htmlFor="finishing-2">Finishing 2</label>
+                                        <input type="checkbox" name="finishing-2" id="finishing-2" />
+                                    </div>
+                                </div> */}
                                 <div>
                                     <label htmlFor="itemFinishing">Finishing</label>
                                     <textarea
@@ -313,13 +342,14 @@ function ItemList({ items, setItems, orderId }) {
                                 <div>
                                     <label htmlFor="itemThumbnail">Item Thumbnail</label>
                                     {/* <UploadThumbnail onThumbnailUrlChange={handleThumbnailUpload} /> */}
-                                    <UploadPdf onThumbnailUrlChange={handleThumbnailUpload}/>
+                                    <UploadPdf onThumbnailUrlChange={handleThumbnailUpload} />
                                     {/* <UploadContainer/> */}
                                     {/* <button onClick={handleThumbnailUpload}>Thumbnail</button> */}
                                     <img src={data.itemThumbnail} alt="Thumbnail Image" />
                                 </div>
                                 <div>
                                     <label htmlFor="itemCost">Est. Cost</label>
+
                                     <input
                                         type="number"
                                         name="itemCost"
@@ -334,6 +364,7 @@ function ItemList({ items, setItems, orderId }) {
                                 <PreviewCanvas width={data.itemWidth} height={data.itemHeight} bleed={data.itemBleed} />
                             </div>
                         </div>
+                        <button onClick={getEstimate}>Estimate</button>
                         <button onClick={toggleVisibility}>Cancel</button>
                         <button onClick={addItem}>Add</button>
                     </section>
@@ -370,7 +401,6 @@ function ItemList({ items, setItems, orderId }) {
                             <td>{item.itemPrintQuality}</td>
                             <td>{item.itemCutter}</td>
                             <td>{item.itemQuantity}</td>
-                            {/* <td>{estimator(item.itemWidth, item.itemHeight, item.itemBleed, item.itemQuantity, item.itemSubstrate, item.itemLaminate, item.itemPress, item.itemPrintMode, item.itemPrintQuality).totalCost.toFixed(2)}</td> */}
                             <td>$ {item.itemCost}</td>
                             <td><img src={item.itemThumbnail} alt="no-image" /></td>
                             <td>
@@ -378,7 +408,7 @@ function ItemList({ items, setItems, orderId }) {
                                 {orderId && <button><a href={`/edit-item?order=${orderId}&item=${index + 1}`}>Edit</a></button>}
                                 {orderId && <button><a href={`/ticket-item?order=${orderId}&item=${index + 1}`}>Ticket</a></button>}
                             </td>
-                            
+
                         </tr>
                     ))}
                 </tbody>

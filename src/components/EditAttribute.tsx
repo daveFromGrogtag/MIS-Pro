@@ -20,7 +20,7 @@ const EditAttribute = () => {
                 timePerSquareInch: data.timePerSquareInch || 0,
                 notes: data.notes || ""
             }).then(() => {
-                alert('customer saved')
+                alert('attribute saved')
             })
         } catch (error) {
             console.error(error);

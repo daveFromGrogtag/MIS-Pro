@@ -333,3 +333,35 @@ min-width: 200px;
   .material-table-details table {
     margin-top: 0 !important;
   }
+
+  .checkbox-container {
+    display: flex;
+  }
+
+  .checkboxes {
+    margin-right: 15px;
+  }
+
+  .checkboxes label {
+    display: block;
+  }
+
+  button {
+    background: darkslategray;
+    color: white;
+    font-weight: 700;
+    border: none;
+    padding: .5rem;
+    font-size: 1rem;
+    margin: 2px;
+  }
+
+  button a {
+    text-decoration: none;
+    color: lightblue;
+  }
+
+  button:hover, button:hover a {
+    opacity: .95;
+    color: lightgreen;
+  }
