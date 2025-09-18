@@ -35,6 +35,7 @@ function ItemList({ items, setItems, orderId }) {
 
     })
     const [isVisible, setIsVisible] = useState(false)
+    const [acceptedQty, setAcceptedQty] = useState(false)
     // const [itemPress, setItemPress] = useState("")
     // const [itemPrintMode, setItemPrintMode] = useState("")
     // const [itemPrintQuality, setItemPrintQuality] = useState("")
@@ -71,6 +72,30 @@ function ItemList({ items, setItems, orderId }) {
     // }, [data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter])
 
 
+    useEffect(() => {
+        if (containsQty(data) && !acceptedQty) {
+            if(confirm("I notice that you've added qty to the notes section. I hope you added that info to the quantity break down of each item.")) {
+                setAcceptedQty(true)
+            }
+        } else {}
+    }, [data])
+
+    function containsQty(obj) {
+        const regex = /\b(quantity|qty)\b/i; // whole word, case-insensitive
+
+        for (const key in obj) {
+            if (Object.hasOwn(obj, key)) {
+                const value = obj[key];
+
+                if (typeof value === "string" && regex.test(value)) {
+                    return true; // found a match
+                }
+            }
+        }
+
+        return false; // no matches
+    }
+
     const getEstimate = async () => {
         try {
             let currentItemCost;
@@ -79,7 +104,7 @@ function ItemList({ items, setItems, orderId }) {
                 let currentItemCostObject = await estimator(data.itemWidth, data.itemHeight, data.itemBleed, data.itemQuantity, data.itemSubstrate, data.itemLaminate, data.itemPress, data.itemPrintMode, data.itemPrintQuality, data.itemCutter)
                 currentItemCost = currentItemCostObject["totalCost"].toFixed(2)
                 console.log(currentItemCost);
-                
+
             } else {
                 currentItemCost = 0
             }
@@ -93,7 +118,7 @@ function ItemList({ items, setItems, orderId }) {
         }
         // console.log("TESTING ESTIMATES");
         // console.log(data);
-        
+
     }
 
     const handleChange = (e) => {
@@ -173,7 +198,7 @@ function ItemList({ items, setItems, orderId }) {
                         {/* <button onClick={showMe}>Add Std Poster</button> */}
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <div>
-                            {/* <PopulatedPressDropdown
+                                {/* <PopulatedPressDropdown
                                 itemPress={itemPress}
                                 setItemPress={setItemPress}
                                 itemPrintMode={itemPrintMode}

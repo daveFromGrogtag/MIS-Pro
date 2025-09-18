@@ -17,7 +17,7 @@ const ExportOrder = () => {
     },[items, data])
 
     
-    const exportToFirebase = (orderId, orderIdString) => {
+    const exportToFirebase = (orderId: number, orderIdString: string) => {
         try {
             setDoc(doc(db, "orders", orderIdString), {
                 orderId,

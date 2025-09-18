@@ -188,12 +188,12 @@ const OrderList = () => {
                             <td>{order.data.dueDate}</td>
                             <td>${order.total ? order.total.toFixed(2) : 0}</td>
                             <td>
-                                        <a href={`/edit-order?order=${order.id}`}>Edit</a> |
-                                        <a href={`/view-packing-slip?order=${order.id}`}>PL</a> |
-                                        <a href={`/ticket-order?order=${order.id}`}>O.Ticket</a> |
-                                        <a href={`/ticket-all-items?order=${order.id}`}>J.Ticket(s)</a> |
-                                        <a href={`/view-invoice?order=${order.id}`}>Inv.</a> |
-                                        <a href={`/duplicate-order?order=${order.id}`}>Dup.</a> |
+                                        <a title="Edit the order and line items" href={`/edit-order?order=${order.id}`}>Edit</a> |
+                                        <a title="go to the packing list printable" href={`/view-packing-slip?order=${order.id}`}>PL</a> |
+                                        <a title="go to the order summary printable ticket" href={`/ticket-order?order=${order.id}`}>O.Ticket</a> |
+                                        <a title="go to the order line itemized printable ticket" href={`/ticket-all-items?order=${order.id}`}>J.Ticket(s)</a> |
+                                        <a title="go to the order printable invoice" href={`/view-invoice?order=${order.id}`}>Inv.</a> |
+                                        <a title="duplicate this order" href={`/duplicate-order?order=${order.id}`}>Dup.</a> |
                                 {/* <details>
                                     <summary>Actions</summary>
                                     <ul>
