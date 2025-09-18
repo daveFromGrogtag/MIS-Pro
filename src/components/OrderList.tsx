@@ -188,10 +188,23 @@ const OrderList = () => {
                             <td>{order.data.dueDate}</td>
                             <td>${order.total ? order.total.toFixed(2) : 0}</td>
                             <td>
-                                <a href={`/edit-order?order=${order.id}`}>Edit</a> |
-                                <a href={`/view-packing-slip?order=${order.id}`}>Pack</a> |
-                                <a href={`/ticket-order?order=${order.id}`}>Ticket</a> |
-                                <a href={`/view-invoice?order=${order.id}`}>Invoice</a>
+                                        <a href={`/edit-order?order=${order.id}`}>Edit</a> |
+                                        <a href={`/view-packing-slip?order=${order.id}`}>PL</a> |
+                                        <a href={`/ticket-order?order=${order.id}`}>O.Ticket</a> |
+                                        <a href={`/ticket-all-items?order=${order.id}`}>J.Ticket(s)</a> |
+                                        <a href={`/view-invoice?order=${order.id}`}>Inv.</a> |
+                                        <a href={`/duplicate-order?order=${order.id}`}>Dup.</a> |
+                                {/* <details>
+                                    <summary>Actions</summary>
+                                    <ul>
+                                        <li><a href={`/edit-order?order=${order.id}`}>Edit</a></li>
+                                        <li><a href={`/view-packing-slip?order=${order.id}`}>Pack</a></li>
+                                        <li><a href={`/ticket-order?order=${order.id}`}>Order Ticket</a></li>
+                                        <li><a href={`/ticket-order?order=${order.id}`}>Job Ticket(s)</a></li>
+                                        <li><a href={`/view-invoice?order=${order.id}`}>Invoice</a></li>
+                                        <li><a href={`/duplicate-order?order=${order.id}`}>Duplicate</a></li>
+                                    </ul>
+                                </details> */}
                             </td>
                         </tr>
                     ))}

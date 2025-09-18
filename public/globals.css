@@ -265,6 +265,9 @@ min-width: 200px;
     .branded-title {
         display: none;
     }
+    .full-page-print {
+      height: 11in;
+    }
   }
 
   .costConverter {

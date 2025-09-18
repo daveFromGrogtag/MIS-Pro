@@ -1,74 +1,101 @@
-import { useState, useEffect } from "react"
-import pressData from './presses.json' assert {type: 'json'}
+import { useState, useEffect } from "react";
+import printerData from '../scripts/presses.json'
 
-const PopulatedPressDropdown = ({ inputType, eventEmitter, setEventEmitter }) => {
-    const [listOptions, setListOptions] = useState([])
-    const [loading, setLoading] = useState(true);
+export default function PopulatedPressDropdown() {
+  const [printer, setPrinter] = useState("");
+  const [printMode, setPrintMode] = useState("");
+  const [qualityMode, setQualityMode] = useState("");
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const querySnapshot = await getDocs(query(collection(db, inputType)));
-                const docs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                setListOptions(docs);
-                console.log(docs);
-            } catch {
+  const printerOptions = Object.keys(printerData);
+  const printModeOptions =
+    printer && printerData[printer]?.print_mode
+      ? Object.keys(printerData[printer].print_mode)
+      : [];
+  const qualityModeOptions =
+    printer && printerData[printer]?.quality_mode
+      ? Object.keys(printerData[printer].quality_mode)
+      : [];
 
-            } finally {
-                setLoading(false)
-                await setEventEmitter(eventEmitter + 1)
-            }
-        }
-        fetchData()
-    }, [])
+  useEffect(() => {
+    
+  }, [printer, printMode, qualityMode])
 
-    if (loading) {
-        return <option value="">LOADING...</option>
-    }
+  // function handleChange(e) {
 
-    return (
-        <>
-            <div>
-                <label htmlFor="itemPress">Press</label>
-                <select
-                    name="itemPress"
-                    id="itemPress"
-                    value={data.itemPress}
-                    onChange={handleChange}
-                >
-                    <PopulatedDropdown inputType={"presses"} />
-                </select>
-            </div>
-            <div>
-                <label htmlFor="itemPrintMode">Print Mode</label>
-                <select
-                    name="itemPrintMode"
-                    id="itemPrintMode"
-                    value={data.itemPrintMode}
-                    onChange={handleChange}
-                >
-                    <PopulatedDropdown inputType={"print_modes"} />
-                </select>
-            </div>
-            <div>
-                <label htmlFor="itemPrintQuality">Print Quality</label>
-                <select
-                    name="itemPrintQuality"
-                    id="itemPrintQuality"
-                    value={data.itemPrintQuality}
-                    onChange={handleChange}
-                >
-                    <option>-</option>
-                    <option value="production-gloss">Production Gloss</option>
-                </select>
-            </div>
+  // }
 
-            <option></option>
-            {listOptions.map((listOption, index) => (
-                <option key={index} value={listOption.id}>{listOption.name}</option>
-            ))}
-        </>
-    )
+  return (
+    <div>
+      {/* Printer Dropdown */}
+      <select
+        value={printer}
+        onChange={(e) => {
+          setPrinter(e.target.value);
+          setPrintMode("");
+          setQualityMode("");
+        }}
+      >
+        <option value="">-- Select Printer --</option>
+        {printerOptions.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+
+      {/* Print Mode Dropdown */}
+      <select
+        value={printMode}
+        onChange={(e) => setPrintMode(e.target.value)}
+        disabled={!printer}
+      >
+        <option value="">-- Select Print Mode --</option>
+        {printModeOptions.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+
+      {/* Quality Mode Dropdown */}
+      <select
+        value={qualityMode}
+        onChange={(e) => setQualityMode(e.target.value)}
+        disabled={!printer}
+      >
+        <option value="">-- Select Quality Mode --</option>
+        {qualityModeOptions.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+
+      {/* Display selected values */}
+      {printer && (
+        <div>
+          <h2>Selected Options:</h2>
+          <p><strong>Printer:</strong> {printer}</p>
+          <p><strong>Print Mode:</strong> {printMode}</p>
+          <p><strong>Quality Mode:</strong> {qualityMode}</p>
+
+          {printMode && (
+            <p>
+              <strong>Cost per sq. in.:</strong>{" "}
+              {printerData[printer].print_mode[printMode].cost_per_square_inch}
+            </p>
+          )}
+
+          {qualityMode && (
+            <p>
+              <strong>Seconds per sq. in.:</strong>{" "}
+              {printerData[printer].quality_mode[qualityMode].seconds_per_square_inch}
+            </p>
+          )}
+        </div>
+      )}
+    </div>
+  );
 }
 
-export default PopulatedPressDropdown
+// export default PopulatedPressDropdown

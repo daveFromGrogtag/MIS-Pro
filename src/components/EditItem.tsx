@@ -40,6 +40,17 @@ const EditItem = () => {
         setItems(itemsPayload)
     }
 
+    const handleThumbnailUpload = (url) => {
+        let payload = {
+            ...itemData,
+            itemThumbnail: url
+        }
+        let itemsPayload = items
+        itemsPayload[itemIndex] = payload
+        setItemData(payload)
+        setItems(itemsPayload)
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -250,8 +261,8 @@ const EditItem = () => {
 
                                 <div>
                                     <label htmlFor="itemThumbnail">Item Thumbnail</label>
-                                    {/* <UploadPdf onThumbnailUrlChange={handleThumbnailUpload}/> */}
-                                    <img src={itemData.itemThumbnail} alt="Thumbnail Image" />
+                                    <UploadPdf onThumbnailUrlChange={handleThumbnailUpload}/>
+                                    <img src={itemData.itemThumbnail} alt="Thumbnail Image"/>
                                 </div>
                                 <div>
                                     <label htmlFor="itemCost">Est. Cost</label>

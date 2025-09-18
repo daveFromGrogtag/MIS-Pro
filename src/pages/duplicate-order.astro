@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+// import TodoList from '../components/TodoList.tsx'
+// import ItemList from '../components/ItemList.tsx'
+// import OrderInfo from '../components/OrderInfo.tsx';
+// import ExportOrder from '../components/ExportOrder.tsx'
+import DuplicateOrder from '../components/DuplicateOrder.tsx'
+---
+
+<Layout title="Create New Order | HMB">
+	<main>
+        <h1 class="branded-title">Duplicate Order</h1>
+        <DuplicateOrder client:only/>
+	</main>
+</Layout>

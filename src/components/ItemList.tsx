@@ -3,6 +3,7 @@ import PreviewCanvas from './PreviewCanvas.tsx'
 import estimator from '../scripts/estimator.js'
 import generateUUID from '../scripts/generateUUID.js'
 import PopulatedDropdown from './PopulatedDropdown.tsx'
+// import PopulatedPressDropdown from './PopulatedPressDropdown.tsx'
 import UploadPdf from './UploadPdf.tsx'
 import { db } from '../scripts/firebase/init.ts'
 import { query, collection, getDocs } from 'firebase/firestore'
@@ -34,6 +35,18 @@ function ItemList({ items, setItems, orderId }) {
 
     })
     const [isVisible, setIsVisible] = useState(false)
+    // const [itemPress, setItemPress] = useState("")
+    // const [itemPrintMode, setItemPrintMode] = useState("")
+    // const [itemPrintQuality, setItemPrintQuality] = useState("")
+
+    // useEffect(() => {
+    //     let payload = {
+    //         ...data,
+    //         itemPress,
+    //         itemPrintMode,
+    //         itemPrintQuality
+    //     }
+    // }, [itemPress, itemPrintMode, itemPrintQuality])
 
     // useEffect(() => {
     //     async function loadEstimate() {
@@ -78,6 +91,9 @@ function ItemList({ items, setItems, orderId }) {
         } catch (error) {
             console.error(error);
         }
+        // console.log("TESTING ESTIMATES");
+        // console.log(data);
+        
     }
 
     const handleChange = (e) => {
@@ -154,8 +170,17 @@ function ItemList({ items, setItems, orderId }) {
                 <section className="add-item-section">
                     <section className="add-item-modal">
                         <h2>Add New Item</h2>
+                        {/* <button onClick={showMe}>Add Std Poster</button> */}
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <div>
+                            {/* <PopulatedPressDropdown
+                                itemPress={itemPress}
+                                setItemPress={setItemPress}
+                                itemPrintMode={itemPrintMode}
+                                setItemPrintMode={setItemPrintMode}
+                                itemPrintQuality={itemPrintQuality}
+                                setItemPrintQuality={setItemPrintQuality}
+                            /> */}
                                 <div>
                                     <label htmlFor="item-product">Product</label>
                                     <input
