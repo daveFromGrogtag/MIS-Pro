@@ -88,6 +88,7 @@ const EditOrder = () => {
         <div>
             <h1>Order: {order}</h1>
             <div className='edit-order-page-links'>
+                <a href={`/duplicate-order?order=${order}`}>Duplicate Order</a><br/>
                 <b>Downloads: </b>
                 <a href={`/view-packing-slip?order=${order}`}>Packing List</a>
                 <a href={`/view-invoice?order=${order}`}>Invoice</a>
