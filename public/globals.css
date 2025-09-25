@@ -195,6 +195,13 @@ min-width: 200px;
     padding: .25rem;
 }
 
+.packing-slip-container .packing-list-row td input.qty-changer {
+  width: 70px;
+  font-size: 1rem;
+  background: none;
+  border: none;
+}
+
 .spinner {
     border: 8px solid #f3f3f3;
     border-top: 8px solid darkslategray;
@@ -267,6 +274,13 @@ min-width: 200px;
     }
     .full-page-print {
       height: 11in;
+    }
+    .packing-slip-container .row-hider {
+      display: none;
+    }
+
+    .packing-slip-container tr.packing-list-row:has(td input[type="checkbox"]:checked) {
+      display: none;
     }
   }
 

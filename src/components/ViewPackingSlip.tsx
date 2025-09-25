@@ -74,19 +74,20 @@ const ViewPackingSlip = () => {
             </table>
             <table>
                 <thead>
-                    <tr><th>#</th><th>Product</th><th>Substrate</th><th>Laminate</th><th>Press</th><th>Quantity</th><th>Thumb</th></tr>
+                    <tr><th>#</th><th>Product</th><th>Substrate</th><th>Laminate</th><th>Press</th><th>Quantity</th><th>Thumb</th><th className='row-hider'>Hide</th></tr>
                 </thead>
                 <tbody>
                     {
                         order.items.map((item, index) => {
-                            return <tr>
+                            return <tr className='packing-list-row'>
                                 <td>{index + 1}</td>
                                 <td>{item.itemProduct}</td>
                                 <td>{item.itemSubstrate}</td>
                                 <td>{item.itemLaminate}</td>
                                 <td>{item.itemPress}</td>
-                                <td>{item.itemQuantity}</td>
+                                <td><input type="number" className='qty-changer' name="qty-changer" defaultValue={item.itemQuantity}/></td>
                                 <td><img src={item.itemThumbnail} alt="no-image" /></td>
+                                <td className='row-hider'><input type="checkbox" name="hider"/></td>
                             </tr>
                         })
                     }
