@@ -188,12 +188,19 @@ const OrderList = () => {
                             <td>{order.data.dueDate}</td>
                             <td>${order.total ? order.total.toFixed(2) : 0}</td>
                             <td>
-                                        <a title="Edit the order and line items" href={`/edit-order?order=${order.id}`}>Edit</a> |
-                                        <a title="go to the packing list printable" href={`/view-packing-slip?order=${order.id}`}>PL</a> |
-                                        <a title="go to the order summary printable ticket" href={`/ticket-order?order=${order.id}`}>O.Ticket</a> |
-                                        <a title="go to the order line itemized printable ticket" href={`/ticket-all-items?order=${order.id}`}>J.Ticket(s)</a> |
+                                        {/* <a title="Edit the order and line items" href={`/edit-order?order=${order.id}`}>Edit</a> |
+                                        <a title="go to the packing list printable" href={`/view-packing-slip?order=${order.id}`}>Pack</a> |
+                                        <a title="go to the order summary printable ticket" href={`/ticket-order?order=${order.id}`}>OrderTick</a> |
+                                        <a title="go to the order line itemized printable ticket" href={`/ticket-all-items?order=${order.id}`}>JobTick(s)</a> |
                                         <a title="go to the order printable invoice" href={`/view-invoice?order=${order.id}`}>Inv.</a> |
-                                        <a title="duplicate this order" href={`/duplicate-order?order=${order.id}`}>Dup.</a> |
+                                        <a title="duplicate this order" href={`/duplicate-order?order=${order.id}`}>Copy.</a> | */}
+
+                                        <a title="Edit" href={`/edit-order?order=${order.id}`}><i className="fa-solid fa-pen-to-square"></i></a><span> </span>
+                                        <a title="Packing List" href={`/view-packing-slip?order=${order.id}`}><i className="fa-solid fa-truck-fast"></i></a><span> </span>
+                                        <a title="Order Summary ticket" href={`/ticket-order?order=${order.id}`}><i className="fa-solid fa-ticket"></i></a><span> </span>
+                                        <a title="Order Line ticket" href={`/ticket-all-items?order=${order.id}`}><i className="fa-solid fa-list"></i></a><span> </span>
+                                        <a title="Invoice" href={`/view-invoice?order=${order.id}`}><i className="fa-solid fa-file-invoice-dollar"></i></a><span> </span>
+                                        <a title="Duplicate Order" href={`/duplicate-order?order=${order.id}`}><i className="fa-solid fa-copy"></i></a>
                                 {/* <details>
                                     <summary>Actions</summary>
                                     <ul>

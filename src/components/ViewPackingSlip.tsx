@@ -39,6 +39,11 @@ const ViewPackingSlip = () => {
                 <tr><td>Due date:</td><td>{order.data.dueDate}</td></tr>
             </table>
             <table>
+                
+                <tr><th>Notes<input type="checkbox"/><span className='hide-notes'>Check to show in printout</span></th></tr>
+                <tr><td><textarea name="packing-notes" id="packing-notes"></textarea></td></tr>
+            </table>
+            <table>
                 <tr>
                     <th>Billing</th><th>Shipping</th>
                 </tr>
@@ -111,6 +116,7 @@ const ViewPackingSlip = () => {
                     }
                 </tbody>
             </table> */}
+            <div></div>
             <table>
                 <thead><tr><th colSpan={3}>Recieved By</th></tr></thead>
                 <tr className='packing-slip-signature-box'><td></td><td></td><td></td></tr>

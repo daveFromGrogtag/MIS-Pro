@@ -282,6 +282,32 @@ min-width: 200px;
     .packing-slip-container tr.packing-list-row:has(td input[type="checkbox"]:checked) {
       display: none;
     }
+    .packing-slip-container table:has(tr th input[type="checkbox"]:not(:checked)) {
+      display: none;
+    }
+
+    .packing-slip-container table tr th input[type="checkbox"] {
+      display: none;
+    }
+
+    .packing-slip-container table tr th span.hide-notes {
+      display: none;
+    }
+  }
+
+  .packing-slip-container table tr th input {
+    max-width: unset;
+    width: unset;
+  }
+
+  .packing-slip-container table tr th span.hide-notes {
+    font-size: 12px;
+  }
+
+  .packing-slip-container #packing-notes {
+    background: none;
+    border: none;
+    width: 99%;
   }
 
   .costConverter {
