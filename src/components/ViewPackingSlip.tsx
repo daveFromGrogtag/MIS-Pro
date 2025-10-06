@@ -118,7 +118,7 @@ const ViewPackingSlip = () => {
             </table> */}
             <div></div>
             <table>
-                <thead><tr><th colSpan={3}>Recieved By</th></tr></thead>
+                <thead><tr><th colSpan={3}>Received By</th></tr></thead>
                 <tr className='packing-slip-signature-box'><td></td><td></td><td></td></tr>
                 <tr><td>Signature</td><td>Name</td><td>Date</td></tr>
 

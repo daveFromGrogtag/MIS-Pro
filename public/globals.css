@@ -293,6 +293,21 @@ min-width: 200px;
     .packing-slip-container table tr th span.hide-notes {
       display: none;
     }
+    .packing-slip-container h1 {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+    .packing-slip-container tr.packing-list-row img {
+      max-height: 50px;
+    }
+    .packing-slip-container, .packing-slip-container tr.packing-list-row td input.qty-changer {
+      font-size: .75rem;
+    }
+    .packing-slip-container th, .packing-slip-container td {
+      padding: 2px;
+    }
+
+
   }
 
   .packing-slip-container table tr th input {
