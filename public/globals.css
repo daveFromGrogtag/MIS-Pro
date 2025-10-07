@@ -310,6 +310,51 @@ min-width: 200px;
 
   }
 
+  .full-page-print section {
+        border: solid black 1px;
+        border-radius: .5rem;
+        margin-bottom: .5rem;
+        padding: 0;
+    }
+    .full-page-print section h2 {
+        background-color: lightblue;
+        margin: 0;
+        border-radius: .5rem .5rem 0 0;
+        font-size: 1.25rem;
+        padding: 0 .5rem;
+    }
+    .full-page-print section .section-info {
+        padding: .5rem;
+    }
+    .full-page-print section p {
+        margin: 0;
+        font-size: .85rem;
+    }
+    .full-page-print h1 {
+        font-size: 1.5rem;
+    }
+    .full-page-print .two-up {
+      display: flex;
+      gap: 1rem;
+    } 
+    .full-page-print .two-up div {
+      margin-top: .5rem;
+      border: solid 1px lightgrey;
+      padding: .5rem;
+      font-size: .85rem;
+    }
+    .full-page-print table {
+      font-size: .85rem;
+    }
+    .full-page-print table th {
+      color: black;
+      background-color: lightblue;
+      padding: .25rem;
+    }
+    .full-page-print table td {
+      padding: .25rem;
+    }
+
   .packing-slip-container table tr th input {
     max-width: unset;
     width: unset;

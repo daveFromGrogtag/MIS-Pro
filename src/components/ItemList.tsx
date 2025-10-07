@@ -74,10 +74,10 @@ function ItemList({ items, setItems, orderId }) {
 
     useEffect(() => {
         if (containsQty(data) && !acceptedQty) {
-            if(confirm("I notice that you've added qty to the notes section. I hope you added that info to the quantity break down of each item.")) {
+            if (confirm("I notice that you've added qty to the notes section. I hope you added that info to the quantity break down of each item.")) {
                 setAcceptedQty(true)
             }
-        } else {}
+        } else { }
     }, [data])
 
     function containsQty(obj) {
@@ -169,6 +169,34 @@ function ItemList({ items, setItems, orderId }) {
 
     const removeItem = (id) => {
         setItems(items.filter(item => item.id !== id))
+    }
+
+    const duplicateItem = (index) => {
+        let originalItem = items[index]
+        let payload = [
+            ...items,
+            {
+                id: generateUUID(),
+                itemProduct: originalItem.itemProduct,
+                itemPress: originalItem.itemPress,
+                itemPrintMode: originalItem.itemPrintMode,
+                itemPrintQuality: originalItem.itemPrintQuality,
+                itemCutter: originalItem.itemCutter,
+                itemSubstrate: originalItem.itemSubstrate,
+                itemLaminate: originalItem.itemLaminate,
+                itemWidth: originalItem.itemWidth,
+                itemHeight: originalItem.itemHeight,
+                itemBleed: originalItem.itemBleed,
+                itemQuantity: originalItem.itemQuantity,
+                itemThumbnail: originalItem.itemThumbnail,
+                itemCost: originalItem.itemCost,
+                itemNotes: originalItem.itemNotes,
+                itemHiddenNotes: originalItem.itemHiddenNotes,
+                itemProof: originalItem.itemProof,
+                itemFinishing: originalItem.itemFinishing
+            }
+        ]
+        setItems(payload)
     }
 
     const toggleVisibility = () => {
@@ -454,9 +482,10 @@ function ItemList({ items, setItems, orderId }) {
                             <td>$ {item.itemCost}</td>
                             <td><img src={item.itemThumbnail} alt="no-image" /></td>
                             <td>
-                                <button onClick={() => removeItem(item.id)}>Remove</button>
-                                {orderId && <button><a href={`/edit-item?order=${orderId}&item=${index + 1}`}>Edit</a></button>}
-                                {orderId && <button><a href={`/ticket-item?order=${orderId}&item=${index + 1}`}>Ticket</a></button>}
+                                <button title="Remove Item" onClick={() => removeItem(item.id)}><i className="fa-solid fa-trash"></i></button>
+                                {orderId && <button><a title="Edit Item" href={`/edit-item?order=${orderId}&item=${index + 1}`}><i className="fa-solid fa-pen-to-square"></i></a></button>}
+                                {orderId && <button><a title="Item Ticket" href={`/ticket-item?order=${orderId}&item=${index + 1}`}><i className="fa-solid fa-ticket"></i></a></button>}
+                                <button title="Duplicate Item" onClick={() => duplicateItem(index)}><i className="fa-solid fa-copy"></i></button>
                             </td>
 
                         </tr>

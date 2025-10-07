@@ -23,6 +23,14 @@ const ViewInvoice = () => {
         }
         fetchData()
     }, [])
+
+    const getOrderTotal = (order) => {
+        let sumTotal = 0
+        order.items.map(item => {
+            sumTotal += parseFloat(item.itemCost)
+        });
+        return sumTotal
+    }
     
     if (loading) {
         return <p>loading...</p>
@@ -32,11 +40,11 @@ const ViewInvoice = () => {
         <div>
             <h1>Invoice {urlParams.get('order')}</h1>
             <table id='order-pricing-table'>
-                <tr><td>Shipping</td><td>${totalCalculator(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientShipping.toFixed(2)}</td></tr>
-                <tr><td>Subtotal</td><td>${totalCalculator(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTotal.toFixed(2)}</td></tr>
-                <tr><td>Tax</td><td>${totalCalculator(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTax.toFixed(2)}</td></tr>
-                <tr><td>Total before Discount</td><td>${totalCalculator(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTotalWithTaxAndShipping.toFixed(2)}</td></tr>
-                <tr><td>Total</td><td>${totalCalculator(order.total, order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTotalWithDiscount.toFixed(2)}</td></tr>
+                <tr><td>Shipping</td><td>${totalCalculator(getOrderTotal(order), order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientShipping.toFixed(2)}</td></tr>
+                <tr><td>Subtotal</td><td>${totalCalculator(getOrderTotal(order), order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTotal.toFixed(2)}</td></tr>
+                <tr><td>Tax</td><td>${totalCalculator(getOrderTotal(order), order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTax.toFixed(2)}</td></tr>
+                <tr><td>Total before Discount</td><td>${totalCalculator(getOrderTotal(order), order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTotalWithTaxAndShipping.toFixed(2)}</td></tr>
+                <tr><td>Total</td><td>${totalCalculator(getOrderTotal(order), order.data.orderTaxRate, order.data.orderShippingCost, order.data.orderMarkup, order.data.orderDiscount).clientTotalWithDiscount.toFixed(2)}</td></tr>
             </table>
             <table>
                 <tr><th colSpan={2}>Order Info</th></tr>

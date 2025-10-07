@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import {db} from '../scripts/firebase/init.ts'
+import { db } from '../scripts/firebase/init.ts'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import OrderInfo from './OrderInfo'
 import ItemList from './ItemList'
@@ -18,7 +18,7 @@ const EditOrder = () => {
     const [notFound, setNotFound] = useState(false)
 
     const handleStatusChange = (e) => {
-        setStatus(e.target.value)        
+        setStatus(e.target.value)
     }
 
     const exportToFirebase = () => {
@@ -37,8 +37,6 @@ const EditOrder = () => {
     }
 
     const getOrderTotal = () => {
-        console.log(items);
-        
         let sumTotal = 0
         items.map(item => {
             sumTotal += parseFloat(item.itemCost)
@@ -48,7 +46,7 @@ const EditOrder = () => {
 
     useEffect(() => {
         getOrderTotal()
-    },[items, data])
+    }, [items, data])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -72,7 +70,7 @@ const EditOrder = () => {
     }, [])
 
     if (loading) {
-        return <Loading/>
+        return <Loading />
     }
 
     if (notFound) {
@@ -88,8 +86,9 @@ const EditOrder = () => {
         <div>
             <h1>Order: {order}</h1>
             <div className='edit-order-page-links'>
-                <a href={`/duplicate-order?order=${order}`}>Duplicate Order</a><br/>
+                <a href={`/duplicate-order?order=${order}`}>Duplicate Order</a><br />
                 <b>Downloads: </b>
+                <a href={`/ticket-all-items?order=${order}`}>Ticket</a>
                 <a href={`/view-packing-slip?order=${order}`}>Packing List</a>
                 <a href={`/view-invoice?order=${order}`}>Invoice</a>
             </div>
@@ -114,9 +113,9 @@ const EditOrder = () => {
                 <option value="onhold">on-hold</option>
                 <option value="closed">closed</option>
             </select>
-            <OrderInfo data={data} setData={setData}/>
-            <ItemList items={items} setItems={setItems} orderId={order}/>
-        <button onClick={exportToFirebase}>Save Changes</button>
+            <OrderInfo data={data} setData={setData} />
+            <ItemList items={items} setItems={setItems} orderId={order} />
+            <button onClick={exportToFirebase}>Save Changes</button>
         </div>
     )
 }
