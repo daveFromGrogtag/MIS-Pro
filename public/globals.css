@@ -259,6 +259,10 @@ min-width: 200px;
   }
 
   @media print {
+    .print-hide {
+      display: none;
+    }
+
     header {
         display: none;
     }    
@@ -273,7 +277,7 @@ min-width: 200px;
         display: none;
     }
     .full-page-print {
-      height: 11in;
+      page-break-after: always;
     }
     .packing-slip-container .row-hider {
       display: none;

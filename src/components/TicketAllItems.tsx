@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { db } from '../scripts/firebase/init.ts'
 import { doc, getDoc } from 'firebase/firestore'
 import Loading from './Loading.tsx'
+import Pill from './Pill.tsx'
 
 const TicketAllItems = () => {
     const urlParams = new URLSearchParams(window.location.search)
@@ -28,7 +29,7 @@ const TicketAllItems = () => {
             }
         }
         fetchData()
-        
+
     }, [])
 
 
@@ -49,23 +50,42 @@ const TicketAllItems = () => {
         <div className='job-ticket'>
             <div className="full-page-print">
                 <h1>Order: {order}</h1>
-                <a href={`/edit-order/?order=${order}`}>Back to order {order}</a>
+                <a className="print-hide" href={`/edit-order/?order=${order}`}>Back to order {order}</a>
                 <div>
-                    <p><b>Client: </b>{orderData.dueDate} | <b>Due Date: </b>{orderData.dueDate} | <b>Order Desc: </b>{orderData.desc} | <b>Client Ref #:</b> {orderData.ref1} {orderData.ref2} | </p>
+
+                    {/* <p><b>Client: </b>{orderData.dueDate} | <b>Due Date: </b>{orderData.dueDate} | <b>Order Desc: </b>{orderData.desc} | <b>Client Ref #:</b> {orderData.ref1} {orderData.ref2} | </p> */}
                 </div>
+                <section>
+                    <h2>Order Info</h2>
+                    <div className="section-info">
+                    <div style={{ 'display': 'grid', 'gridTemplateColumns': '1fr 1fr' }}>
+                        <div style={{ "borderRight": "1px solid black", "marginRight": "5px" }}>
+                            <Pill keyName="Client" valueName={orderData.billingCompany} />
+                            <Pill keyName="Due Date" valueName={orderData.dueDate} />
+                            <Pill keyName="Desc." valueName={orderData.desc} /><br />
+                            <Pill keyName="Client Ref 1" valueName={orderData.ref1} />
+                            <Pill keyName="Client Ref 2" valueName={orderData.ref2} />
+                        </div>
+                        <div>
+                            <p><b>Notes</b></p>
+                            {orderData.notes.split(/\n/g).map((line) => <p>{line}</p>)}
+                        </div>
+                    </div>
+                    </div>
+                </section>
                 <table>
                     <tr><th>Billing Info</th><th>Shipping Info</th></tr>
                     <tr><td><p>{orderData.billingCompany}<br />
-                            {orderData.billingAttn}<br />
-                            {orderData.billingAddress1} {orderData.billingAddress2}<br />
-                            {orderData.billingCity}, {orderData.billingState} {orderData.billingZip}</p></td><td><p>{orderData.orderShippingMethod}</p>
-                        <p>{orderData.shippingCompany}<br />
-                            {orderData.shippingAttn}<br />
-                            {orderData.shippingAddress1} {orderData.shippingAddress2}<br />
-                            {orderData.shippingCity}, {orderData.shippingState} {orderData.shippingZip}</p></td></tr>
+                        {orderData.billingAttn}<br />
+                        {orderData.billingAddress1} {orderData.billingAddress2}<br />
+                        {orderData.billingCity}, {orderData.billingState} {orderData.billingZip}</p></td><td><p>{orderData.orderShippingMethod}</p>
+                            <p>{orderData.shippingCompany}<br />
+                                {orderData.shippingAttn}<br />
+                                {orderData.shippingAddress1} {orderData.shippingAddress2}<br />
+                                {orderData.shippingCity}, {orderData.shippingState} {orderData.shippingZip}</p></td></tr>
                 </table>
                 <table>
-                    <tr><th>#</th><th>Name</th><th>Substrate</th><th>Qty</th></tr>
+                    <tr><th>#</th><th>Item Name</th><th>Substrate</th><th>Qty</th></tr>
                     {items.map((item, i) => {
                         return (
                             <tr>
@@ -205,76 +225,105 @@ const TicketAllItems = () => {
                         </div> */}
 
 
-                            <h1>Order: {order} - Item: {i + 1} | {orderData.billingCompany} | {orderData.dueDate}</h1>
-                            <section>
-                                <h2>Client Info</h2>
-                                <div className="section-info">
-                                    <p><b>Client: </b>{orderData.billingCompany} | <b>Contact: </b>{orderData.billingAttn} | <b>Due Date: </b>{orderData.dueDate}</p>
-                                    <p><b>Client Ref #:</b> {orderData.ref1} {orderData.ref2} | </p>
-                                    <div className='two-up'>
-                                        <div>
-                                            <b>Billing</b>
-                                            <p>{orderData.billingCompany}<br />
-                                                {orderData.billingAttn}<br />
-                                                {orderData.billingAddress1} {orderData.billingAddress2}<br />
-                                                {orderData.billingCity}, {orderData.billingState} {orderData.billingZip}</p>
-                                        </div>
-                                        <div>
-                                            <b>Shipping</b>
-                                            <p>{orderData.shippingCompany}<br />
-                                                {orderData.shippingAttn}<br />
-                                                {orderData.shippingAddress1} {orderData.shippingAddress2}<br />
-                                                {orderData.shippingCity}, {orderData.shippingState} {orderData.shippingZip}</p>
-                                        </div>
+                        <h1>Order: {order} - Item: {i + 1} | {orderData.billingCompany} | {orderData.dueDate}</h1>
+                        <section>
+                            <h2>Client Info</h2>
+                            <div className="section-info">
+                                <Pill keyName="Client" valueName={orderData.billingCompany} />
+                                <Pill keyName="Contact" valueName={orderData.billingAttn} />
+                                <Pill keyName="Client" valueName={orderData.billingCompany} />
+                                <Pill keyName="Client" valueName={orderData.billingCompany} />
+                                <p><b>Client: </b>{orderData.billingCompany} | <b>Contact: </b>{orderData.billingAttn} | <b>Due Date: </b>{orderData.dueDate}</p>
+                                <p><b>Client Ref #:</b> {orderData.ref1} {orderData.ref2} | </p>
+                                <div className='two-up'>
+                                    <div>
+                                        <b>Billing</b>
+                                        <p>{orderData.billingCompany}<br />
+                                            {orderData.billingAttn}<br />
+                                            {orderData.billingAddress1} {orderData.billingAddress2}<br />
+                                            {orderData.billingCity}, {orderData.billingState} {orderData.billingZip}</p>
+                                    </div>
+                                    <div>
+                                        <b>Shipping</b>
+                                        <p>{orderData.shippingCompany}<br />
+                                            {orderData.shippingAttn}<br />
+                                            {orderData.shippingAddress1} {orderData.shippingAddress2}<br />
+                                            {orderData.shippingCity}, {orderData.shippingState} {orderData.shippingZip}</p>
                                     </div>
                                 </div>
-                            </section>
-                            <section>
-                                <h2>Item Info</h2>
-                                <div class="section-info">
-                                    <p><b>Desc: </b>{item.itemProduct} | <b>Quantity: </b>{item.itemQuantity}</p>
-                                    <p><b>Width: </b>{item.itemWidth}" | <b>Height: </b>{item.itemHeight}" | <b>Bleed: </b>{item.itemBleed}"</p>
-                                    <p><b>Substrate: </b>{item.itemSubstrate}</p>
-                                    <p><b>Print Mode: </b>{item.itemPrintMode} | <b>Print Quality: </b>{item.itemPrintQuality}</p>
-                                </div>
-                            </section>
-                            <section>
-                                <h2>Prepress</h2>
-                                <div class="section-info">
-                                    <p><b>Proofs: </b>{item.itemProof}</p>
-                                </div>
-                            </section>
-                            <section>
-                                <h2>Press</h2>
-                                <div class="section-info">
-                                    <p><b>Press: </b>{item.itemPress}</p>
-                                </div>
-                            </section>
-                            <section>
-                                <h2>Finishing</h2>
-                                <div class="section-info">
-                                    <p><b>Laminate: </b>{item.itemLaminate} | <b>Cutter: </b>{item.itemCutter}</p>
-                                    <p><b>Finishing: </b>{item.itemFinishing}</p>
-                                </div>
-                            </section>
-                            <section>
-                                <h2>Shipping</h2>
-                                <div class="section-info">
-                                    <p><b>Method:</b> {orderData.orderShippingMethod}</p>
-                                    <p><b>Packaging:</b> {orderData.orderPackaging}</p>
-                                </div>
-                            </section>
-                            <section>
-                                <h2>Special Instructions</h2>
-                                <div class="section-info">
-                                    <p><b>Notes: </b>{item.itemNotes}</p>
-                                    <p><b>H. Notes: </b>{item.itemHiddenNotes}</p>
-                                </div>
-                            </section>
-                            <div className='ticket-thumbnail-container'>
-                                <img src={item.itemThumbnail} alt="Thumbnail Image" />
                             </div>
+                        </section>
+                        <section>
+                            <h2>Item Info</h2>
+                            <div className="section-info">
+                                <Pill keyName="Desc." valueName={item.itemProduct} /><Pill keyName="QTY" valueName={item.itemQuantity} />
+                                <Pill keyName="Substrate" valueName={item.itemSubstrate} /><Pill keyName="Width" valueName={item.itemWidth + '"'} /><Pill keyName="Height" valueName={item.itemHeight + '"'} /><Pill keyName="Bleed" valueName={item.itemBleed + '"'} />
+                                <Pill keyName="Print Mode" valueName={item.itemPrintMode} /><Pill keyName="Print Quality" valueName={item.itemPrintQuality} />
+                                {/* <p><b>Desc: </b>{item.itemProduct} | <b>Quantity: </b>{item.itemQuantity}</p> */}
+                                {/* <p><b>Width: </b>{item.itemWidth}" | <b>Height: </b>{item.itemHeight}" | <b>Bleed: </b>{item.itemBleed}"</p> */}
+                                {/* <p><b>Substrate: </b>{item.itemSubstrate}</p> */}
+                                {/* <p><b>Print Mode: </b>{item.itemPrintMode} | <b>Print Quality: </b>{item.itemPrintQuality}</p> */}
+                            </div>
+                        </section>
+                        <section>
+                            <h2>Prepress</h2>
+                            <div className="section-info">
+                                <Pill keyName="Proofs" valueName={item.itemProof} />
+                                {/* <p><b>Proofs: </b>{item.itemProof}</p> */}
+                            </div>
+                        </section>
+                        <section>
+                            <h2>Press</h2>
+                            <div className="section-info">
+                                <Pill keyName="Press" valueName={item.itemPress} />
+                                {/* <p><b>Press: </b>{item.itemPress}</p> */}
+                            </div>
+                        </section>
+                        <section>
+                            <h2>Finishing</h2>
+                            <div className="section-info">
+                                <div style={{ 'display': 'grid', 'gridTemplateColumns': '1fr 1fr' }}>
+                                    <div style={{"borderRight": "1px solid black", "marginRight": "5px"}}>
+                                <Pill keyName="Laminate" valueName={item.itemLaminate} /><br/>
+                                <Pill keyName="Cutter" valueName={item.itemCutter} />
+                                    </div>
+                                    <div>
+                                <p><b>Finishing</b></p>
+                                {item.itemFinishing.split(/\n/g).map((line) => <p>{line}</p>)}
+                                    </div>
+                                </div>
+                                {/* <p><b>Laminate: </b>{item.itemLaminate} | <b>Cutter: </b>{item.itemCutter}</p>
+                                    <p><b>Finishing: </b>{item.itemFinishing}</p> */}
+                            </div>
+                        </section>
+                        <section>
+                            <h2>Shipping</h2>
+                            <div className="section-info">
+                                <Pill keyName="Method" valueName={orderData.orderShippingMethod} />
+                                <Pill keyName="Packaging" valueName={orderData.orderPackaging} />
+                                {/* <p><b>Method:</b> {orderData.orderShippingMethod}</p>
+                                    <p><b>Packaging:</b> {orderData.orderPackaging}</p> */}
+                            </div>
+                        </section>
+                        <section>
+                            <h2>Special Instructions</h2>
+                            <div className="section-info">
+                                <div style={{ 'display': 'grid', 'gridTemplateColumns': '1fr 1fr' }}>
+                                    <div style={{"borderRight": "1px solid black", "marginRight": "5px"}}>
+                                        <p><b>Notes</b></p>
+                                        {item.itemNotes.split(/\n/g).map((line) => <p>{line}</p>)}
+                                    </div>
+                                    <div>
+                                        <p><b>H. Notes</b></p>
+                                        {item.itemHiddenNotes.split(/\n/g).map((line) => <p>{line}</p>)}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <div className='ticket-thumbnail-container'>
+                            <img src={item.itemThumbnail} alt="Thumbnail Image" />
                         </div>
+                    </div>
                 )
             })}
 
