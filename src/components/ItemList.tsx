@@ -32,6 +32,7 @@ function ItemList({ items, setItems, orderId }) {
         itemHiddenNotes: "",
         itemProof: "PDF Proof",
         itemFinishing: "",
+        itemTaxable: true
 
     })
     const [isVisible, setIsVisible] = useState(false)
@@ -139,6 +140,18 @@ function ItemList({ items, setItems, orderId }) {
         setData(payload)
     }
 
+    const handleCheckbox = (e) => {
+        const checkBoxName = e.target.name
+        let currentValue = data[checkBoxName]
+        let newValue = !currentValue
+        let payload = {
+            ...data,
+            [checkBoxName]: newValue
+        }
+        setData(payload)
+        console.log(payload); 
+    }
+
     const addItem = (e) => {
         let payload = [
             ...items,
@@ -160,7 +173,8 @@ function ItemList({ items, setItems, orderId }) {
                 itemNotes: data.itemNotes,
                 itemHiddenNotes: data.itemHiddenNotes,
                 itemProof: data.itemProof,
-                itemFinishing: data.itemFinishing
+                itemFinishing: data.itemFinishing,
+                itemTaxable: data.itemTaxable
             }
         ]
         setItems(payload)
@@ -193,7 +207,8 @@ function ItemList({ items, setItems, orderId }) {
                 itemNotes: originalItem.itemNotes,
                 itemHiddenNotes: originalItem.itemHiddenNotes,
                 itemProof: originalItem.itemProof,
-                itemFinishing: originalItem.itemFinishing
+                itemFinishing: originalItem.itemFinishing,
+                itemTaxable: originalItem.itemTaxable
             }
         ]
         setItems(payload)
@@ -424,6 +439,10 @@ function ItemList({ items, setItems, orderId }) {
                                     {/* <UploadContainer/> */}
                                     {/* <button onClick={handleThumbnailUpload}>Thumbnail</button> */}
                                     <img src={data.itemThumbnail} alt="Thumbnail Image" />
+                                </div>
+                                <div>
+                                    <label htmlFor="itemTaxable">Taxable?</label>
+                                    <input type="checkbox" name="itemTaxable" id="itemTaxable" checked={data.itemTaxable} onClick={handleCheckbox}/>
                                 </div>
                                 <div>
                                     <label htmlFor="itemCost">Est. Cost</label>

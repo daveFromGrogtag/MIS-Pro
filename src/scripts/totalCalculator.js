@@ -1,4 +1,4 @@
-function totalCalculator(total, taxRate, shippingCost, markup, discount) {
+function totalCalculator(total, taxRate, shippingCost, markup, discount, taxableTotal=total) {
     total = total?parseFloat(total):0
     taxRate = taxRate?parseFloat(taxRate)/100:0
     shippingCost = shippingCost?parseFloat(shippingCost):0
@@ -6,14 +6,16 @@ function totalCalculator(total, taxRate, shippingCost, markup, discount) {
     discount = discount?parseFloat(discount)/100:0
 
     let clientTotal = total * (1 + markup)
+    let clientTaxableTotal = taxableTotal * (1 + markup)
     let clientShipping =  shippingCost * (1 + markup)
-    let clientTax = clientTotal * taxRate
-    let clientSubtotalWithTax = clientTotal * (1 + taxRate)
+    let clientTax = clientTaxableTotal * taxRate
+    let clientSubtotalWithTax = clientTotal + clientTax
     let clientTotalWithTaxAndShipping = clientSubtotalWithTax + clientShipping
     let clientTotalWithDiscount = clientTotalWithTaxAndShipping * (1 - discount)
 
     let clientTotals = {
         cost: total,
+        taxableTotal: taxableTotal,
         shippingCost: shippingCost,
         clientTotal: clientTotal,
         clientShipping: clientShipping,

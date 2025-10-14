@@ -13,6 +13,7 @@ const EditOrder = () => {
     const [data, setData] = useState({})
     const [items, setItems] = useState([])
     const [total, setTotal] = useState(0)
+    const [taxableTotal, setTaxableTotal] = useState(0)
     const [status, setStatus] = useState('open')
     const [loading, setLoading] = useState(true)
     const [notFound, setNotFound] = useState(false)
@@ -38,11 +39,16 @@ const EditOrder = () => {
 
     const getOrderTotal = () => {
         let sumTotal = 0
+        let taxTotal = 0
         items.map(item => {
+            if (item.itemTaxable === undefined || item.itemTaxable === true) {
+                taxTotal += parseFloat(item.itemCost)
+            }
             sumTotal += parseFloat(item.itemCost)
         });
         setTotal(sumTotal)
-    }
+        setTaxableTotal(taxTotal)        
+    } 
 
     useEffect(() => {
         getOrderTotal()
@@ -93,12 +99,12 @@ const EditOrder = () => {
                 <a href={`/view-invoice?order=${order}`}>Invoice</a>
             </div>
             <table id='order-pricing-table'>
-                <tr><td>Cost</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).cost.toFixed(2)}</td></tr>
-                <tr><td>Tax</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).clientTax.toFixed(2)}</td></tr>
-                <tr><td>Shipping</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).shippingCost.toFixed(2)}</td></tr>
-                <tr><td>Shipping MU</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).clientShipping.toFixed(2)}</td></tr>
-                <tr><td>Total MU</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).clientTotalWithTaxAndShipping.toFixed(2)}</td></tr>
-                <tr><td>Total + MU - D</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount).clientTotalWithDiscount.toFixed(2)}</td></tr>
+                <tr><td>Cost</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount, taxableTotal).cost.toFixed(2)}</td></tr>
+                <tr><td>Tax</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount, taxableTotal).clientTax.toFixed(2)}</td></tr>
+                <tr><td>Shipping</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount, taxableTotal).shippingCost.toFixed(2)}</td></tr>
+                <tr><td>Shipping MU</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount, taxableTotal).clientShipping.toFixed(2)}</td></tr>
+                <tr><td>Total MU</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount, taxableTotal).clientTotalWithTaxAndShipping.toFixed(2)}</td></tr>
+                <tr><td>Total + MU - D</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount, taxableTotal).clientTotalWithDiscount.toFixed(2)}</td></tr>
             </table>
             <label htmlFor="status">Status:</label>
             <select name="status" id="status" onChange={handleStatusChange} defaultValue={status}>

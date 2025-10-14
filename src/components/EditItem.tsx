@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import {db} from '../scripts/firebase/init.ts'
+import { db } from '../scripts/firebase/init.ts'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import Loading from './Loading.tsx'
 import PopulatedDropdown from './PopulatedDropdown.tsx'
@@ -40,6 +40,20 @@ const EditItem = () => {
         setItems(itemsPayload)
     }
 
+    const handleCheckbox = (e) => {
+        const checkBoxName = e.target.name
+        let currentValue = itemData[checkBoxName]
+        let newValue = !currentValue
+        let payload = {
+            ...itemData,
+            [checkBoxName]: newValue
+        }
+        let itemsPayload = items
+        itemsPayload[itemIndex] = payload
+        setItemData(payload)
+        setItems(itemsPayload)
+    }
+
     const handleThumbnailUpload = (url) => {
         let payload = {
             ...itemData,
@@ -72,7 +86,7 @@ const EditItem = () => {
 
 
     if (loading) {
-        return <Loading/>
+        return <Loading />
     }
 
     if (notFound) {
@@ -87,198 +101,202 @@ const EditItem = () => {
     return (
         <div>
             <h1 className='branded-title'>Edit Item</h1>
-            <h3 className='branded-title'>Item: {order}-{itemIndex+1}</h3>
+            <h3 className='branded-title'>Item: {order}-{itemIndex + 1}</h3>
             <a href={`/edit-order/?order=${order}`}>Back to order {order}</a>
 
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <div>
-                                <div>
-                                    <label htmlFor="item-product">Product</label>
-                                    <input
-                                        type="text"
-                                        name="itemProduct"
-                                        id="itemProduct"
-                                        value={itemData.itemProduct}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                <div>
-                                    <label htmlFor="itemPress">Press</label>
-                                    <select
-                                        name="itemPress"
-                                        id="itemPress"
-                                        value={itemData.itemPress}
-                                        onChange={handleChange}
-                                    >
-                                    <PopulatedDropdown inputType={"presses"} eventEmitter={eventEmitter} setEventEmitter={setEventEmitter}/>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label htmlFor="itemPrintMode">Print Mode</label>
-                                    <select
-                                        name="itemPrintMode"
-                                        id="itemPrintMode"
-                                        value={itemData.itemPrintMode}
-                                        onChange={handleChange}
-                                    >
-                                    <PopulatedDropdown inputType={"print_modes"} eventEmitter={eventEmitter} setEventEmitter={setEventEmitter}/>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label htmlFor="itemPrintQuality">Print Quality</label>
-                                    <select
-                                        name="itemPrintQuality"
-                                        id="itemPrintQuality"
-                                        value={itemData.itemPrintQuality}
-                                        onChange={handleChange}
-                                    >
-                                        <option>-</option>
-                                        <option value="production-gloss">Production Gloss</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label htmlFor="itemCutter">Cutter</label>
-                                    <select
-                                        name="itemCutter"
-                                        id="itemCutter"
-                                        value={itemData.itemCutter}
-                                        onChange={handleChange}
-                                    >
-                                    <PopulatedDropdown inputType={"cutters"} eventEmitter={eventEmitter} setEventEmitter={setEventEmitter}/>
-                                    </select>
-                                </div>
-                                <hr />
-                                <div>
-                                    <label htmlFor="itemSubstrate">Substrate</label>
-                                    <select
-                                        name="itemSubstrate"
-                                        id="itemSubstrate"
-                                        value={itemData.itemSubstrate}
-                                        onChange={handleChange}
-                                    >
-                                    <PopulatedDropdown inputType={"substrates"} eventEmitter={eventEmitter} setEventEmitter={setEventEmitter}/>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label htmlFor="itemLaminate">Laminate</label>
-                                    <select
-                                        name="itemLaminate"
-                                        id="itemLaminate"
-                                        value={itemData.itemLaminate}
-                                        onChange={handleChange}
-                                    >
-                                        <PopulatedDropdown inputType={"laminates"} eventEmitter={eventEmitter} setEventEmitter={setEventEmitter}/>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label htmlFor="itemWidth">Width</label>
-                                    <input
-                                        type="number"
-                                        name="itemWidth"
-                                        id="itemWidth"
-                                        min="0"
-                                        value={itemData.itemWidth}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                <div>
-                                    <label htmlFor="itemHeight">Height</label>
-                                    <input
-                                        type="number"
-                                        name="itemHeight"
-                                        id="itemHeight"
-                                        min="0"
-                                        value={itemData.itemHeight}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                <div>
-                                    <label htmlFor="itemBleed">Bleed</label>
-                                    <input
-                                        type="number"
-                                        name="itemBleed"
-                                        id="itemBleed"
-                                        min="0"
-                                        value={itemData.itemBleed}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                <div>
-                                    <label htmlFor="itemQuantity">Quantity</label>
-                                    <input
-                                        type="number"
-                                        name="itemQuantity"
-                                        id="itemQuantity"
-                                        min="1"
-                                        value={itemData.itemQuantity}
-                                        onChange={handleChange}
-                                    />
-                                </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div>
+                    <div>
+                        <label htmlFor="item-product">Product</label>
+                        <input
+                            type="text"
+                            name="itemProduct"
+                            id="itemProduct"
+                            value={itemData.itemProduct}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="itemPress">Press</label>
+                        <select
+                            name="itemPress"
+                            id="itemPress"
+                            value={itemData.itemPress}
+                            onChange={handleChange}
+                        >
+                            <PopulatedDropdown inputType={"presses"} eventEmitter={eventEmitter} setEventEmitter={setEventEmitter} />
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="itemPrintMode">Print Mode</label>
+                        <select
+                            name="itemPrintMode"
+                            id="itemPrintMode"
+                            value={itemData.itemPrintMode}
+                            onChange={handleChange}
+                        >
+                            <PopulatedDropdown inputType={"print_modes"} eventEmitter={eventEmitter} setEventEmitter={setEventEmitter} />
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="itemPrintQuality">Print Quality</label>
+                        <select
+                            name="itemPrintQuality"
+                            id="itemPrintQuality"
+                            value={itemData.itemPrintQuality}
+                            onChange={handleChange}
+                        >
+                            <option>-</option>
+                            <option value="production-gloss">Production Gloss</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="itemCutter">Cutter</label>
+                        <select
+                            name="itemCutter"
+                            id="itemCutter"
+                            value={itemData.itemCutter}
+                            onChange={handleChange}
+                        >
+                            <PopulatedDropdown inputType={"cutters"} eventEmitter={eventEmitter} setEventEmitter={setEventEmitter} />
+                        </select>
+                    </div>
+                    <hr />
+                    <div>
+                        <label htmlFor="itemSubstrate">Substrate</label>
+                        <select
+                            name="itemSubstrate"
+                            id="itemSubstrate"
+                            value={itemData.itemSubstrate}
+                            onChange={handleChange}
+                        >
+                            <PopulatedDropdown inputType={"substrates"} eventEmitter={eventEmitter} setEventEmitter={setEventEmitter} />
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="itemLaminate">Laminate</label>
+                        <select
+                            name="itemLaminate"
+                            id="itemLaminate"
+                            value={itemData.itemLaminate}
+                            onChange={handleChange}
+                        >
+                            <PopulatedDropdown inputType={"laminates"} eventEmitter={eventEmitter} setEventEmitter={setEventEmitter} />
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="itemWidth">Width</label>
+                        <input
+                            type="number"
+                            name="itemWidth"
+                            id="itemWidth"
+                            min="0"
+                            value={itemData.itemWidth}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="itemHeight">Height</label>
+                        <input
+                            type="number"
+                            name="itemHeight"
+                            id="itemHeight"
+                            min="0"
+                            value={itemData.itemHeight}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="itemBleed">Bleed</label>
+                        <input
+                            type="number"
+                            name="itemBleed"
+                            id="itemBleed"
+                            min="0"
+                            value={itemData.itemBleed}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="itemQuantity">Quantity</label>
+                        <input
+                            type="number"
+                            name="itemQuantity"
+                            id="itemQuantity"
+                            min="1"
+                            value={itemData.itemQuantity}
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                                {/* itemNotes: data.itemNotes, */}
-                                <div>
-                                    <label htmlFor="itemNotes">Notes</label>
-                                    <textarea
-                                        name="itemNotes"
-                                        id="itemNotes"
-                                        value={itemData.itemNotes}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                {/* itemHiddenNotes: data.itemHiddenNotes, */}
-                                <div>
-                                    <label htmlFor="itemHiddenNotes">Hidden Notes</label>
-                                    <textarea
-                                        name="itemHiddenNotes"
-                                        id="itemHiddenNotes"
-                                        value={itemData.itemHiddenNotes}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                {/* itemProof: data.itemProof, */}
-                                <div>
-                                    <label htmlFor="itemProof">Proof</label>
-                                    <select
-                                        name="itemProof"
-                                        id="itemProof"
-                                        value={itemData.itemProof}
-                                        onChange={handleChange}
-                                    >
-                                    <option>PDF Proof</option>
-                                    <option>Physical Proof</option>
-                                    </select>
-                                </div>
-                                {/* itemFinishing: data.itemFinishing */}
-                                <div>
-                                    <label htmlFor="itemFinishing">Finishing</label>
-                                    <textarea
-                                        name="itemFinishing"
-                                        id="itemFinishing"
-                                        value={itemData.itemFinishing}
-                                        onChange={handleChange}
-                                    />
-                                </div>
+                    {/* itemNotes: data.itemNotes, */}
+                    <div>
+                        <label htmlFor="itemNotes">Notes</label>
+                        <textarea
+                            name="itemNotes"
+                            id="itemNotes"
+                            value={itemData.itemNotes}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    {/* itemHiddenNotes: data.itemHiddenNotes, */}
+                    <div>
+                        <label htmlFor="itemHiddenNotes">Hidden Notes</label>
+                        <textarea
+                            name="itemHiddenNotes"
+                            id="itemHiddenNotes"
+                            value={itemData.itemHiddenNotes}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    {/* itemProof: data.itemProof, */}
+                    <div>
+                        <label htmlFor="itemProof">Proof</label>
+                        <select
+                            name="itemProof"
+                            id="itemProof"
+                            value={itemData.itemProof}
+                            onChange={handleChange}
+                        >
+                            <option>PDF Proof</option>
+                            <option>Physical Proof</option>
+                        </select>
+                    </div>
+                    {/* itemFinishing: data.itemFinishing */}
+                    <div>
+                        <label htmlFor="itemFinishing">Finishing</label>
+                        <textarea
+                            name="itemFinishing"
+                            id="itemFinishing"
+                            value={itemData.itemFinishing}
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                                <div>
-                                    <label htmlFor="itemThumbnail">Item Thumbnail</label>
-                                    <UploadPdf onThumbnailUrlChange={handleThumbnailUpload}/>
-                                    <img src={itemData.itemThumbnail} alt="Thumbnail Image"/>
-                                </div>
-                                <div>
-                                    <label htmlFor="itemCost">Est. Cost</label>
-                                    <input
-                                        type="number"
-                                        name="itemCost"
-                                        id="itemCost"
-                                        min="0"
-                                        value={itemData.itemCost}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                    <div>
+                        <label htmlFor="itemThumbnail">Item Thumbnail</label>
+                        <UploadPdf onThumbnailUrlChange={handleThumbnailUpload} />
+                        <img src={itemData.itemThumbnail} alt="Thumbnail Image" />
+                    </div>
+                    <div>
+                        <label htmlFor="itemTaxable">Taxable?</label>
+                        <input type="checkbox" name="itemTaxable" id="itemTaxable" checked={(itemData.itemTaxable === undefined || itemData.itemTaxable === true)} onClick={handleCheckbox} />
+                    </div>
+                    <div>
+                        <label htmlFor="itemCost">Est. Cost</label>
+                        <input
+                            type="number"
+                            name="itemCost"
+                            id="itemCost"
+                            min="0"
+                            value={itemData.itemCost}
+                            onChange={handleChange}
+                        />
+                    </div>
+                </div>
+            </div>
 
-        <button onClick={exportToFirebase}>Save Changes</button>
+            <button onClick={exportToFirebase}>Save Changes</button>
         </div>
     )
 }
