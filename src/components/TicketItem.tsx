@@ -55,7 +55,7 @@ const TicketItem = () => {
     return (
         <div className='job-ticket'>
             <div className="full-page-print">
-                <h1>Order: {order} - Item: {itemIndex + 1} | {orderData.billingCompany} | {orderData.dueDate}</h1>
+                <h1>Order: {order} - Item: {itemIndex + 1} | {orderData.billingCompany} | {formatDate(orderData.dueDate)}</h1>
                 <section>
                     <h2>Client Info</h2>
                     <div className="section-info">

@@ -68,7 +68,7 @@ const TicketAllItems = () => {
                             </div>
                             <div>
                                 <p><b>Notes</b></p>
-                                {orderData.notes.split(/\n/g).map((line) => <p>{line}</p>)}
+                                {(orderData.notes || "").split(/\n/g).map((line,i) => <p key={i}>{line}</p>)}
                             </div>
                         </div>
                     </div>
