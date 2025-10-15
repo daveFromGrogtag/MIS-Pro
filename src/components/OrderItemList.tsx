@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react"
 import { db } from '../scripts/firebase/init.ts'
-import { query, collection, getDocs, orderBy } from 'firebase/firestore'
+import { query, collection, getDocs, orderBy, where } from 'firebase/firestore'
 import Loading from "./Loading.tsx"
 import tableSearch from "../scripts/table-search.js"
+import CoolTable from "./CoolTable.tsx"
+
 
 const OrderItemList = () => {
     const [data, setData] = useState([])
@@ -22,12 +24,14 @@ const OrderItemList = () => {
     })
 
     useEffect(() => {
+        let statusArray = Object.keys(statusChecks).filter(key => statusChecks[key]);
         const fetchData = async () => {
+
             try {
-                const querySnapshot = await getDocs(query(collection(db, 'orders'), orderBy('orderId', 'desc')));
+                const querySnapshot = await getDocs(query(collection(db, 'orders'), where('status', 'in', statusArray)));
                 const docs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 setData(docs);
-                console.log(docs);
+                // console.log(docs);
 
             } catch (error) {
                 console.error("Error fetching documents: ", error);
@@ -37,7 +41,7 @@ const OrderItemList = () => {
         };
         console.log('fetching data...');
         fetchData();
-    }, []);
+    }, [statusChecks]);
 
     const handleCheckBoxChange = (e) => {
         const { name, checked } = e.target;
@@ -47,165 +51,178 @@ const OrderItemList = () => {
         })
     }
 
-    if (loading) {
+        const flattenedData = data.flatMap((eachOrder) =>
+        eachOrder.items.map((item, index) => ({
+            itemIndex: index + 1,
+            orderId: eachOrder.id,
+            status: eachOrder.status,
+            client: eachOrder.data.client,
+            desc: eachOrder.data.desc,
+            dueDate: eachOrder.data.dueDate,
+            product: item.itemProduct,
+            press: item.itemPress,
+            substrate: item.itemSubstrate,
+            qty: item.itemQuantity,
+            thumbnailUrl: item.itemThumbnail
+        }))
+    );
+
+    if (loading) {       
         return <Loading />
     }
 
-    function orderTableFilter(columnsToCheck, currentStatus) {
-        let columnsString = columnsToCheck.join("").toString().toLowerCase()
-        if (statusChecks[currentStatus] === false) {
-            return "hideIt"
-        }
-        if (columnsString.includes(search.toLowerCase())) {
-            return ""
-        } else {
-            return "hideIt"
-        }
-    }
+        const dataColumns = [
+        {
+            header: "OrderID",
+            accessorKey: "orderId",
+        },
+        {
+            header: "ItemID",
+            accessorKey: "itemIndex",
+        },
+        {
+            header: "Status",
+            accessorKey: "status",
+        },
+        {
+            header: "Client",
+            accessorKey: "client"
+        },
+        {
+            header: "Order Desc",
+            accessorKey: "desc"
+        },
+        {
+            header: "Due",
+            accessorKey: "dueDate"
+        },
+        {
+            header: "Product",
+            accessorKey: "product"
+        },
+        {
+            header: "press",
+            accessorKey: "press"
+        },
+        {
+            header: "substrate",
+            accessorKey: "substrate"
+        },
+        {
+            header: "qty",
+            accessorKey: "qty"
+        },
+        {
+            header: "Actions",
+            cell: ({ row }) => {
+                const id = row.original.orderId;
+                const itemId = row.original.itemIndex;
+                return (
+                    <>
+                    <button title="Edit Item"><a href={`/edit-item?order=${id}&item=${itemId}`}><i className="fa-solid fa-pen-to-square"></i></a></button>
+                    <button title="Item Ticket"><a href={`/ticket-item?order=${id}&item=${itemId}`}><i className="fa-solid fa-ticket"></i></a></button>
+                    </>
+                );
+            },
+        },
+    ]
 
     return (
         <>
-        <div className="statusCheckBoxContainer">
-            <label>
-                <input
-                    type="checkbox"
-                    name="open"
-                    checked={statusChecks.open}
-                    onChange={handleCheckBoxChange}
-                />
-                Open
-            </label>
-            <label>
-                <input
-                    type="checkbox"
-                    name="processing"
-                    checked={statusChecks.processing}
-                    onChange={handleCheckBoxChange}
-                />
-                Processing
-            </label>
-            <label>
-                <input
-                    type="checkbox"
-                    name="pending"
-                    checked={statusChecks.pending}
-                    onChange={handleCheckBoxChange}
-                />
-                Pending
-            </label>
-            <label>
-                <input
-                    type="checkbox"
-                    name="oop"
-                    checked={statusChecks.oop}
-                    onChange={handleCheckBoxChange}
-                />
-                Out on Proof
-            </label>
-            <label>
-                <input
-                    type="checkbox"
-                    name="prepress"
-                    checked={statusChecks.prepress}
-                    onChange={handleCheckBoxChange}
-                />
-                Prepress
-            </label>
-            <label>
-                <input
-                    type="checkbox"
-                    name="production"
-                    checked={statusChecks.production}
-                    onChange={handleCheckBoxChange}
-                />
-                Production
-            </label>
-            <label>
-                <input
-                    type="checkbox"
-                    name="cancelled"
-                    checked={statusChecks.cancelled}
-                    onChange={handleCheckBoxChange}
-                />
-                Cancelled
-            </label>
-            <label>
-                <input
-                    type="checkbox"
-                    name="closed"
-                    checked={statusChecks.closed}
-                    onChange={handleCheckBoxChange}
-                />
-                Closed
-            </label>
-            <label>
-                <input
-                    type="checkbox"
-                    name="shipped"
-                    checked={statusChecks.shipped}
-                    onChange={handleCheckBoxChange}
-                />
-                Shipped
-            </label>
-            
-            <label>
-                <input
-                    type="checkbox"
-                    name="onhold"
-                    checked={statusChecks.onhold}
-                    onChange={handleCheckBoxChange}
-                />
-                OnHold
-            </label>
-        </div>
-            <table>
-                <thead>
-                    <tr><th colSpan={10}>
-                        <input
-                            className="orderListSearchBar"
-                            type="text"
-                            placeholder="SEARCH?"
-                            value={search}
-                            onChange={(e) => { setSearch(e.target.value) }} />
-                    </th></tr>
-                    <tr>
-                        <th>Id</th>
-                        <th>Status</th>
-                        <th>Client</th>
-                        <th>Description</th>
-                        <th>Product</th>
-                        <th>Press/Sub</th>
-                        <th>Qty</th>
-                        <th>Due Date</th>
-                        <th>Thumb</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((order) => (
-                        order.items.map((item, index) => (
-                            <tr key={item.id} className={orderTableFilter([order.id, order.data.client, order.data.desc], order.status)}>
-                                <td>{order.id}</td>
-                                <td>{order.status}</td>
-                                <td>{order.data.client}</td>
-                                <td>{order.data.desc}</td>
-                                <td>{item.itemProduct}</td>
-                                <td style={{overflowWrap: 'anywhere'}}>{item.itemPress}<br/>{item.itemSubstrate}</td>
-                                <td>{item.itemQuantity}</td>
-                                <td>{order.data.dueDate}</td>
-                                <td><img style={{maxHeight: '100px', height: 'auto', width: 'auto', maxWidth: '300px'}} src={item.itemThumbnail}/></td>
-                                <td>
-                                    <button title="Edit Item"><a href={`/edit-item?order=${order.id}&item=${index + 1}`}><i className="fa-solid fa-pen-to-square"></i></a></button> 
-                                    <button title="Item Ticket"><a href={`/ticket-item?order=${order.id}&item=${index + 1}`}><i className="fa-solid fa-ticket"></i></a></button>
-                                    {/* |
-                                    <a href={`/view-packing-slip?order=${order.id}`}>Pack List</a> |
-                                    <a href={`/view-invoice?order=${order.id}`}>Invoice</a> */}
-                                </td>
-                            </tr>
-                        ))
-                    ))}
-                </tbody>
-            </table>
+            <div className="statusCheckBoxContainer">
+                <label>
+                    <input
+                        type="checkbox"
+                        name="open"
+                        checked={statusChecks.open}
+                        onChange={handleCheckBoxChange}
+                    />
+                    Open
+                </label>
+                <label>
+                    <input
+                        type="checkbox"
+                        name="processing"
+                        checked={statusChecks.processing}
+                        onChange={handleCheckBoxChange}
+                    />
+                    Processing
+                </label>
+                <label>
+                    <input
+                        type="checkbox"
+                        name="pending"
+                        checked={statusChecks.pending}
+                        onChange={handleCheckBoxChange}
+                    />
+                    Pending
+                </label>
+                <label>
+                    <input
+                        type="checkbox"
+                        name="oop"
+                        checked={statusChecks.oop}
+                        onChange={handleCheckBoxChange}
+                    />
+                    Out on Proof
+                </label>
+                <label>
+                    <input
+                        type="checkbox"
+                        name="prepress"
+                        checked={statusChecks.prepress}
+                        onChange={handleCheckBoxChange}
+                    />
+                    Prepress
+                </label>
+                <label>
+                    <input
+                        type="checkbox"
+                        name="production"
+                        checked={statusChecks.production}
+                        onChange={handleCheckBoxChange}
+                    />
+                    Production
+                </label>
+                <label>
+                    <input
+                        type="checkbox"
+                        name="cancelled"
+                        checked={statusChecks.cancelled}
+                        onChange={handleCheckBoxChange}
+                    />
+                    Cancelled
+                </label>
+                <label>
+                    <input
+                        type="checkbox"
+                        name="closed"
+                        checked={statusChecks.closed}
+                        onChange={handleCheckBoxChange}
+                    />
+                    Closed
+                </label>
+                <label>
+                    <input
+                        type="checkbox"
+                        name="shipped"
+                        checked={statusChecks.shipped}
+                        onChange={handleCheckBoxChange}
+                    />
+                    Shipped
+                </label>
+
+                <label>
+                    <input
+                        type="checkbox"
+                        name="onhold"
+                        checked={statusChecks.onhold}
+                        onChange={handleCheckBoxChange}
+                    />
+                    OnHold
+                </label>
+            </div>
+            <CoolTable data={flattenedData} columns={dataColumns} />
         </>
     );
 
