@@ -13,8 +13,12 @@ const TicketAllItems = () => {
     const [notFound, setNotFound] = useState(false)
 
     function formatDate(dateString) {
-        const [year, month, day] = dateString.split('-');
-        return `${month}/${day}/${year}`;
+        if (dateString) {
+            const [year, month, day] = dateString.split('-');
+            return `${month}/${day}/${year}`;
+        } else {
+            return "-"
+        }
     }
 
     useEffect(() => {
@@ -88,7 +92,7 @@ const TicketAllItems = () => {
                     <tr><th>#</th><th>Item Name</th><th>Substrate</th><th>Qty</th></tr>
                     {items.map((item, i) => {
                         return (
-                            <tr>
+                            <tr key={i}>
                                 <td>{i + 1}</td>
                                 <td>{item.itemProduct}</td>
                                 <td>{item.itemSubstrate}</td>
@@ -100,7 +104,7 @@ const TicketAllItems = () => {
             </div>
             {items.map((item, i) => {
                 return (
-                    <div className="full-page-print">
+                    <div key={i} className="full-page-print">
                         <h1>Order: {order} - Item: {i + 1} | {orderData.billingCompany} | {formatDate(orderData.dueDate)}</h1>
                         <section>
                             <h2>Client Info</h2>
@@ -158,7 +162,7 @@ const TicketAllItems = () => {
                                     </div>
                                     <div>
                                         <p><b>Finishing</b></p>
-                                        {item.itemFinishing.split(/\n/g).map((line) => <p>{line}</p>)}
+                                        {item.itemFinishing.split(/\n/g).map((line, index) => <p key={index}>{line}</p>)}
                                     </div>
                                 </div>
                             </div>
@@ -176,11 +180,11 @@ const TicketAllItems = () => {
                                 <div style={{ 'display': 'grid', 'gridTemplateColumns': '1fr 1fr' }}>
                                     <div style={{ "borderRight": "1px solid black", "marginRight": "5px" }}>
                                         <p><b>Notes</b></p>
-                                        {item.itemNotes.split(/\n/g).map((line) => <p>{line}</p>)}
+                                        {item.itemNotes.split(/\n/g).map((line, index) => <p key={index}>{line}</p>)}
                                     </div>
                                     <div>
                                         <p><b>H. Notes</b></p>
-                                        {item.itemHiddenNotes.split(/\n/g).map((line) => <p>{line}</p>)}
+                                        {item.itemHiddenNotes.split(/\n/g).map((line, index) => <p key={index}>{line}</p>)}
                                     </div>
                                 </div>
                             </div>

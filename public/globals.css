@@ -1,198 +1,226 @@
 @import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
 
+
+
 html {
-    font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-    margin: 0;
-    /* max-width: 1250px; */
-    box-sizing:border-box;
-    display: flex;
+  margin: 0;
+  /* max-width: 1250px; */
+  box-sizing: border-box;
+  display: flex;
 }
 
 main {
-    margin-left: calc(250px + 2rem);
-    padding: 1rem;
+  margin-left: calc(250px + 2rem);
+  padding: 1rem;
 }
 
 header {
-    /* box-sizing:border-box; */
-    min-width: 250px;
-    max-width: 500px;
-    position: fixed;
-    background-color: darkslategrey;
-    height: 100vh;
+  /* box-sizing:border-box; */
+  min-width: 250px;
+  max-width: 500px;
+  position: fixed;
+  background-color: darkslategrey;
+  height: 100vh;
+  padding: 1rem;
+}
+
+@media (max-width: 700px) {
+  header {
+    height: unset;
+    position: unset;
+    min-width: unset;
+    max-width: unset;
+    display: block;
+    width: 100%;
+  }
+
+  main {
+    margin-left: unset;
     padding: 1rem;
+  }
+
+  body {
+    margin: unset;
+    /* max-width: 1250px; */
+    box-sizing: border-box;
+    display: unset;
+  }
 }
 
 header h1 {
-    font-family: "Paytone One", sans-serif;
-    font-weight: 400;
-    color: white;
-    margin-bottom: 0;
+  font-family: "Paytone One", sans-serif;
+  font-weight: 400;
+  color: white;
+  margin-bottom: 0;
 }
 
 h1.branded-title {
-    font-family: "Paytone One", sans-serif;
-    color: darkslategray;
-    font-size: 4rem;
-    font-weight: 400;
-    margin-top: 0;
-    margin-bottom: 0;
+  font-family: "Paytone One", sans-serif;
+  color: darkslategray;
+  font-size: 4rem;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 h3.branded-title {
-    font-family: "Paytone One", sans-serif;
-    color: darkslategray;
-    font-size: 2.5rem;
-    font-weight: 400;
-    margin-top: 0;
+  font-family: "Paytone One", sans-serif;
+  color: darkslategray;
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-top: 0;
 }
 
 header h3 {
-    font-family: "Paytone One", sans-serif;
-    color: white;
-    font-weight: 400;
-    margin-top: 0;
+  font-family: "Paytone One", sans-serif;
+  color: white;
+  font-weight: 400;
+  margin-top: 0;
 }
 
 nav ul {
-    list-style: none;
-    padding: unset;
+  list-style: none;
+  padding: unset;
 }
 
 nav ul li {
-    padding: .5rem;
+  padding: .5rem;
 }
 
 nav i {
-    margin-right: .75rem;
-    width: 1rem; 
+  margin-right: .75rem;
+  width: 1rem;
 }
 
 nav a {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 nav a:hover {
-    color: lightblue;
+  color: lightblue;
 }
 
 section {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 label {
-    display: block;
-    font-size: 12px;
-    color: #777777;
-    text-transform: uppercase;
+  display: block;
+  font-size: 12px;
+  color: #777777;
+  text-transform: uppercase;
 }
 
-input, select {
-    padding: .25rem;
-    margin-bottom: .5rem;
-    width: 100%;
-    max-width: 250px;
+input,
+select {
+  padding: .25rem;
+  margin-bottom: .5rem;
+  width: 100%;
+  max-width: 250px;
 }
 
 .add-item-section {
-    background: #222225ee;
-    backdrop-filter: blur(.125rem);
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background: #222225ee;
+  backdrop-filter: blur(.125rem);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .add-item-section .add-item-modal {
-    background-color: #eee;
-    width: 500px;
-    padding: 2rem;
-    border-radius: .5rem;
-    overflow-y: scroll;
-    max-height: calc(100vh - 100px);
+  background-color: #eee;
+  width: 500px;
+  padding: 2rem;
+  border-radius: .5rem;
+  overflow-y: scroll;
+  max-height: calc(100vh - 100px);
 }
 
 /* General table styling */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
 }
 
 /* Table header styling */
 th {
-    background-color: darkslategrey;
-    color: white;
-    padding: 12px;
-    text-align: left;
+  background-color: darkslategrey;
+  color: white;
+  padding: 12px;
+  text-align: left;
 }
 
 /* Table cell styling */
 td {
-    border: 1px solid #ddd;
-    padding: 8px;
+  border: 1px solid #ddd;
+  padding: 8px;
 }
 
 /* Table row styling for alternating colors */
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 /* Table row styling for hover effect */
 tr:hover {
-    background-color: #ddd;
+  background-color: #ddd;
 }
 
 /* Optional: Add a border to the table */
 table {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden; /* Ensures that the border-radius works */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  /* Ensures that the border-radius works */
 }
 
 /* Optional: Add a shadow to the table for a bit of depth */
 table {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 tfoot tr td {
-    text-align: center;
+  text-align: center;
 }
+
 tfoot tr td button {
-    margin: .25rem;
+  margin: .25rem;
 }
 
 #order-pricing-table {
-    width: auto;
+  width: auto;
 }
 
 #order-pricing-table td {
-min-width: 200px;
+  min-width: 200px;
 }
 
 .packing-slip-signature-box {
-    height: 5rem;
+  height: 5rem;
 }
 
 .packing-slip-container {
-    width: 8.5in;
+  width: 8.5in;
 }
 
 .packing-slip-header {
-    text-align: center;
-    background-color: darkslategrey;
-    color: white;
-    padding: .25rem;
+  text-align: center;
+  background-color: darkslategrey;
+  color: white;
+  padding: .25rem;
 }
 
 .packing-slip-container .packing-list-row td input.qty-changer {
@@ -203,272 +231,299 @@ min-width: 200px;
 }
 
 .spinner {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid darkslategray;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 2s ease-in-out infinite;
-    margin: 0 auto;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid darkslategray;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s ease-in-out infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
 
-  .form-line {
-    display: flex;
+  100% {
+    transform: rotate(360deg);
   }
+}
 
-  .form-line div {
-    margin-right: 1rem;
-  }
+.form-line {
+  display: flex;
+}
 
-  .form-line input {
-    width: 250px;
-  }
+.form-line div {
+  margin-right: 1rem;
+}
 
-  .edit-order-page-links  a {
-    margin-right: .5rem;
-  }
+.form-line input {
+  width: 250px;
+}
 
-  ::placeholder {
-    color: #ccc;
-  }
+.edit-order-page-links a {
+  margin-right: .5rem;
+}
 
-  .orderListSearchBar {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: unset;
-    padding: .5rem;
-  }
+::placeholder {
+  color: #ccc;
+}
 
-  .hideIt {
+.orderListSearchBar {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: unset;
+  padding: .5rem;
+}
+
+.hideIt {
+  display: none;
+}
+
+.statusCheckBoxContainer input {
+  width: auto;
+  max-width: unset;
+}
+
+.statusCheckBoxContainer label {
+  display: unset;
+  margin-right: 1rem;
+}
+
+@media print {
+  .print-hide {
     display: none;
   }
 
-  .statusCheckBoxContainer input {
-    width: auto;
-    max-width: unset;
+  header {
+    display: none;
   }
 
-  .statusCheckBoxContainer label {
-    display: unset;
-    margin-right: 1rem;
+  main {
+    margin-left: 0;
   }
 
-  @media print {
-    .print-hide {
-      display: none;
-    }
-
-    header {
-        display: none;
-    }    
-    main {
-        margin-left: 0;
-    }
-
-    button.big {
-        display: none;
-    }
-    .branded-title {
-        display: none;
-    }
-    .full-page-print {
-      page-break-after: always;
-    }
-    .packing-slip-container .row-hider {
-      display: none;
-    }
-
-    .packing-slip-container tr.packing-list-row:has(td input[type="checkbox"]:checked) {
-      display: none;
-    }
-    .packing-slip-container table:has(tr th input[type="checkbox"]:not(:checked)) {
-      display: none;
-    }
-
-    .packing-slip-container table tr th input[type="checkbox"] {
-      display: none;
-    }
-
-    .packing-slip-container table tr th span.hide-notes {
-      display: none;
-    }
-    .packing-slip-container h1 {
-      font-size: 1.5rem;
-      line-height: 1;
-    }
-    .packing-slip-container tr.packing-list-row img {
-      max-height: 50px;
-    }
-    .packing-slip-container, .packing-slip-container tr.packing-list-row td input.qty-changer {
-      font-size: .75rem;
-    }
-    .packing-slip-container th, .packing-slip-container td {
-      padding: 2px;
-    }
-
-
+  button.big {
+    display: none;
   }
 
-  .full-page-print section {
-        border: solid black 1px;
-        border-radius: .5rem;
-        margin-bottom: .5rem;
-        padding: 0;
-    }
-    .full-page-print section h2 {
-        background-color: lightblue;
-        margin: 0;
-        border-radius: .5rem .5rem 0 0;
-        font-size: 1.25rem;
-        padding: 0 .5rem;
-    }
-    .full-page-print section .section-info {
-        padding: .5rem;
-    }
-    .full-page-print section p {
-        margin: 0;
-        font-size: .85rem;
-    }
-    .full-page-print h1 {
-        font-size: 1.5rem;
-    }
-    .full-page-print .two-up {
-      display: flex;
-      gap: 1rem;
-    } 
-    .full-page-print .two-up div {
-      margin-top: .5rem;
-      border: solid 1px lightgrey;
-      padding: .5rem;
-      font-size: .85rem;
-    }
-    .full-page-print table {
-      font-size: .85rem;
-    }
-    .full-page-print table th {
-      color: black;
-      background-color: lightblue;
-      padding: .25rem;
-    }
-    .full-page-print table td {
-      padding: .25rem;
-    }
+  .branded-title {
+    display: none;
+  }
 
-  .packing-slip-container table tr th input {
-    max-width: unset;
-    width: unset;
+  .full-page-print {
+    page-break-after: always;
+  }
+
+  .packing-slip-container .row-hider {
+    display: none;
+  }
+
+  .packing-slip-container tr.packing-list-row:has(td input[type="checkbox"]:checked) {
+    display: none;
+  }
+
+  .packing-slip-container table:has(tr th input[type="checkbox"]:not(:checked)) {
+    display: none;
+  }
+
+  .packing-slip-container table tr th input[type="checkbox"] {
+    display: none;
   }
 
   .packing-slip-container table tr th span.hide-notes {
-    font-size: 12px;
-  }
-
-  .packing-slip-container #packing-notes {
-    background: none;
-    border: none;
-    width: 99%;
-  }
-
-  .costConverter {
-    background-color: #ccc;
-    padding: 1rem;
-    border-radius: 5px;
-  }
-
-  .job-ticket {
-    width: 8.5in
-  }
-
-  .job-ticket .address-container {
-    border: #777777 solid 1px;
-    display: flex;
-    justify-content: space-evenly;
-  }
-
-  .job-ticket .address-container div {
-    border: #777777 solid 1px;
-    flex-grow: 1;
-    margin: 5px;
-    padding: 5px;
-  }
-
-  .job-ticket .ticket-thumbnail-container {
-    border: #777777 solid 1px;
-    padding: 1rem;
-
-  }
-
-  textarea {
-    width: 300px;
-    height: 100px;
-  }
-
-  #ticket-order-id {
-    border: solid 2px black;
-    padding: 1rem;
-    border-radius: 5px;
-    margin: 1rem;
-    font-weight: 700;
-    font-size: 2.5rem;
-    text-align: center;
-  }
-
-  .reports-page .cancelled {
     display: none;
   }
 
-  .reports-page .shipped {
-    display: none;
+  .packing-slip-container h1 {
+    font-size: 1.5rem;
+    line-height: 1;
   }
 
-  .reports-page .onhold {
-    background-color: lightgoldenrodyellow;
+  .packing-slip-container tr.packing-list-row img {
+    max-height: 50px;
   }
 
-  .material-table-details summary {
-    font-size: 18pt;
-    font-weight: 700;
-    color: white;
-    background-color: darkslategray;
-    padding: 12pt;
-  }
-  .material-table-details table {
-    margin-top: 0 !important;
+  .packing-slip-container,
+  .packing-slip-container tr.packing-list-row td input.qty-changer {
+    font-size: .75rem;
   }
 
-  .checkbox-container {
-    display: flex;
+  .packing-slip-container th,
+  .packing-slip-container td {
+    padding: 2px;
   }
 
-  .checkboxes {
-    margin-right: 15px;
-  }
 
-  .checkboxes label {
-    display: block;
-  }
+}
 
-  button {
-    background: darkslategray;
-    color: white;
-    font-weight: 700;
-    border: none;
-    padding: .5rem;
-    font-size: 1rem;
-    margin: 2px;
-  }
+.full-page-print section {
+  border: solid black 1px;
+  border-radius: .5rem;
+  margin-bottom: .5rem;
+  padding: 0;
+}
 
-  button a {
-    text-decoration: none;
-    color: lightblue;
-  }
+.full-page-print section h2 {
+  background-color: lightblue;
+  margin: 0;
+  border-radius: .5rem .5rem 0 0;
+  font-size: 1.25rem;
+  padding: 0 .5rem;
+}
 
-  button:hover, button:hover a {
-    opacity: .95;
-    color: lightgreen;
-  }
+.full-page-print section .section-info {
+  padding: .5rem;
+}
+
+.full-page-print section p {
+  margin: 0;
+  font-size: .85rem;
+}
+
+.full-page-print h1 {
+  font-size: 1.5rem;
+}
+
+.full-page-print .two-up {
+  display: flex;
+  gap: 1rem;
+}
+
+.full-page-print .two-up div {
+  margin-top: .5rem;
+  border: solid 1px lightgrey;
+  padding: .5rem;
+  font-size: .85rem;
+}
+
+.full-page-print table {
+  font-size: .85rem;
+}
+
+.full-page-print table th {
+  color: black;
+  background-color: lightblue;
+  padding: .25rem;
+}
+
+.full-page-print table td {
+  padding: .25rem;
+}
+
+.packing-slip-container table tr th input {
+  max-width: unset;
+  width: unset;
+}
+
+.packing-slip-container table tr th span.hide-notes {
+  font-size: 12px;
+}
+
+.packing-slip-container #packing-notes {
+  background: none;
+  border: none;
+  width: 99%;
+}
+
+.costConverter {
+  background-color: #ccc;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.job-ticket {
+  width: 8.5in
+}
+
+.job-ticket .address-container {
+  border: #777777 solid 1px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.job-ticket .address-container div {
+  border: #777777 solid 1px;
+  flex-grow: 1;
+  margin: 5px;
+  padding: 5px;
+}
+
+.job-ticket .ticket-thumbnail-container {
+  border: #777777 solid 1px;
+  padding: 1rem;
+
+}
+
+textarea {
+  width: 300px;
+  height: 100px;
+}
+
+#ticket-order-id {
+  border: solid 2px black;
+  padding: 1rem;
+  border-radius: 5px;
+  margin: 1rem;
+  font-weight: 700;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.reports-page .cancelled {
+  display: none;
+}
+
+.reports-page .shipped {
+  display: none;
+}
+
+.reports-page .onhold {
+  background-color: lightgoldenrodyellow;
+}
+
+.material-table-details summary {
+  font-size: 18pt;
+  font-weight: 700;
+  color: white;
+  background-color: darkslategray;
+  padding: 12pt;
+}
+
+.material-table-details table {
+  margin-top: 0 !important;
+}
+
+.checkbox-container {
+  display: flex;
+}
+
+.checkboxes {
+  margin-right: 15px;
+}
+
+.checkboxes label {
+  display: block;
+}
+
+button {
+  background: darkslategray;
+  color: white;
+  font-weight: 700;
+  border: none;
+  padding: .5rem;
+  font-size: 1rem;
+  margin: 2px;
+}
+
+button a {
+  text-decoration: none;
+  color: lightblue;
+}
+
+button:hover,
+button:hover a {
+  opacity: .95;
+  color: lightgreen;
+}

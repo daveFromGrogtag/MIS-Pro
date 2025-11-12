@@ -1,0 +1,17 @@
+---
+import LinkButton from '../components/LinkButton.astro';
+import ShippedList from '../components/ShippedList.tsx';
+import Layout from '../layouts/Layout.astro';
+import OrderSearch from '../components/OrderSearch'
+---
+
+<Layout title="Orders | HMB">
+	<main>
+        <h1 class="branded-title">Shipped Orders</h1>
+        <LinkButton link="new-order" title="New Order +" kind="big"/>
+		<section>
+            <h2>Current Orders List</h2>
+            <ShippedList client:load/>
+        </section>
+	</main>
+</Layout>
