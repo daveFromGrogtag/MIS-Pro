@@ -324,6 +324,10 @@ tfoot tr td button {
     display: none;
   }
 
+    .packing-slip-container .packing-slip-header:has(div.print-hide input[type="checkbox"]:checked) {
+    display: none;
+  }
+
   .packing-slip-container table:has(tr th input[type="checkbox"]:not(:checked)) {
     display: none;
   }

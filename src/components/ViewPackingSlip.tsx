@@ -32,8 +32,8 @@ const ViewPackingSlip = () => {
             <h1>Packing Slip {urlParams.get('order')}</h1>
             <table>
                 <tr><th colSpan={2}>Order Info</th></tr>
-                <tr><td>Reference 1</td><td>{order.data.ref1}</td></tr>
-                <tr><td>Reference 2</td><td>{order.data.ref2}</td></tr>
+                {order.data.ref1?<tr><td>Reference 1</td><td>{order.data.ref1}</td></tr>:''}
+                {order.data.ref2?<tr><td>Reference 2</td><td>{order.data.ref2}</td></tr>:''}
                 <tr><td>Client</td><td>{order.data.client}</td></tr>
                 <tr><td>Description</td><td>{order.data.desc}</td></tr>
                 <tr><td>Due date:</td><td>{order.data.dueDate}</td></tr>

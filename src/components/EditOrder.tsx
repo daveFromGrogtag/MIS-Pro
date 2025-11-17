@@ -5,6 +5,8 @@ import OrderInfo from './OrderInfo'
 import ItemList from './ItemList'
 import Loading from './Loading.tsx'
 import totalCalculator from '../scripts/totalCalculator.js'
+import { auth } from '../scripts/firebase/init.ts'
+import { onAuthStateChanged } from 'firebase/auth';
 
 
 const EditOrder = () => {
@@ -17,9 +19,27 @@ const EditOrder = () => {
     const [status, setStatus] = useState('open')
     const [loading, setLoading] = useState(true)
     const [notFound, setNotFound] = useState(false)
+    const [statusLog, setStatusLog] = useState([])
 
     const handleStatusChange = (e) => {
         setStatus(e.target.value)
+        statusLogger(status, e.target.value)
+    }
+
+    function getCurrentUserEmail() {
+        return new Promise((resolve) => {
+            onAuthStateChanged(auth, (user) => {
+                resolve(user ? user.email : null);
+            });
+        });
+    }
+
+    async function statusLogger(oldStatus, newStatus) {
+        const currentUserEmail = await getCurrentUserEmail()
+        const currentDateTime = new Date()
+        let logEntry = `${currentDateTime.toLocaleString()} - ${currentUserEmail} - ${oldStatus} => ${newStatus}`
+        let newLog = [...statusLog, logEntry]
+        setStatusLog(newLog)
     }
 
     const exportToFirebase = () => {
@@ -28,7 +48,8 @@ const EditOrder = () => {
                 data,
                 items,
                 total,
-                status
+                status,
+                statusLog
             }).then(() => {
                 alert('order saved')
             })
@@ -47,8 +68,8 @@ const EditOrder = () => {
             sumTotal += parseFloat(item.itemCost)
         });
         setTotal(sumTotal)
-        setTaxableTotal(taxTotal)        
-    } 
+        setTaxableTotal(taxTotal)
+    }
 
     useEffect(() => {
         getOrderTotal()
@@ -64,6 +85,7 @@ const EditOrder = () => {
                 setItems(docSnap.data().items)
                 setTotal(docSnap.data().total)
                 setStatus(docSnap.data().status)
+                docSnap.data().statusLog?setStatusLog(docSnap.data().statusLog):setStatusLog([])
 
             } catch (error) {
                 console.error(error);
@@ -122,6 +144,9 @@ const EditOrder = () => {
             <OrderInfo data={data} setData={setData} />
             <ItemList items={items} setItems={setItems} orderId={order} />
             <button onClick={exportToFirebase}>Save Changes</button>
+            <p>
+                {statusLog.map((line) => <li>{line}</li>)}
+            </p>
         </div>
     )
 }
