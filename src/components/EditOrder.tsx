@@ -85,7 +85,7 @@ const EditOrder = () => {
                 setItems(docSnap.data().items)
                 setTotal(docSnap.data().total)
                 setStatus(docSnap.data().status)
-                docSnap.data().statusLog?setStatusLog(docSnap.data().statusLog):setStatusLog([])
+                docSnap.data().statusLog ? setStatusLog(docSnap.data().statusLog) : setStatusLog([])
 
             } catch (error) {
                 console.error(error);
@@ -120,6 +120,10 @@ const EditOrder = () => {
                 <a href={`/view-packing-slip?order=${order}`}>Packing List</a>
                 <a href={`/view-invoice?order=${order}`}>Invoice</a>
             </div>
+            <details>
+                <summary>Status Change Log</summary>
+                {statusLog.map((line, index) => <><small key={index}>{line}</small><br /></>)}
+            </details>
             <table id='order-pricing-table'>
                 <tr><td>Cost</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount, taxableTotal).cost.toFixed(2)}</td></tr>
                 <tr><td>Tax</td><td>${totalCalculator(total, data.orderTaxRate, data.orderShippingCost, data.orderMarkup, data.orderDiscount, taxableTotal).clientTax.toFixed(2)}</td></tr>
@@ -144,9 +148,6 @@ const EditOrder = () => {
             <OrderInfo data={data} setData={setData} />
             <ItemList items={items} setItems={setItems} orderId={order} />
             <button onClick={exportToFirebase}>Save Changes</button>
-            <p>
-                {statusLog.map((line) => <li>{line}</li>)}
-            </p>
         </div>
     )
 }
