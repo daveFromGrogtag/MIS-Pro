@@ -359,6 +359,12 @@ tfoot tr td button {
     padding: 2px;
   }
 
+  .packing-slip-container input.packingSlipVersion {
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1;
+  }
 
 }
 

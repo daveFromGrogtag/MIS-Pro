@@ -29,7 +29,7 @@ const ViewPackingSlip = () => {
 
     return (
         <div>
-            <h1>Packing Slip {urlParams.get('order')}</h1>
+            <h1>Packing Slip {urlParams.get('order')} <input className="packingSlipVersion" type="number" /></h1>
             <table>
                 <tr><th colSpan={2}>Order Info</th></tr>
                 {order.data.ref1?<tr><td>Reference 1</td><td>{order.data.ref1}</td></tr>:''}
@@ -51,12 +51,8 @@ const ViewPackingSlip = () => {
                     <td>
                         {order.data.billingCompany}<br />
                         {order.data.billingAttn}<br />
-                        {order.data.billingAddress1}<br />
-                        {order.data.billingAddress2}<br />
-                        {order.data.billingAddress3}<br />
-                        {order.data.billingCity}<br />
-                        {order.data.billingState}<br />
-                        {order.data.billingZip}<br />
+                        {order.data.billingAddress1} {order.data.billingAddress2} {order.data.billingAddress3}
+                        {order.data.billingCity}, {order.data.billingState} {order.data.billingZip}<br />
                         {order.data.billingCountry}<br />
                         {order.data.billingEmail}<br />
                         {order.data.billingPhone}<br />
@@ -65,12 +61,8 @@ const ViewPackingSlip = () => {
                     <td>
                         {order.data.shippingCompany}<br />
                         {order.data.shippingAttn}<br />
-                        {order.data.shippingAddress1}<br />
-                        {order.data.shippingAddress2}<br />
-                        {order.data.shippingAddress3}<br />
-                        {order.data.shippingCity}<br />
-                        {order.data.shippingState}<br />
-                        {order.data.shippingZip}<br />
+                        {order.data.shippingAddress1} {order.data.shippingAddress2} {order.data.shippingAddress3}<br />
+                        {order.data.shippingCity}, {order.data.shippingState} {order.data.shippingZip}<br />
                         {order.data.shippingCountry}<br />
                         {order.data.shippingEmail}<br />
                         {order.data.shippingPhone}<br />
@@ -79,7 +71,7 @@ const ViewPackingSlip = () => {
             </table>
             <table>
                 <thead>
-                    <tr><th>#</th><th>Product</th><th>Substrate</th><th>Laminate</th><th>Press</th><th>Quantity</th><th>Thumb</th><th className='row-hider'>Hide</th></tr>
+                    <tr><th>#</th><th>Product</th><th>Quantity</th><th className='row-hider'>Hide</th></tr>
                 </thead>
                 <tbody>
                     {
@@ -87,11 +79,7 @@ const ViewPackingSlip = () => {
                             return <tr className='packing-list-row'>
                                 <td>{index + 1}</td>
                                 <td>{item.itemProduct}</td>
-                                <td>{item.itemSubstrate}</td>
-                                <td>{item.itemLaminate}</td>
-                                <td>{item.itemPress}</td>
                                 <td><input type="number" className='qty-changer' name="qty-changer" defaultValue={item.itemQuantity}/></td>
-                                <td><img src={item.itemThumbnail} alt="no-image" /></td>
                                 <td className='row-hider'><input type="checkbox" name="hider"/></td>
                             </tr>
                         })
