@@ -291,6 +291,10 @@ function ItemList({ items, setItems, orderId }) {
                                     >
                                         <option>-</option>
                                         <option value="production-gloss">Production Gloss</option>
+                                        <option value="production-matte">Production Matte</option>
+                                        <option value="high-quality-gloss">High Quality Gloss</option>
+                                        <option value="high-quality-matte">High Quality Gloss</option>
+                                        <option value="spot-gloss-matte">High Quality Gloss</option>
                                     </select>
                                 </div>
                                 <div>
